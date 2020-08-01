@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Faq from '../views/Faq.vue'
 import Order from '../views/Order.vue'
+import Error404 from '../views/Error404.vue'
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,11 @@ Vue.use(VueRouter)
     path:'/order',
     name: 'Order',
     component: Order
+  },
+  {
+    path:'*',
+    name: 'Error404',
+    component: Error404
   }
 ]
 
