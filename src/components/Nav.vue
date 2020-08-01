@@ -1,7 +1,9 @@
 <template>
 <!-- Obrati paznju na ovaj padding top sto si stavio ovde ispod -->
-  <v-app-bar id="theBar" height="80" class="pt-3" 
+  <v-app-bar id="theBar" height="100"  
       app
+      hide-on-scroll
+      flat
       color="#ffffff"
       dark
     >
