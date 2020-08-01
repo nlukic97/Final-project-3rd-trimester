@@ -6,7 +6,7 @@
       dark
     >
       
-      <router-link to="/" class="text-decoration-none">
+      <router-link to="/" class="text-decoration-none mr-2">
         <v-btn 
           color="secondary"
           text
@@ -16,7 +16,7 @@
       </router-link>
       
 
-      <router-link to="/about" class="text-decoration-none">
+      <router-link to="/about" class="text-decoration-none mr-2">
         <v-btn 
           color="secondary"
           text
@@ -48,7 +48,7 @@
       </v-card>      
 
       <!-- <v-spacer></v-spacer> -->
-      <router-link to="/faq" class="text-decoration-none">
+      <router-link to="/faq" class="text-decoration-none ml-2">
         <v-btn 
           color="secondary"
           text
@@ -57,7 +57,7 @@
         </v-btn>
       </router-link>
       
-      <router-link to="/order" class="text-decoration-none">
+      <router-link to="/order" class="text-decoration-none ml-2">
         <v-btn 
           color="secondary"
           text
