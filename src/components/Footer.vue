@@ -1,9 +1,4 @@
 <template>
-  <!-- <v-footer absolute padless>
-    <v-col class="red text-center">
-      <h1>This is the footer</h1>
-    </v-col>
-  </v-footer> -->
   <v-footer
     dark
     padless
@@ -20,8 +15,7 @@
           class="mx-4 white--text"
           icon
         >
-          
-          <a :href="urls[index]" target="_blank"><v-icon size="24px">{{ icon }}</v-icon></a>
+          <a :href="urls[index]" target="_blank" class="text-decoration-none white--text"><v-icon size="24px">mdi-{{ icon }}</v-icon></a>
         </v-btn>
       </v-card-text>
 
@@ -32,7 +26,7 @@
       <v-divider></v-divider>
 
       <v-card-text class="white--text">
-        {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+        <span>&copy; </span>{{ new Date().getFullYear() }} — <strong>Hillingdon Chippie</strong>
       </v-card-text>
     </v-card>
   </v-footer>
@@ -43,17 +37,19 @@ export default {
   data(){
     return {
       icons:[
-        'mdi-facebook',
-        'mdi-twitter',
-        'mdi-linkedin',
-        'mdi-instagram'
+        'facebook',
+        'twitter',
+        'linkedin',
+        'instagram'
       ],
-      urls: [
-        'https://www.facebook.com',
-        'https://www.twitter.com',
-        'https://www.linkedin.com',
-        'https://www.instagram.com'
-      ]
+      username:'hillindgon-chippie', //make sure all social media accounts have the same username
+      urls: []
+    }
+  }
+  ,
+  beforeMount(){
+    for(var i = 0; i < this.icons.length; i++){
+      this.urls[i] = 'https://www.'+this.icons[i]+'.com/' + this.username; //proveri za ovo
     }
   }
 }

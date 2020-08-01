@@ -1,45 +1,70 @@
 <template>
-  <!-- <v-app-bar id="theBar" class="d-flex justify-center" -->
-  <v-app-bar id="theBar"
+<!-- Obrati paznju na ovaj padding top sto si stavio ovde ispod -->
+  <v-app-bar id="theBar" height="80" class="pt-3" 
       app
-      color="red"
+      color="#ffffff"
       dark
     >
-      <router-link to="/">Home</router-link>
-      <router-link to="/About">About</router-link>
-
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img id="name"
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-
-      </div>
+      
+      <router-link to="/" class="text-decoration-none">
+        <v-btn 
+          color="secondary"
+          text
+        >
+        <span class="black--text">Home</span>
+        </v-btn>
+      </router-link>
       
 
-      <!-- <v-spacer></v-spacer> -->
+      <router-link to="/about" class="text-decoration-none">
+        <v-btn 
+          color="secondary"
+          text
+        >
+        <span class="black--text">About</span>
+        </v-btn>
+      </router-link>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Order</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      <v-card class="d-flex justify-space-around red align-center" flat width="250" min-height="80" id="logo">
+        <v-img id="logo-img-1" 
+        class="ml-5"
+        contain
+        src='../assets/fish-white.png'
+        max-width="35"
+        >
+        </v-img>
+
+        <!-- <v-card max-width="50%" class="red" flat> -->
+        <h2 id="logo-text">Hillingdon chippie</h2>
+        <!-- </v-card> -->
+
+        <v-img id="logo-img-2" 
+        class="mr-5"
+        contain
+        src='../assets/fish-white.png'
+        max-width="35"
+        >
+        </v-img>
+      </v-card>      
+
+      <!-- <v-spacer></v-spacer> -->
+      <router-link to="/faq" class="text-decoration-none">
+        <v-btn 
+          color="secondary"
+          text
+        >
+        <span class="black--text">FAQ</span>
+        </v-btn>
+      </router-link>
+      
+      <router-link to="/order" class="text-decoration-none">
+        <v-btn 
+          color="secondary"
+          text
+        >
+        <span class="black--text">Order</span>
+        </v-btn>
+      </router-link>
     </v-app-bar>
 </template>
 <script>
@@ -53,4 +78,22 @@ export default {
   display:flex;
   justify-content: center;
 }
+
+#logo {
+  border-radius: 0;
+  line-height: 1.2;
+  #logo-text {
+    max-width: 120px;
+  }
+  #logo-img-1 {
+  transform: rotate(-40deg);
+  }
+  #logo-img-2 {
+  transform: rotate(130deg);
+  }
+}
+
+
+
+
 </style>
