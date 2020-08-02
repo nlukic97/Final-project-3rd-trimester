@@ -62,7 +62,7 @@ export default {
     })
 
     document.addEventListener("keydown",(e)=>{
-      if(e.keyCode == '13' || e.which == '13' ){
+      if((e.keyCode == '13' || e.which == '13') && this.displayPrompt == 'true'){ //samo ce na enter proizvod da radi ako vidi da je otvorena kutija
         this.addingToCart()
         this.$emit("update-prompt");
       }

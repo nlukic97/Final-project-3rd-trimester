@@ -26,7 +26,7 @@
     <!-- ---------------------------- ///////////////// ---------------------------- -->
 
     <v-row>
-      <v-col cols="9">
+      <v-col lg='9' md="9">
         <h2>Menu</h2>
         <div id="availableFood">
           <ul v-for="(item, index) in items" :key="index">
@@ -53,7 +53,7 @@
           </ul>
         </div>
       </v-col>
-      <v-col cols='3'>
+      <v-col lg='3' md='3'>
         <h2>Cart</h2>
         <div id="checkout-container">
           <v-btn id="clear-cart-btn"
@@ -67,6 +67,7 @@
           </v-btn>
             
           <ul v-for="(cartI, index) in cart" :key="index">
+            <span @click="cartItemDelete(index)">X</span>
             <h4> {{cartI.size}} {{cartI.title}}</h4>
             <li>{{cartI.price}} £</li>
           </ul>
@@ -213,8 +214,20 @@ export default {
       this.promptDisplay = 'false'
     },
 
+    cartItemDelete(index){
+      var answer = confirm('Are you sure you want to delete this item?')
+      if(answer){
+        this.cart.splice(index,1)
+      }
+    },
+
     clearCart(){
-      this.cart = []
+      if(this.cart.length > 0){
+        var answer =confirm('Are you sure you want to delete all items from your cart?')
+        if(answer == true){
+          this.cart = []
+        }
+      }
     },
     checkout(){
       if(this.cart.length == 0){
@@ -236,7 +249,7 @@ export default {
 <style scoped lang="scss">
 #availableFood {
   display:flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   // align-content: flex-start;
   flex-wrap: wrap;
   flex-direction: row;
