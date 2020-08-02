@@ -62,6 +62,13 @@ export default {
     })
 
     document.addEventListener("keydown",(e)=>{
+      if(e.keyCode == '13' || e.which == '13' ){
+        this.addingToCart()
+        this.$emit("update-prompt");
+      }
+    })
+
+    document.addEventListener("keydown",(e)=>{
       if(e.keyCode == 27 || e.which == 27){
          this.$emit("update-prompt","false") //ako klikne esc, onda mu zatvara ovaj prozor
       }

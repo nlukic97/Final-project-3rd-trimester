@@ -1,7 +1,6 @@
 <template>
 <div class="order">
   <v-container>
-  <h1>This is an order page</h1>
     <Prompt id="prompt" 
       @update-prompt="updatePrompt"
       @adding-to-cart="cartAdd"
@@ -27,7 +26,9 @@
     <!-- ---------------------------- ///////////////// ---------------------------- -->
 
     <v-row>
-      <v-col cols="12" id="availableFood">
+      <v-col cols="9">
+        <h2>Menu</h2>
+        <div id="availableFood">
           <ul v-for="(item, index) in items" :key="index">
             <h3>{{item.size}} {{item.title}}</h3>
             <div class="img-container">
@@ -50,6 +51,34 @@
               </v-btn>
             </li>
           </ul>
+        </div>
+      </v-col>
+      <v-col cols='3'>
+        <h2>Cart</h2>
+        <div id="checkout-container">
+          <v-btn id="clear-cart-btn"
+          @click="clearCart"
+          class="red white--text"
+          fab
+          height="25"
+          width="25"
+          >
+            X
+          </v-btn>
+            
+          <ul v-for="(cartI, index) in cart" :key="index">
+            <h4> {{cartI.size}} {{cartI.title}}</h4>
+            <li>{{cartI.price}} £</li>
+          </ul>
+          <div id="button-container">
+            <v-btn id="checkout-btn"
+            @click="checkout"
+            class="red white--text"
+            >
+              Checkout
+            </v-btn>
+          </div>
+        </div>
       </v-col>
     </v-row>
   </v-container>
@@ -182,6 +211,17 @@ export default {
 
     updatePrompt(){
       this.promptDisplay = 'false'
+    },
+
+    clearCart(){
+      this.cart = []
+    },
+    checkout(){
+      if(this.cart.length == 0){
+        console.log('Your cart is empty !')
+      } else {
+        console.log(this.cart)
+      }
     }
   },
   mounted(){
@@ -196,15 +236,14 @@ export default {
 <style scoped lang="scss">
 #availableFood {
   display:flex;
-  justify-content: center;
+  justify-content: flex-start;
   // align-content: flex-start;
   flex-wrap: wrap;
   flex-direction: row;
-
   ul {
   width:240px;
   padding:20px;
-  margin:10px;
+  margin: 0 10px 10px 10px;
   border:1px solid #333;
     h3 {
       text-align: left;
@@ -220,6 +259,33 @@ export default {
     li {
       list-style-type: none;
       text-align: left;
+    }
+  }
+}
+
+#checkout-container {
+  border:1px solid #333;
+  min-height: 100px;
+  position: relative;
+  // padding-bottom: 36px;
+  padding-bottom:36px;
+  #clear-cart-btn {
+    // display: none;
+    position: absolute;
+    right: -10px;
+    top:-10px;
+  }
+  ul {
+    list-style-type: none;
+    text-align: left;
+    margin-bottom: 8px;
+  }
+  #button-container {
+    width:100%;
+    position: absolute;
+    bottom:0;
+    #checkout-btn {
+      margin: 0 auto;
     }
   }
 }
