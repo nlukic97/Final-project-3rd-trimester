@@ -13,6 +13,12 @@
                   <span>{{indexEx+1}}: {{extra}}</span>
                 </li>
               </ol>
+              <v-btn
+              class="red white--text"
+              @click="addToCart(index)"
+              >
+              Add to cart
+              </v-btn>
             </li>
 
           </ul>
@@ -97,6 +103,12 @@ export default {
 
         console.log(this.items[a].price)
       }
+    },
+
+    addToCart(index){
+      console.log(index)
+      console.log(this.items[index])
+      alert('You have decided to order item number ' + index)
     }
   },
   mounted(){

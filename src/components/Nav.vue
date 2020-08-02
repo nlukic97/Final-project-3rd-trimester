@@ -37,7 +37,7 @@
         </v-img>
 
         <!-- <v-card max-width="50%" class="red" flat> -->
-        <h2 id="logo-text">Hillingdon chippie</h2>
+        <h3 id="logo-text">Hillingdon chippie</h3>
         <!-- </v-card> -->
 
         <v-img id="logo-img-2" 
