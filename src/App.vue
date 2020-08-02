@@ -3,7 +3,7 @@
     <Nav/>
 
     <v-main>
-      <router-view/>
+      <router-view id="router-view"/>
     </v-main>
 
     <Footer/>
@@ -30,5 +30,8 @@ export default {
 <style lang="scss">
   body {
     text-align: center;
+  }
+  #router-view {
+    min-height: 80vh; //da li treba ovo ? 404 mi bolje izgleda sa njim
   }
 </style>
