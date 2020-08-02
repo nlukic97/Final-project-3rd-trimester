@@ -4,30 +4,47 @@
   <h1>This is an order page</h1>
     <Prompt id="prompt" 
       @update-prompt="updatePrompt"
+      @adding-to-cart="cartAdd"
       msg="Are you sure you would like to order this?" :displayPrompt='promptDisplay' 
       :title="promptedItem.title"
+      :img="promptedItem.img"
       :size="promptedItem.size"
       :price="promptedItem.price"
       :extras="promptedItem.extras"
     />
 
+    <!-- ---------------------------- cart view testing ---------------------------- -->
+                        <!-- <v-row>
+                          <v-col>
+                            <ul v-for="(cartI, index) in cart" :key="index">
+                              <li>{{cartI.title}}</li>
+                              <li>{{cartI.img}}</li>
+                              <li>{{cartI.size}}</li>
+                              <li>{{cartI.price}}</li>
+                            </ul>
+                          </v-col>
+                        </v-row> -->
+    <!-- ---------------------------- ///////////////// ---------------------------- -->
 
     <v-row>
       <v-col cols="12" id="availableFood">
           <ul v-for="(item, index) in items" :key="index">
             <h3>{{item.size}} {{item.title}}</h3>
+            <div class="img-container">
+              <img :src="item.img" alt="">
+            </div>
             <li><strong>Price: </strong>{{item.price}} £</li>
             <li><strong><em>Extras:</em></strong>
 
               <ol>
-                <li v-for="(extra, indexEx) in item.extras" :key="indexEx">
+                <li v-for="(extra, indexEx) in item.extras" :key="indexEx"> <!-- change this to be a string later ->extras -->
                   <span>{{indexEx+1}}: {{extra}}</span>
                 </li>
               </ol>
 
               <v-btn
               class="red white--text"
-              @click="addToCart(index)"
+              @click="cartPrompt(index)"
               >
               Add to cart
               </v-btn>
@@ -57,6 +74,7 @@ export default {
       items: [
         {
           title: 'Cod',
+          img:'https://www.thesprucepets.com/thmb/FOLwbR72UrUpF9sZ45RYKzgO8dg=/3072x2034/filters:fill(auto,1)/yellow-tang-fish-508304367-5c3d2790c9e77c000117dcf2.jpg',
           size: 'Regular',
           price: 4.30,
           extras: [
@@ -66,7 +84,8 @@ export default {
         },
         {
           title: 'Cod',
-          size: 'Large',
+          img: 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+          size: 'Regular',
           price: 5.03,
           extras: [
             'salt',
@@ -75,7 +94,8 @@ export default {
         },
         {
           title: 'Cod',
-          size: 'Large',
+          img: 'https://www.hakaimagazine.com/wp-content/uploads/header-fish-feel.jpg',
+          size: 'Regular',
           price: 5.25,
           extras: [
             'salt',
@@ -84,6 +104,7 @@ export default {
         },
         {
           title: 'Cod',
+          img: 'https://cdn0.wideopenpets.com/wp-content/uploads/2019/10/Fish-Names-770x405.png',
           size: 'Large',
           price: 5.29,
           extras: [
@@ -93,6 +114,7 @@ export default {
         },
         {
           title: 'Cod',
+          img: 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
           size: 'Large',
           price: 2.30,
           extras: [
@@ -102,6 +124,7 @@ export default {
         },
         {
           title: 'Cod',
+          img: 'https://cdn.pixabay.com/photo/2014/03/24/13/49/trout-294469__340.png',
           size: 'Large',
           price: 5.24,
           extras: [
@@ -109,6 +132,8 @@ export default {
             'vinager'
           ]
         }
+      ],
+      cart:[
       ]
     }
   },
@@ -123,19 +148,36 @@ export default {
           this.items[a].price = this.items[a].price.toString()
         }
 
-        console.log(this.items[a].price)
+        // console.log(this.items[a].price)
       }
     },
 
-    addToCart(index){
-      // console.log(this.items[index])
-      this.promptedItem.title = this.items[index].title
-      this.promptedItem.size = this.items[index].size
-      this.promptedItem.price = this.items[index].price
-      this.promptedItem.extras = this.items[index].extras
-      // console.log(this.promptedItem)
+    cartPrompt(index){
+      //imao sam problem jer sam prvo radio ovo sto je zakomentarisano, zatim sad uradio ovaj drugi metod i radi. Sa ovim prvim sam morao da imam dodatu liniju 179. Sad ovim ispod kako sad stoji i ne moram to da imam, ali sam stavio tu cisto eto.
+
+      // this.promptedItem.title = this.items[index].title
+      // this.promptedItem.size = this.items[index].size
+      // this.promptedItem.img = this.items[index].img
+      // this.promptedItem.price = this.items[index].price
+      // this.promptedItem.extras = this.items[index].extras
+
+      this.promptedItem = {
+        title: this.items[index].title,
+        size: this.items[index].size,
+        img: this.items[index].img,
+        price: this.items[index].price,
+        extras: this.items[index].extras
+      }
 
       this.promptDisplay = 'true'
+    },
+
+    cartAdd(){
+      this.cart.push(this.promptedItem)
+      this.updatePrompt()
+      console.log(this.cart) //ovo kasnije dodajes u cookie
+      this.promptedItem = {}; //ovo iznad sad i ne moras ali sto da ne iz predostroznosti
+      
     },
 
     updatePrompt(){
@@ -155,15 +197,25 @@ export default {
 #availableFood {
   display:flex;
   justify-content: center;
+  // align-content: flex-start;
   flex-wrap: wrap;
   flex-direction: row;
+
   ul {
-  width:350px;
+  width:240px;
   padding:20px;
   margin:10px;
   border:1px solid #333;
     h3 {
       text-align: left;
+    }
+    .img-container {
+      height:151px;
+      display: flex;
+      align-items: center;
+      img {
+      width:100%;
+      }
     }
     li {
       list-style-type: none;

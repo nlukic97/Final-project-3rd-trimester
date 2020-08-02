@@ -4,10 +4,17 @@
     <div class="promptContainer">
       <div class="innerBox">
         <span id="x">X</span>
-        <h4>Large cod</h4>
+        <h2>{{size}} {{title}}</h2>
+        <img :src="img" alt="">
         <p>{{msg}}</p>
-        <p>{{size}} {{title}} £</p>
-        <p>{{price}}</p>
+        <p>{{price}} £</p>
+
+        <v-btn 
+          class="red white--text"
+          @click="addingToCart"
+        >Add to cart
+        </v-btn>
+
       </div>
   </div>
   </div>
@@ -20,13 +27,14 @@ export default {
     displayPrompt: String,
     title:String,
     size:String,
+    img: String,
     price:String,
     extras:Array
   },
   watch: {
     displayPrompt: function(){
       this.promptDisplay()
-      console.log(this.displayPrompt)
+      // console.log(this.displayPrompt)
     }
   },
   data(){
@@ -37,20 +45,26 @@ export default {
   methods:{
     promptDisplay(){
       if(this.displayPrompt == 'false'){
-        // document.querySelectorAll('.promptContainer')[0].style.display='none'
-        // document.getElementById('overlay').style.display='none'
         document.getElementById('prompt').style.display='none'
       } else if(this.displayPrompt == 'true')
-        // document.querySelectorAll('.promptContainer')[0].style.display='block'
-        // document.getElementById('overlay').style.display='static'
         document.getElementById('prompt').style.display='block'
+    },
+
+    addingToCart(){
+      this.$emit("adding-to-cart") //ne saljem nikakav podatak tako da mi ne treba ovo
     }
   },
   mounted(){
     this.promptDisplay()
 
     document.getElementById('x').addEventListener('click',()=>{
-      this.$emit("update-prompt",'false') //ne manjati vrednost propa unutar komponente
+      this.$emit("update-prompt") //ne manjati vrednost propa unutar komponente. Ne saljem nikakve podatke, jer order ih sve vec ima
+    })
+
+    document.addEventListener("keydown",(e)=>{
+      if(e.keyCode == 27 || e.which == 27){
+         this.$emit("update-prompt","false") //ako klikne esc, onda mu zatvara ovaj prozor
+      }
     })
   }
 }
@@ -72,7 +86,6 @@ export default {
 .promptContainer {
   width:100%;
   height:100%;
-  // background-color:rgba(102, 101, 101, 0.6);
   position: fixed;
   left:0;
   top:0;
@@ -80,10 +93,16 @@ export default {
 
 }
 .innerBox {
-  width:600px;
-  margin:115px auto 0 auto;
+  // width:600px;
+  width:40%;
+  margin:40px auto 0 auto;
+  padding:20px;
   background-color:white;
   border:1px solid #333;
+  img {
+    width:80%;
+    margin: 0 auto;
+  }
 }
 
 #x {
