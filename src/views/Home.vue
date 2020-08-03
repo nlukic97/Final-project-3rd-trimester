@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <!-- <HelloWorld msg="Welcome to Hillingdon chippie !"/> -->
-    <v-container>
+    <v-container class="pb-0">
       <v-row>
         <v-col class="hero">
           <div class="overlay"></div>
@@ -23,7 +23,7 @@
         </v-col>
       </v-row>
 
-      <v-row>
+      <v-row> <!-- width smanji malo na ovima da budu vise ka sredini. Mozda display-flex" -->
         <v-col cols="3">
           <div class="circle"></div>
           <h4>Pick your food</h4>
