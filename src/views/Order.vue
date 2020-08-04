@@ -35,13 +35,14 @@
               <img :src="item.img" alt="">
             </div>
             <li><strong>Price: </strong>{{item.price}} £</li>
-            <li><strong><em>Extras:</em></strong>
-
-              <ol>
-                <li v-for="(extra, indexEx) in item.extras" :key="indexEx"> <!-- change this to be a string later ->extras -->
+            <li>
+              
+               <!-- change this to be a string later ->extras -->
+              <!-- <ol>
+                <li v-for="(extra, indexEx) in item.extras" :key="indexEx">
                   <span>{{indexEx+1}}: {{extra}}</span>
                 </li>
-              </ol>
+              </ol> -->
 
               <v-btn
               class="red white--text"
@@ -99,7 +100,7 @@ export default {
         title: '',
         size: '',
         price:'' ,
-        extras: []
+        extras: ''
       },
       items: [
         {
@@ -107,60 +108,42 @@ export default {
           img:'https://www.thesprucepets.com/thmb/FOLwbR72UrUpF9sZ45RYKzgO8dg=/3072x2034/filters:fill(auto,1)/yellow-tang-fish-508304367-5c3d2790c9e77c000117dcf2.jpg',
           size: 'Regular',
           price: 4.30,
-          extras: [
-            'salt',
-            'vinager'
-          ]
+          extras: 'salt, vinager'
         },
         {
           title: 'Cod',
           img: 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
           size: 'Regular',
           price: 5.03,
-          extras: [
-            'salt',
-            'vinager'
-          ]
+          extras: "pepper, salt"
         },
         {
           title: 'Cod',
           img: 'https://www.hakaimagazine.com/wp-content/uploads/header-fish-feel.jpg',
           size: 'Regular',
           price: 5.25,
-          extras: [
-            'salt',
-            'vinager'
-          ]
+          extras: 'salt, vinager'
         },
         {
           title: 'Cod',
           img: 'https://cdn0.wideopenpets.com/wp-content/uploads/2019/10/Fish-Names-770x405.png',
           size: 'Large',
           price: 5.29,
-          extras: [
-            'salt',
-            'vinager'
-          ]
+          extras:'salt, vinager'
         },
         {
-          title: 'Cod',
-          img: 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-          size: 'Large',
+          title: 'Burger',
+          img: 'https://media-cdn.tripadvisor.com/media/photo-s/17/ba/a6/31/burger.jpg',
+          size: 'Regular',
           price: 2.30,
-          extras: [
-            'salt',
-            'vinager'
-          ]
+          extras: 'mayo, burger sauce, BH sauce, ketchup'
         },
         {
           title: 'Cod',
           img: 'https://cdn.pixabay.com/photo/2014/03/24/13/49/trout-294469__340.png',
           size: 'Large',
           price: 5.24,
-          extras: [
-            'salt',
-            'vinager'
-          ]
+          extras: 'salt, vinager'
         }
       ],
       cart:[
@@ -177,35 +160,50 @@ export default {
         } else {
           this.items[a].price = this.items[a].price.toString()
         }
-
-        // console.log(this.items[a].price)
       }
     },
 
     cartPrompt(index){
-      //imao sam problem jer sam prvo radio ovo sto je zakomentarisano, zatim sad uradio ovaj drugi metod i radi. Sa ovim prvim sam morao da imam dodatu liniju 179. Sad ovim ispod kako sad stoji i ne moram to da imam, ali sam stavio tu cisto eto.
-
-      // this.promptedItem.title = this.items[index].title
-      // this.promptedItem.size = this.items[index].size
-      // this.promptedItem.img = this.items[index].img
-      // this.promptedItem.price = this.items[index].price
-      // this.promptedItem.extras = this.items[index].extras
-
       this.promptedItem = {
         title: this.items[index].title,
         size: this.items[index].size,
         img: this.items[index].img,
         price: this.items[index].price,
-        extras: this.items[index].extras
+        extras: this.items[index].extras //this is changed later when we add to cart. ovo jos uvek predstavlja problem 
       }
 
       this.promptDisplay = 'true'
     },
 
-    cartAdd(){
+    cartAdd(response){
+      console.log('Added to cart: ')
+      // console.log(response)
+
+      this.promptedItem.extras = ''; //clearing up the extras array to be populated with selected which will be pushed to the cart and re-cleared again
+
+      //creating a string to store the chosen extras
+      if(response.length > 0 && response.length < 2){
+        this.promptedItem.extras = response[0]
+      } else if (response.length >= 2){
+        for(var e = 0; e < response.length; e++){
+          if(e != response.length - 1){
+            this.promptedItem.extras = this.promptedItem.extras + response[e] + ', '
+          } else {
+            this.promptedItem.extras = this.promptedItem.extras + response[e]
+          }
+        }
+      } else if (response.length == 0){
+        this.promptedItem.extras = '';
+      }
+
+      // console.log(response)
+
+
       this.cart.push(this.promptedItem)
+      console.log(this.cart)
+      // console.log(this.cart)
       this.updatePrompt()
-      console.log(this.cart) //ovo kasnije dodajes u cookie
+      //console.log(this.cart) //ovo kasnije dodajes u cookie
       this.promptedItem = {}; //ovo iznad sad i ne moras ali sto da ne iz predostroznosti
       
     },

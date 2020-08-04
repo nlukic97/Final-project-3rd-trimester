@@ -8,6 +8,12 @@
         <img :src="img" alt="">
         <p>{{msg}}</p>
         <p>{{price}} £</p>
+        <div class="d-flex justify-center" style="border:1px solid red">
+          <div v-for="(extra, index) in this.itemExtras" :key="index" class="mr-5">
+            <label :for="extra">{{extra}}</label>
+            <input type="checkbox" :id="extra" :name="extra" v-model="selectedExtras[extra]">
+          </div>
+        </div>
 
         <v-btn 
           class="red white--text"
@@ -29,17 +35,22 @@ export default {
     size:String,
     img: String,
     price:String,
-    extras:Array
+    extras:String
   },
   watch: {
     displayPrompt: function(){
       this.promptDisplay()
       // console.log(this.displayPrompt)
+    },
+    extras: function(){
+      this.extraCheckboxMaker();
+      this.createSelectedExtras();
     }
   },
   data(){
     return {
-      
+      itemExtras:[],
+      selectedExtras:[]
     }
   },
   methods:{
@@ -50,9 +61,37 @@ export default {
         document.getElementById('prompt').style.display='block'
     },
 
+    extraCheckboxMaker(){
+      if(this.extras && this.extras.indexOf(',') > 0){
+        this.itemExtras = this.extras.split(', ');
+      // console.log(this.itemExtras)
+      }
+    },
+
+    createSelectedExtras(){
+      for(var i = 0; i < this.itemExtras.length; i++){
+        this.selectedExtras[this.itemExtras[i]] = false;
+      }
+      // console.log(this.selectedExtras)
+    },
+
     addingToCart(){
-      this.$emit("adding-to-cart") //ne saljem nikakav podatak tako da mi ne treba ovo
+      var keys = Object.keys(this.selectedExtras); //change name of this to extraValue
+      var chosenExtras = [];
+
+      for(var i = 0; i < keys.length; i++){
+        if(this.selectedExtras[keys[i]] === true){
+          chosenExtras.push(keys[i])
+        }
+      }
+
+      this.$emit("adding-to-cart",chosenExtras) //ne saljem nikakav podatak tako da mi ne treba ovo
+      this.selectedExtras = [];
+      this.itemExtras = [];
     }
+  },
+  beforeMount(){
+    
   },
   mounted(){
     this.promptDisplay()
@@ -61,6 +100,8 @@ export default {
       this.$emit("update-prompt") //ne manjati vrednost propa unutar komponente. Ne saljem nikakve podatke, jer order ih sve vec ima
     })
 
+
+    //enter click
     document.addEventListener("keydown",(e)=>{
       if((e.keyCode == '13' || e.which == '13') && this.displayPrompt == 'true'){ //samo ce na enter proizvod da radi ako vidi da je otvorena kutija
         this.addingToCart()
@@ -68,6 +109,7 @@ export default {
       }
     })
 
+    //escape
     document.addEventListener("keydown",(e)=>{
       if(e.keyCode == 27 || e.which == 27){
          this.$emit("update-prompt","false") //ako klikne esc, onda mu zatvara ovaj prozor
