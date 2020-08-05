@@ -1,12 +1,15 @@
 <template>
 <!-- Obrati paznju na ovaj padding top sto si stavio ovde ispod -->
-  <v-app-bar id="theBar" height="100"  
+  <div>
+    <!-- regular menu -->
+    <v-app-bar id="theBar" height="100"  
       app
       hide-on-scroll
       flat
       color="#ffffff"
       dark
     >
+    
       
       <router-link to="/" class="text-decoration-none mr-2">
         <v-btn 
@@ -49,7 +52,6 @@
         </v-img>
       </v-card>      
 
-      <!-- <v-spacer></v-spacer> -->
       <router-link to="/faq" class="text-decoration-none ml-2">
         <v-btn 
           color="secondary"
@@ -66,12 +68,72 @@
         >
         <span class="black--text">Order</span>
         </v-btn>
-      </router-link>
+      </router-link>  
+
     </v-app-bar>
+
+    <!--mobile menu -->
+    <div class="text-left pt-5 pl-2" id="mobile-menu" >
+      <v-menu 
+      offset-y
+      close-on-click
+      close-on-content-click
+      >
+        <template v-slot:activator="{ on, attrs }"  >
+          <v-btn style="width:30%"
+            color="red"
+            dark
+            v-bind="attrs"
+            v-on="on"
+          >
+            Menu
+          </v-btn>
+        </template>
+        <v-list
+        
+        >
+          <v-list-item
+            id="mobile-menu-list"
+            v-for="(item, index) in menuItems"
+            :key="index"
+          >
+            <router-link :to="item.route"
+            class="black--text text-decoration-none">
+              <v-list-item-title>{{ item.name }}</v-list-item-title>
+            </router-link>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </div>
+  </div>
+  
+    
 </template>
 <script>
 export default {
-  name: 'Nav'
+  name: 'Nav',
+  data(){
+    return {
+      menuItems:[
+        {
+          name:'Home',
+          route:'/'
+        },
+        {
+          name:'About',
+          route:'/about'
+        },
+        {
+          name:'FAQ',
+          route:'/faq'
+        },
+        {
+          name:'Order',
+          route:'/order'
+        }
+      ]
+    }
+  }
 }
 </script>
 <style lang="scss">
@@ -94,7 +156,27 @@ export default {
   transform: rotate(130deg);
   }
 }
+@media (min-width:536px){
+  #theBar {
+    display:block;
+  }
+  #mobile-menu, #mobile-menu-list {
+    display:none;
+  }
+}
 
+@media (max-width:535px){
+  #theBar {
+    display:none;
+  }
+  #mobile-menu, #mobile-menu-list {
+    display:block;
+  }
+
+  .v-main {
+  padding:0!important;
+  }
+}
 
 
 
