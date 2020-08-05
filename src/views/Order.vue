@@ -35,15 +35,7 @@
               <img :src="item.img" alt="">
             </div>
             <li><strong>Price: </strong>{{item.price}} £</li>
-            <li>
-              
-               <!-- change this to be a string later ->extras -->
-              <!-- <ol>
-                <li v-for="(extra, indexEx) in item.extras" :key="indexEx">
-                  <span>{{indexEx+1}}: {{extra}}</span>
-                </li>
-              </ol> -->
-
+            <li class="text-center">
               <v-btn
               class="red white--text"
               @click="cartPrompt(index)"
@@ -64,13 +56,14 @@
           height="25"
           width="25"
           >
-            X
+            X <!-- clear cart -->
           </v-btn>
             
           <ul v-for="(cartI, index) in cart" :key="index">
             <span @click="cartItemDelete(index)">X</span>
             <h4> {{cartI.size}} {{cartI.title}}</h4>
             <li>{{cartI.price}} £</li>
+            <li>{{cartI.extras}}</li>
           </ul>
           <div id="button-container">
             <v-btn id="checkout-btn"
@@ -235,7 +228,11 @@ export default {
       }
     }
   },
+  beforeMount(){
+    document.body.style.opacity="0%"
+  },
   mounted(){
+    document.body.style.opacity="100%"
     this.priceDecimals()
     this.promptDisplay = 'false'
   },

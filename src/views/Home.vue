@@ -113,9 +113,9 @@ export default {
       width:100%;
       margin: 0 auto;
       position: absolute;
-      top:35%;
+      top:35%; //sredi ovo u mobile
       #hero-2-box {
-        min-width:340px;
+        min-width:340px; //sredi mozda i ovo  mobile verziji
         width: 40%;
         background-color: rgba(196, 20, 20, 0.564);
         margin: 0 auto;
@@ -125,7 +125,9 @@ export default {
   }
   .circle {
     width:110px;
+    //width:80px; //za mobile
     height:110px;
+    //height:80px; //za mobile
     border:1px solid #333;
     border-radius: 50%;
     margin: 0 auto;
