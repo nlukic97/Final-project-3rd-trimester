@@ -11,62 +11,57 @@
       :price="promptedItem.price"
       :extras="promptedItem.extras"
     />
-
-    <!-- ---------------------------- cart view testing ---------------------------- -->
-                        <!-- <v-row>
-                          <v-col>
-                            <ul v-for="(cartI, index) in cart" :key="index">
-                              <li>{{cartI.title}}</li>
-                              <li>{{cartI.img}}</li>
-                              <li>{{cartI.size}}</li>
-                              <li>{{cartI.price}}</li>
-                            </ul>
-                          </v-col>
-                        </v-row> -->
-    <!-- ---------------------------- ///////////////// ---------------------------- -->
-
-    <v-row>
-      <v-col lg='9' md="9">
+    <v-row class="pb-10">
+      <v-col lg='9' md="9" sm="12" cols="12">
         <h2>Menu</h2>
-        <div id="availableFood">
-          <ul v-for="(item, index) in items" :key="index">
+        <div id="availableFood" class="d-flex flex-wrap justify-center">
+          <v-card 
+          v-for="(item, index) in items" :key="index"
+          class="pt-5 pb-5 mb-15 ml-2 mr-2"
+          id="item-card"
+          >
             <h3>{{item.size}} {{item.title}}</h3>
-            <div class="img-container">
+            <div class="img-container d-flex align-center">
               <img :src="item.img" alt="">
             </div>
-            <li><strong>Price: </strong>{{item.price}} £</li>
-            <li class="text-center">
+            <span><strong>Price: </strong>{{item.price}} £</span>
+            <div class="text-center">
               <v-btn
               class="red white--text"
               @click="cartPrompt(index)"
               >
               Add to cart
               </v-btn>
-            </li>
-          </ul>
+            </div>
+          </v-card>
         </div>
       </v-col>
-      <v-col lg='3' md='3'>
+      <v-col 
+      lg='3' md="3" sm="12" cols="12" 
+      id="cart">
         <h2>Cart</h2>
         <div id="checkout-container">
           <v-btn id="clear-cart-btn"
           @click="clearCart"
           class="red white--text"
           fab
-          height="25"
-          width="25"
+          
           >
-            X <!-- clear cart -->
+            Clear<br>cart <!-- clear cart -->
           </v-btn>
             
-          <ul v-for="(cartI, index) in cart" :key="index">
+          <v-card 
+          v-for="(cartI, index) in cart" :key="index"
+          >
             <span @click="cartItemDelete(index)">X</span>
             <h4> {{cartI.size}} {{cartI.title}}</h4>
             <li>{{cartI.price}} £</li>
             <li>{{cartI.extras}}</li>
-          </ul>
+          </v-card>
+
           <div id="button-container">
-            <v-btn id="checkout-btn"
+            <v-btn 
+            id="checkout-btn"
             @click="checkout"
             class="red white--text"
             >
@@ -102,7 +97,8 @@ export default {
           size: 'Regular',
           price: 4.30,
           extras: 'salt, vinager'
-        },
+        }
+        ,
         {
           title: 'Cod',
           img: 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
@@ -242,59 +238,107 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-#availableFood {
-  display:flex;
-  justify-content: space-around;
-  // align-content: flex-start;
-  flex-wrap: wrap;
-  flex-direction: row;
-  ul {
-  width:240px;
-  padding:20px;
-  margin: 0 10px 10px 10px;
-  border:1px solid #333;
-    h3 {
-      text-align: left;
-    }
-    .img-container {
-      height:151px;
-      display: flex;
-      align-items: center;
-      img {
+// #availableFood {
+//   display:flex;
+//   justify-content: space-around;
+//   // align-content: flex-start;
+//   flex-wrap: wrap;
+//   flex-direction: row;
+//   ul {
+//   width:240px;
+//   padding:20px;
+//   margin: 0 10px 10px 10px;
+//   border:1px solid #333;
+//     h3 {
+//       text-align: left;
+//     }
+//     .img-container {
+//       height:151px;
+//       display: flex;
+//       align-items: center;
+//       img {
+//       width:100%;
+//       }
+//     }
+//     li {
+//       list-style-type: none;
+//       text-align: left;
+//     }
+//   }
+// }
+
+// #checkout-container {
+//   border:1px solid #333;
+//   min-height: 100px;
+//   position: relative;
+//   // padding-bottom: 36px;
+//   padding-bottom:36px;
+//   #clear-cart-btn {
+//     // display: none;
+//     position: absolute;
+//     right: -10px;
+//     top:-10px;
+//   }
+//   ul {
+//     list-style-type: none;
+//     text-align: left;
+//     margin-bottom: 8px;
+//   }
+//   #button-container {
+//     width:100%;
+//     position: absolute;
+//     bottom:0;
+//     #checkout-btn {
+//       margin: 0 auto;
+//     }
+//   }
+// }
+</style>
+<style scoped lang="scss">
+#item-card {
+  max-width: 240px;
+  .img-container {
+    width:80%;
+    margin:7px auto;
+    height:151px;
+    overflow: hidden;
+    img {
       width:100%;
-      }
-    }
-    li {
-      list-style-type: none;
-      text-align: left;
     }
   }
 }
 
-#checkout-container {
-  border:1px solid #333;
-  min-height: 100px;
+
+#cart {
+  #checkout-container {
   position: relative;
-  // padding-bottom: 36px;
-  padding-bottom:36px;
-  #clear-cart-btn {
-    // display: none;
-    position: absolute;
-    right: -10px;
-    top:-10px;
-  }
-  ul {
-    list-style-type: none;
-    text-align: left;
-    margin-bottom: 8px;
-  }
-  #button-container {
-    width:100%;
-    position: absolute;
-    bottom:0;
-    #checkout-btn {
-      margin: 0 auto;
+    #clear-cart-btn {
+      position: absolute;
+      top:-30px;
+      right:-5px;
+      z-index: 4;
+      font-size: 12px;
     }
   }
 }
+
+@media screen and (max-width: '959px'){
+  #cart {
+    position:fixed;
+    bottom:0;
+    z-index:0;
+    background-color: #fff;
+    border-top:1px solid black;
+    border-bottom: 1px solid black;
+    height:98px;
+  }
+}
+
+@media (max-width: 575px){
+  #item-card {
+  max-width: 240px;
+  min-width: 90%;
+  }
+};
+
 </style>

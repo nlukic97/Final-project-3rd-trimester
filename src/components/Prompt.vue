@@ -2,17 +2,31 @@
   <div id="Prompt">
     <div id="overlay"></div>
     <div class="promptContainer">
-      <div class="innerBox">
+      <v-card class="innerBox">
         <span id="x">X</span>
         <h2>{{size}} {{title}}</h2>
         <img :src="img" alt="">
         <p>{{msg}}</p>
         <p>{{price}} £</p>
-        <div class="d-flex justify-center" style="border:1px solid red">
-          <div v-for="(extra, index) in this.itemExtras" :key="index" class="mr-5">
-            <label :for="extra">{{extra}}</label>
-            <input type="checkbox" :id="extra" :name="extra" v-model="selectedExtras[extra]">
-          </div>
+        <div class="d-flex flex-wrap justify-center" style="width:80%; margin: 0 auto;">
+          <v-btn 
+          v-for="(extra, index) in this.itemExtras" :key="index" 
+          class="mr-2 ml-2 mb-4"
+          width="180px"
+          style="
+          margin:0;
+          padding:0;
+          "
+          >
+            <div class="checkbox-container">
+              <input type="checkbox" :id="extra" :name="extra" v-model="selectedExtras[extra]">
+
+              <label :for="extra" class="mr-2">
+                {{extra}}
+              </label>
+
+            </div>
+          </v-btn>
         </div>
 
         <v-btn 
@@ -21,7 +35,7 @@
         >Add to cart
         </v-btn>
 
-      </div>
+      </v-card>
   </div>
   </div>
 </template>
@@ -119,10 +133,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-// #prompt {
-//   display: none;
-// }
-
 #overlay{
   background-color: rgba(102, 101, 101, 0.6);
   width:100%;
@@ -146,23 +156,53 @@ export default {
   width:40%;
   margin:40px auto 0 auto;
   padding:20px;
-  background-color:white;
-  border:1px solid #333;
   img {
     width:80%;
     margin: 0 auto;
   }
+  .checkbox-container {
+    position:relative;
+    input {
+      position:absolute;
+      left: 20px;
+      top:10px;
+      // display: none;
+
+    }
+    label {
+      display:inline-block;
+      padding:10px 40px;
+      width:180px;
+      margin-left: 7px; 
+      // border:1px solid red;
+    }
+  }
 }
 
 #x {
-  float:right;
-  padding:3px 8px;
+  // float:right;
+  padding:2px 10px;
+  border-radius:50%;
   background-color: red;
   color:#fff;
+  position:absolute;
+  right:25px;
 }
 
 #x:hover {
   background-color:rgb(248, 47, 47);
   cursor: pointer;
+}
+
+@media (max-width: 791px){
+  .innerBox {
+    width:60%;
+  }
+}
+
+@media (max-width: 575px){
+  .innerBox {
+    width:80%;
+  }
 }
 </style>
