@@ -7,7 +7,7 @@
         <h2>{{size}} {{title}}</h2>
         <img :src="img" alt="">
         <p>{{msg}}</p>
-        <p>{{price}} £</p>
+        <p>{{price}} &#163;</p>
         <div class="d-flex flex-wrap justify-center" style="width:80%; margin: 0 auto;">
           <v-btn 
           v-for="(extra, index) in this.itemExtras" :key="index" 
@@ -30,7 +30,7 @@
         </div>
 
         <v-btn 
-          class="red white--text"
+          class="red white--text mb-5 mt-5"
           @click="addingToCart"
         >Add to cart
         </v-btn>
@@ -153,11 +153,13 @@ export default {
 }
 .innerBox {
   // width:600px;
-  width:40%;
-  margin:40px auto 0 auto;
-  padding:20px;
+  width:53%;
+  margin:20px auto 0 auto;
+  padding:30px;
+  max-height:90%;
+  overflow-y: scroll;
   img {
-    width:80%;
+    width:65%;
     margin: 0 auto;
   }
   .checkbox-container {
