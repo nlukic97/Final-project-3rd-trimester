@@ -38,11 +38,12 @@
         </div>
       </v-col>
       <v-col lg='3' md="3" sm="12" cols="12" id="cart">
-<!-- &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+<!-- ---------------------    desktop/ large screen navigation ----------------------  -->
         <v-card>
           <div class="d-flex justify-space-between align-center">
             <v-btn id="open-cart-btn"
             class="red white--text ml-4 mr-4"
+            :class="rotationClass"
             fab
             @click="cartViewToggle()"
             >
@@ -56,10 +57,8 @@
               Empty
             </v-btn>
           </div>
-          <!-- how to make this inderneath conditional ?? -->
-          <div :class="cartClass" class="checkout-container"> <!--    or       #checkout-container-closed    -->
-            <!-- ovo ovde pravi problem. Imas scroll y -->
-              
+          
+          <div :class="cartClass" class="checkout-container">
             <v-card 
             v-for="(cartItem, index) in cart" :key="index"
             class="cartItemCard"
@@ -75,7 +74,7 @@
                     height="20px"
                     fab
                   >
-                  X
+                    X
                   </v-btn>
                 </div>
               </div>
@@ -98,6 +97,15 @@
               </v-btn>
             </div>
       </v-col>
+
+<!-- ---------------------    mobile/ tablet cart ----------------------  -->
+      <v-btn
+      class="red white--text"
+      id="cart2-btn"
+      fab
+      >
+      Cart
+      </v-btn>
     </v-row>
   </v-container>
 </div>
@@ -201,7 +209,8 @@ export default {
       cart:[
       ],
       totalPrice:0,
-      cartClass:'checkout-container'
+      cartClass:'checkout-container',
+      rotationClass:'rotate180'
     }
   },
   methods: {
@@ -266,8 +275,10 @@ export default {
     cartViewToggle(){
       if(this.cartClass == 'checkout-container-open'){
         this.cartClass = 'checkout-container-closed'
+        this.rotationClass = 'rotate180'
       } else {
         this.cartClass = 'checkout-container-open'
+        this.rotationClass = ''
       }
     },
 
@@ -353,10 +364,12 @@ export default {
   }
 }
 
+#cart2-btn {
+  display: none;
+}
 
 #cart {
   position:relative;
-  // border:1px solid red;
   padding:0;
   #clear-cart-btn {
     z-index: 4;
@@ -380,6 +393,8 @@ export default {
       }
     }
   }
+
+  //on desktops and larger screens, this is used to toggle the visibility of the cart items
   .checkout-container-open {
     max-height:60vh;
     height:300px;
@@ -395,15 +410,23 @@ export default {
   }
 }
 
+.rotate180 {
+  transform: rotate(-180deg);
+}
+
 @media screen and (max-width: '959px'){
   #cart {
-    position:fixed;
-    bottom:0;
-    z-index:0;
-    background-color: #fff;
-    border-top:1px solid black;
-    border-bottom: 1px solid black;
-    height:98px;
+    display: none;
+  }
+
+  //on mobiles and tables, a button appears which opens the "cart" prop
+  #cart2-btn {
+    display: block;
+    position: fixed;
+    bottom:5%;
+    left:5%;
+    width:70px;
+    height:70px;
   }
 }
 
