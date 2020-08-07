@@ -44,6 +44,7 @@
             <v-btn id="open-cart-btn"
             class="red white--text ml-4 mr-4"
             fab
+            @click="cartViewToggle()"
             >
               V
             </v-btn>
@@ -56,7 +57,7 @@
             </v-btn>
           </div>
           <!-- how to make this inderneath conditional ?? -->
-          <div :class="{'checkout-container': openCart}"> <!--    or       #checkout-container-closed    -->
+          <div :class="cartClass" class="checkout-container"> <!--    or       #checkout-container-closed    -->
             <!-- ovo ovde pravi problem. Imas scroll y -->
               
             <v-card 
@@ -200,7 +201,7 @@ export default {
       cart:[
       ],
       totalPrice:0,
-      openCart:false
+      cartClass:'checkout-container'
     }
   },
   methods: {
@@ -260,6 +261,14 @@ export default {
       this.promptedItem = {}; //ovo iznad sad i ne moras ali sto da ne iz predostroznosti
       this.calcCartTotal()
       
+    },
+
+    cartViewToggle(){
+      if(this.cartClass == 'checkout-container-open'){
+        this.cartClass = 'checkout-container-closed'
+      } else {
+        this.cartClass = 'checkout-container-open'
+      }
     },
 
     cartExtraDisplay(index){
@@ -360,12 +369,8 @@ export default {
     height:20px;
   }
   .checkout-container {
-  padding:5px;
-  max-height:60vh;
-  // height:0px;
-  overflow:hidden;
-  overflow-y:scroll;
-    
+    padding:5px;
+    transition: height 1s;   
     .cartItemCard {
       text-align: left;
       padding:10px 10px 20px;
@@ -375,10 +380,18 @@ export default {
       }
     }
   }
-
+  .checkout-container-open {
+    max-height:60vh;
+    height:300px;
+    transition: height 0.4s;
+    overflow:hidden;
+    overflow-y:scroll;
+  }
   .checkout-container-closed {
-    height:0px!important;
-    overflow-x: hidden!important;
+    height:0px;
+    overflow:hidden;
+    overflow-y: hidden;
+    transition: height 0.4s;
   }
 }
 
