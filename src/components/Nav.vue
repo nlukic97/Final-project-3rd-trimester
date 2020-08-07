@@ -80,7 +80,7 @@
       close-on-content-click
       >
         <template v-slot:activator="{ on, attrs }"  >
-          <v-btn style="width:30%"
+          <v-btn style="width:20%"
             color="red"
             dark
             v-bind="attrs"
