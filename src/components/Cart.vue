@@ -6,7 +6,9 @@
       <v-card class="innerBox">
         <span id="x" @click="closeMobileCart()">X</span>
         <h2>Cart</h2>
-        <p>{{checkoutPrice}} &#163;</p>
+        <p><span v-if="cart.length == 0">Cart empty! - </span>{{checkoutPrice}} &#163;</p>
+        
+
 
         <v-card class="pt-5 pb-5 pl-3 pr-3 mb-4 text-left"
           v-for="(item, index) in cart" :key="index"
@@ -27,7 +29,8 @@
         <!-- the same card here goes which was used in the cart section for the large screen -->
         </v-card>
 
-        <v-btn 
+        <v-btn
+          v-if="cart.length != 0"
           class="red white--text mb-5 mt-5"
         >Checkout
         </v-btn>

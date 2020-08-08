@@ -63,9 +63,14 @@
             <v-btn id="clear-cart-btn"
             @click="clearCart"
             class="red white--text mr-4"
+            v-if="cart.length != 0"
             >
               Empty
             </v-btn>
+            <div
+            class="clear-cart-btn pr-15"
+            v-if="cart.length == 0">
+            </div>
           </div>
           
           <div :class="cartClass" class="checkout-container">
@@ -102,6 +107,7 @@
               id="checkout-btn"
               @click="checkout"
               class="red white--text mt-3"
+              v-if="cart.length != 0"
               >
                 Checkout
               </v-btn>
