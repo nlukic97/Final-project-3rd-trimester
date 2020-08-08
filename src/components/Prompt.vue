@@ -1,4 +1,4 @@
-  <template>
+<template>
   <div id="Prompt">
     <div id="overlay"></div>
     <div class="promptContainer">
@@ -36,7 +36,7 @@
         </v-btn>
 
       </v-card>
-  </div>
+    </div>
   </div>
 </template>
 <script>
@@ -68,7 +68,7 @@ export default {
     }
   },
   methods:{
-    promptDisplay(){
+    promptDisplay(){ //this should not be here. No document select, use a v-if
       if(this.displayPrompt == 'false'){
         document.getElementById('prompt').style.display='none'
       } else if(this.displayPrompt == 'true')

@@ -1,6 +1,7 @@
 <template>
 <div class="order">
   <v-container>
+    <Cart id="cart-prompt" :checkoutCart="cart" :checkoutPrice="totalPrice" :displayMobileCart="false"/> 
     <Prompt id="prompt" 
       @update-prompt="updatePrompt"
       @adding-to-cart="cartAdd"
@@ -11,6 +12,7 @@
       :price="promptedItem.price"
       :extras="promptedItem.extras"
     />
+
     <v-row class="pb-10">
       <v-col lg='9' md="9" sm="12" cols="12">
         <h2>Menu</h2>
@@ -112,10 +114,12 @@
 </template>
 <script>
 import Prompt from '../components/Prompt.vue'
+import Cart from '../components/Cart.vue'
 export default {
   name: 'Order',
   components: {
-    Prompt
+    Prompt,
+    Cart
   },
   data(){
     return {
@@ -208,7 +212,7 @@ export default {
       ],
       cart:[
       ],
-      totalPrice:0,
+      totalPrice:0, //you may need to sort this out. It should be a string. We want to send a string prop. maybe when calculating turn it into numbers, and then back into string.
       cartClass:'checkout-container',
       rotationClass:'rotate180'
     }
