@@ -1,7 +1,15 @@
 <template>
 <div class="order">
   <v-container>
-    <Cart id="cart-prompt" :checkoutCart="cart" :checkoutPrice="totalPrice" :displayMobileCart="false"/> 
+
+    <Cart 
+      id="mobile-cart-prompt" 
+      @close-mobile-cart="updateMobileCart" 
+      :checkoutCart="cart" 
+      :checkoutPrice="totalPrice" 
+      :displayMobileCart="mobileCartDisplay"
+    /> 
+
     <Prompt id="prompt" 
       @update-prompt="updatePrompt"
       @adding-to-cart="cartAdd"
@@ -12,7 +20,7 @@
       :price="promptedItem.price"
       :extras="promptedItem.extras"
     />
-
+    <!-- -------------------- Food menu -------------------- -->
     <v-row class="pb-10">
       <v-col lg='9' md="9" sm="12" cols="12">
         <h2>Menu</h2>
@@ -105,6 +113,7 @@
       class="red white--text"
       id="cart2-btn"
       fab
+      @click="mobileCartToggle"
       >
       Cart
       </v-btn>
@@ -124,6 +133,7 @@ export default {
   data(){
     return {
       promptDisplay:'true',
+      mobileCartDisplay:false,
       promptedItem:{
         title: '',
         size: '',
@@ -212,7 +222,7 @@ export default {
       ],
       cart:[
       ],
-      totalPrice:0, //you may need to sort this out. It should be a string. We want to send a string prop. maybe when calculating turn it into numbers, and then back into string.
+      totalPrice:'0', //you may need to sort this out. It should be a string. We want to send a string prop. maybe when calculating turn it into numbers, and then back into string.
       cartClass:'checkout-container',
       rotationClass:'rotate180'
     }
@@ -220,13 +230,9 @@ export default {
   methods: {
     priceDecimals(){
       for(var a = 0; a < this.items.length; a++){
-        var check = this.items[a].price.toString();
-
-        if(check[check.length-2] == '.'){
-          this.items[a].price = check + '0';
-        } else {
-          this.items[a].price = this.items[a].price.toString()
-        }
+        var check = parseFloat((this.items[a].price));
+        var strCheck = check.toFixed(2).toString()
+        this.items[a].price = strCheck;
       }
     },
 
@@ -294,8 +300,20 @@ export default {
       }
     },
 
+    mobileCartToggle(){
+      if(this.mobileCartDisplay == false){
+        this.mobileCartDisplay = true
+      } else {
+        this.mobileCartDisplay = false
+      }
+    },
+
     updatePrompt(){
       this.promptDisplay = 'false'
+    },
+
+    updateMobileCart(){
+      this.mobileCartDisplay = false;
     },
 
     cartItemDelete(index){
@@ -323,14 +341,10 @@ export default {
       }
 
       var priceString = price.toFixed(2).toString()
-
-      if(priceString[priceString.length-2] == '.'){
-          this.totalPrice = priceString + '0';
-        } else {
-          this.totalPrice = priceString
-        }
-      //this.totalPrice = price // round this so that only 2 digits remain after -------------------------------------------------
-      console.log('Totalcart price: ' + this.totalPrice)
+      this.totalPrice = priceString;
+     
+      
+      console.log('Totalcart price: ' + this.totalPrice) //this is where you push the route to the new view for checkout. with the props in the cart made into a string
     },
 
     checkout(){
@@ -342,12 +356,13 @@ export default {
     }
   },
   beforeMount(){
-    document.body.style.opacity="0%"
+    // document.body.style.opacity="0%"
   },
   mounted(){
-    document.body.style.opacity="100%"
+    // document.body.style.opacity="100%"
     this.priceDecimals()
     this.promptDisplay = 'false'
+    this.mobileCartDisplay = false;
   },
   updated(){
     this.priceDecimals()
@@ -414,6 +429,10 @@ export default {
   }
 }
 
+#mobile-cart-prompt { //for it to be closed under normal conditions
+    display:none;
+  }
+
 .rotate180 {
   transform: rotate(-180deg);
 }
@@ -431,6 +450,10 @@ export default {
     left:5%;
     width:70px;
     height:70px;
+  }
+
+  #mobile-cart-prompt { 
+    display:block;
   }
 }
 

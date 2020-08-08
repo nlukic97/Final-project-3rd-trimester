@@ -110,7 +110,7 @@ export default {
   mounted(){
     this.promptDisplay()
 
-    document.getElementById('x').addEventListener('click',()=>{
+    document.getElementById('x').addEventListener('click',()=>{ //ne trebas ovako.
       this.$emit("update-prompt") //ne manjati vrednost propa unutar komponente. Ne saljem nikakve podatke, jer order ih sve vec ima
     })
 

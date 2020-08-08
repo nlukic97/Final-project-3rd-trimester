@@ -1,18 +1,18 @@
 <template>
   <div id="Prompt" v-if="displayMobileCart">
     <div id="overlay"></div>
+
     <div class="promptContainer">
       <v-card class="innerBox">
-        <span id="x">X</span>
+        <span id="x" @click="closeMobileCart()">X</span>
         <h2>Cart</h2>
         <p>{{checkoutPrice}} &#163;</p>
+
         <v-card
           v-for="(item, index) in cart" :key="index"
         >
-        e
-          
+        <!-- the same card here goes which was used in the cart section for the large screen -->
         </v-card>
-        
 
         <v-btn 
           class="red white--text mb-5 mt-5"
@@ -21,6 +21,7 @@
 
       </v-card>
     </div>
+
   </div>
 </template>
 <script>
@@ -39,6 +40,11 @@ export default {
   data(){
     return {
       cart:''
+    }
+  },
+  methods:{
+    closeMobileCart(){
+      this.$emit('close-mobile-cart')
     }
   }
 }
