@@ -223,7 +223,7 @@ export default {
       cart:[
       ],
       totalPrice:'0', //you may need to sort this out. It should be a string. We want to send a string prop. maybe when calculating turn it into numbers, and then back into string.
-      cartClass:'checkout-container',
+      cartClass:'checkout-container-closed',
       rotationClass:'rotate180'
     }
   },
@@ -286,7 +286,7 @@ export default {
       if(this.cartClass == 'checkout-container-open'){
         this.cartClass = 'checkout-container-closed'
         this.rotationClass = 'rotate180'
-      } else {
+      } else if(this.cartClass == 'checkout-container-closed') {
         this.cartClass = 'checkout-container-open'
         this.rotationClass = ''
       }

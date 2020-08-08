@@ -8,9 +8,22 @@
         <h2>Cart</h2>
         <p>{{checkoutPrice}} &#163;</p>
 
-        <v-card
+        <v-card class="pt-5 pb-5 pl-3 pr-3 mb-4 text-left"
           v-for="(item, index) in cart" :key="index"
         >
+          <div class="d-flex justify-space-between text-left">
+            <span>{{item.size}} {{item.title}}</span>
+            <span>{{item.price}} &#163;</span>
+            <v-btn
+            class="red white--text"
+            fab
+            width="20px"
+            height="20px"
+            >
+              x <!-- We now need to make this work. So, it should emit its id to "order, and we remove the item with that index from the cart array" -->
+            </v-btn>
+          </div>
+          <span class="pl-5" v-if="item.extras">+ {{item.extras}}</span>
         <!-- the same card here goes which was used in the cart section for the large screen -->
         </v-card>
 
