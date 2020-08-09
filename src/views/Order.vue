@@ -358,6 +358,8 @@ export default {
         console.log('Your cart is empty !')
       } else {
         console.log(this.cart)
+        this.$router.push('order/checkout') //redirect to the checkout page
+        //ovde imas sve u cookie, i taj cookie ce da populise cart.
       }
     }
   },

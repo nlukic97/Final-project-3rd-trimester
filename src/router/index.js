@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Faq from '../views/Faq.vue'
 import Order from '../views/Order.vue'
 import Error404 from '../views/Error404.vue'
+import Checkout from '../views/Checkout.vue'
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,11 @@ Vue.use(VueRouter)
     path:'/order',
     name: 'Order',
     component: Order
+  },
+  {
+    path:'/order/checkout',
+    name:'Checkout',
+    component: Checkout
   },
   {
     path:'*',

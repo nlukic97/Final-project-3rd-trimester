@@ -25,7 +25,7 @@
 
       <v-divider></v-divider>
 
-      <v-card-text class="white--text">
+      <v-card-text class="white--text" id="copyRight">
         <span>&copy; </span>{{ new Date().getFullYear() }} — <strong>Hillingdon Chippie</strong>
       </v-card-text>
     </v-card>
@@ -54,3 +54,8 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+#copyRight {
+  height:160px;
+}
+</style>

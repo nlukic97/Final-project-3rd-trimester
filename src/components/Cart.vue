@@ -32,6 +32,7 @@
         <v-btn
           v-if="cart.length != 0"
           class="red white--text mb-5 mt-5"
+          @click="checkout"
         >Checkout
         </v-btn>
 
@@ -61,6 +62,15 @@ export default {
   methods:{
     closeMobileCart(){
       this.$emit('close-mobile-cart')
+    },
+    checkout(){
+      if(this.cart.length == 0){
+        console.log('Your cart is empty !')
+      } else {
+        console.log(this.cart)
+        this.$router.push('order/checkout') //redirect to the checkout page
+        //ovde imas sve u cookie, i taj cookie ce da populise cart.
+      }
     }
   }
 }
