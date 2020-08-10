@@ -18,26 +18,34 @@ export default {
   name:'CookieBanner',
   data(){
     return {
-      CookiePromptDisplay:true
+      CookiePromptDisplay:true,
+      cookieObj:'',
+      acceptCookies:''
     }
   },
   methods: {
     toggleCookiePrompt(){
       if(this.CookiePromptDisplay == true){
-        this.CookiePromptDisplay = false;
+        this.cookieObj.create('acceptedCookies','true',10)
+        this.checkCookie()
       }
     },
 
-    acceptedCookieCheck(){
-      console.log('This will read if these is a cookie. It will store the answer in var ans');
-      var ans = 'cookie not present';
-      if(ans == 'cookie present'){
+    checkCookie(){
+      this.acceptCookies = this.cookieObj.read('acceptedCookies')
+      if(!this.acceptCookies){
+        this.CookiePromptDisplay = true;
+      } else {
         this.CookiePromptDisplay = false;
       }
     }
   },
   beforeMount() {
-    this.acceptedCookieCheck()
+    this.cookieObj = new this.$cookie;
+    this.checkCookie()
+  },
+  mounted(){
+    
   }
 }
 </script>

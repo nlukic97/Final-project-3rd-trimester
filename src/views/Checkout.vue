@@ -132,14 +132,14 @@ export default {
       valid:false,
       nameRules: [
         v => !!v || 'Name is required',
-        v => (v && v.length <= 35) || 'Name must be less than 35 characters',
+        v => (v && v.length <= 35) || 'Name must be less than 35 characters'
       ],
       addressRules: [
         v => !!v || 'Address is required'
       ],
       emailRules: [
         v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+        v => /.+@.+\..+/.test(v) || 'E-mail must be valid' // /[^A-z0-9]+/;
       ],
       phoneNumberRules:[
         v => !!v || 'Phone number is required'
@@ -176,6 +176,7 @@ export default {
       var b = this.$refs.form2.validate()
 
       if(a == true && b == true){
+        //ovde ide axios poziv. Ako je uspesan, onda ide router push. Ako ne, onda baca na error stranicu.
         this.$router.push('../confirm')
       }
     },

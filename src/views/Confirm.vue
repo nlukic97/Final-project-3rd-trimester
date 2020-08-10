@@ -8,6 +8,11 @@
       </v-row>
       <v-row>
         <v-col>
+          
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
           <h3>Check your email for your digital receipt.</h3>
         </v-col>
       </v-row>
