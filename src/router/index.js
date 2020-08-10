@@ -5,6 +5,7 @@ import Faq from '../views/Faq.vue'
 import Order from '../views/Order.vue'
 import Error404 from '../views/Error404.vue'
 import Checkout from '../views/Checkout.vue'
+import Confirm from '../views/Confirm.vue'
 
 Vue.use(VueRouter)
 
@@ -36,6 +37,11 @@ Vue.use(VueRouter)
     path:'/order/checkout',
     name:'Checkout',
     component: Checkout
+  },
+  {
+    path:'/confirm',
+    name: 'Confirm',
+    component: Confirm
   },
   {
     path:'*',

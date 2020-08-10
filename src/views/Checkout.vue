@@ -22,11 +22,15 @@
           <h3>Address</h3>
           <v-card>
             <v-col>
-              <v-form>
-                <v-text-field label="name" outlined dense v-model="name"></v-text-field>
-                <v-text-field label="address" outlined dense v-model="address"></v-text-field>
-                <v-text-field label="email" outlined dense v-model="email"></v-text-field>
-                <v-text-field label="Phone number" outlined dense v-model="phoneNumber"></v-text-field>
+              <v-form
+                ref="form1"
+                v-model="valid"
+                lazy-validation
+              >
+                <v-text-field label="name" outlined dense v-model="name" :rules="nameRules"></v-text-field>
+                <v-text-field label="address" outlined dense v-model="address" :rules="addressRules"></v-text-field>
+                <v-text-field label="email" outlined dense v-model="email" :rules="emailRules"></v-text-field>
+                <v-text-field label="Phone number" type="number" outlined dense v-model="phoneNumber" :rules="phoneNumberRules"></v-text-field>
               </v-form>
             </v-col>
           </v-card>
@@ -37,9 +41,13 @@
           <h3>Payment</h3>
           <v-card>
             <v-col> <!-- treba li ovo ? -->
-              <v-form>
-                <v-text-field label="Card Number" outlined dense v-model="cardNumber"></v-text-field>
-                <v-text-field label="CVC-code" outlined dense v-model="cvc"></v-text-field>
+              <v-form
+                ref="form2"
+                v-model="valid"
+                lazy-validation
+              >
+                <v-text-field label="Card Number" type="number" outlined dense v-model="cardNumber" :rules="cardNumberRules"></v-text-field>
+                <v-text-field label="CVC-code" type="number" outlined dense v-model="cvc" :rules="cvcRules"></v-text-field>
               </v-form>
             </v-col> <!-- treba li ovo ? -->
           </v-card>
@@ -68,14 +76,13 @@
             <v-card>
               <div 
               v-for="(item, index) in cart" :key="index"
-              class="pb-2 pt-2 text-left"
-              style="border-top:1px solid gray;"
+              class="pb-2 pt-2 text-left cartItems"
               >
                 <div class="d-flex justify-space-between pl-7 pr-7">
                   <span>{{item.size}} {{item.title}} </span>
                   <span>{{item.price}} 	&#163;</span>
                 </div>
-                <span v-if="item.extras" class="pl-10">+ {{item.extras}}</span>
+                <span v-if="item.extras" class="pl-10 extras">+ {{item.extras}}</span>
               </div>
             </v-card>
 
@@ -121,7 +128,28 @@ export default {
       phoneNumber:'',
       cardNumber:'',
       cvc:'',
-      total:0
+      total:0,
+      valid:false,
+      nameRules: [
+        v => !!v || 'Name is required',
+        v => (v && v.length <= 35) || 'Name must be less than 35 characters',
+      ],
+      addressRules: [
+        v => !!v || 'Address is required'
+      ],
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+      ],
+      phoneNumberRules:[
+        v => !!v || 'Phone number is required'
+      ],
+      cardNumberRules:[
+        v => !!v || 'Card number is required'
+      ],
+      cvcRules:[
+        v => !!v || 'CVC number is required',
+      ]
     }
   },
   methods:{
@@ -144,14 +172,11 @@ export default {
     },
 
     validation(){ //but try to implement vuetify validation in here. You have three different forms, that is one issue.s
-      if(
-        this.name == '' 
-        || this.address == ''
-        || this.email == ''
-      ) {
-        console.log('Not good')
-      } else {
-        console.log('good')
+      var a = this.$refs.form1.validate()
+      var b = this.$refs.form2.validate()
+
+      if(a == true && b == true){
+        this.$router.push('../confirm')
       }
     },
 
@@ -171,6 +196,12 @@ export default {
   }
 }
 </script>
-<style lang="less" scoped>
-
+<style lang="scss" scoped>
+.cartItems {
+  color: #3f3e3e;
+  border-top:1px solid rgb(117, 107, 107);
+  .extras {
+    color: #797878;
+  }
+}
 </style>
