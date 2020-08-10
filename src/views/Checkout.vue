@@ -2,14 +2,13 @@
   <div id="Checkout">
     <v-container>
       <v-row>
-        <v-col cols="12">
-          <router-link to="/order">
-            <v-btn
-              class="red white--text"
-            >
-              Back
-            </v-btn>
-          </router-link>
+        <v-col cols="12" class="text-left">
+          <v-btn
+            class="red white--text"
+            @click="backToOrderPage"
+          >
+            Back
+          </v-btn>
         </v-col>
       </v-row>
       <v-row>
@@ -20,43 +19,68 @@
       <v-row>
         <!-- address info -->
         <v-col cols="12" sm="12" md="4">
-          <h4>address</h4>
+          <h3>Address</h3>
           <v-card>
-            <p>address</p>
+            <v-col> <!-- treba li ovo ? -->
+              <v-form>
+                <v-text-field label="name" outlined dense></v-text-field>
+                <v-text-field label="address" outlined dense></v-text-field>
+                <v-text-field label="email" outlined dense></v-text-field>
+                <v-text-field label="Phone number" outlined dense></v-text-field>
+              </v-form>
+            </v-col> <!-- treba li ovo ? -->
           </v-card>
         </v-col >
+
         <!-- payment info -->
         <v-col cols="12" sm="12" md="4">
-          <h4>payment info</h4>
+          <h3>Payment</h3>
           <v-card>
-            <p>payment info</p>
+            <v-col> <!-- treba li ovo ? -->
+              <v-form>
+                <v-text-field label="Card Number" outlined dense></v-text-field>
+                <v-text-field label="CVC-code" outlined dense></v-text-field>
+              </v-form>
+            </v-col> <!-- treba li ovo ? -->
           </v-card>
         </v-col>
+
         <!-- order info -->
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="4"
+        >
+          <h3>Order</h3>
           <v-card>
-            <div 
-            v-for="(item, index) in cart" :key="index"
-            class="pb-3 pt-1"
-            style="border-bottom:1px solid gray;"
-            >
-              <div>
-                <span>{{item.size}} {{item.title}} </span>
-                <span>{{item.price}} 	&#163;</span>
-              </div>
-              <span v-if="item.extras">+ {{item.extras}}</span>
+
+            <div class="d-flex justify-space-around pb-3 pt-8">
+              <h3>Total:</h3>
+              <h3>{{this.total}} &#163;</h3>
             </div>
+
+            <v-btn
+            class="red white--text mb-7"
+            width="60%"
+            >
+              Order now
+            </v-btn>
+
+            <v-card>
+              <div 
+              v-for="(item, index) in cart" :key="index"
+              class="pb-2 pt-2 text-left"
+              style="border-top:1px solid gray;"
+              >
+                <div class="d-flex justify-space-between pl-7 pr-7">
+                  <span>{{item.size}} {{item.title}} </span>
+                  <span>{{item.price}} 	&#163;</span>
+                </div>
+                <span v-if="item.extras" class="pl-10">+ {{item.extras}}</span>
+              </div>
+            </v-card>
+
           </v-card>
         </v-col>
       </v-row>
       
-
-
-      <v-btn
-          class="red white--text"
-        >
-          Order now
-        </v-btn>
     </v-container>
   </div>
 </template>
@@ -88,13 +112,26 @@ export default {
           price: 5.25,
           extras: 'salt, vinager'
         }
-      ]
+      ],
+      total:0
     }
   },
   methods:{
     finalCart(){
       //nesto sto ce da strpa sve iz cookie-a u this.cart. Ovo je final cart pred purchase.
       //prvo bi ocistio ovaj array da bude prazan, i onda populisao iz cookie-a
+    },
+    
+    calcTotal(){
+      var price = 0;
+      for(var i = 0; i < this.cart.length; i++){
+        price = price + parseInt(this.cart[i].price)
+      }
+      this.total = price;
+      console.log(this.total)
+    },
+    backToOrderPage(){
+      this.$router.push('/order')
     }
   },
   beforeMount(){
@@ -102,8 +139,10 @@ export default {
   },
   mounted(){
     if(this.cart.length == 0){
-      this.$router.push('/order')
+      this.backToOrderPage()
     }
+
+    this.calcTotal()
   }
 }
 </script>
