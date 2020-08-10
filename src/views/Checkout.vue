@@ -21,14 +21,14 @@
         <v-col cols="12" sm="12" md="4">
           <h3>Address</h3>
           <v-card>
-            <v-col> <!-- treba li ovo ? -->
+            <v-col>
               <v-form>
-                <v-text-field label="name" outlined dense></v-text-field>
-                <v-text-field label="address" outlined dense></v-text-field>
-                <v-text-field label="email" outlined dense></v-text-field>
-                <v-text-field label="Phone number" outlined dense></v-text-field>
+                <v-text-field label="name" outlined dense v-model="name"></v-text-field>
+                <v-text-field label="address" outlined dense v-model="address"></v-text-field>
+                <v-text-field label="email" outlined dense v-model="email"></v-text-field>
+                <v-text-field label="Phone number" outlined dense v-model="phoneNumber"></v-text-field>
               </v-form>
-            </v-col> <!-- treba li ovo ? -->
+            </v-col>
           </v-card>
         </v-col >
 
@@ -38,8 +38,8 @@
           <v-card>
             <v-col> <!-- treba li ovo ? -->
               <v-form>
-                <v-text-field label="Card Number" outlined dense></v-text-field>
-                <v-text-field label="CVC-code" outlined dense></v-text-field>
+                <v-text-field label="Card Number" outlined dense v-model="cardNumber"></v-text-field>
+                <v-text-field label="CVC-code" outlined dense v-model="cvc"></v-text-field>
               </v-form>
             </v-col> <!-- treba li ovo ? -->
           </v-card>
@@ -55,10 +55,12 @@
               <h3>Total:</h3>
               <h3>{{this.total}} &#163;</h3>
             </div>
-
+            
+            <!-- ne umem kako da validiramo ovo -->
             <v-btn
             class="red white--text mb-7"
             width="60%"
+            @click="validation()"
             >
               Order now
             </v-btn>
@@ -113,6 +115,12 @@ export default {
           extras: 'salt, vinager'
         }
       ],
+      name:'',
+      address:'',
+      email:'',
+      phoneNumber:'',
+      cardNumber:'',
+      cvc:'',
       total:0
     }
   },
@@ -125,13 +133,30 @@ export default {
     calcTotal(){
       var price = 0;
       for(var i = 0; i < this.cart.length; i++){
-        price = price + parseInt(this.cart[i].price)
+        price = price + parseFloat(this.cart[i].price)
       }
       this.total = price;
       console.log(this.total)
     },
+
     backToOrderPage(){
       this.$router.push('/order')
+    },
+
+    validation(){ //but try to implement vuetify validation in here. You have three different forms, that is one issue.s
+      if(
+        this.name == '' 
+        || this.address == ''
+        || this.email == ''
+      ) {
+        console.log('Not good')
+      } else {
+        console.log('good')
+      }
+    },
+
+    submit(){
+      console.log(this.cart)
     }
   },
   beforeMount(){

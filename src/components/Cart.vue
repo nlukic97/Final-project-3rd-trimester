@@ -4,7 +4,27 @@
 
     <div class="promptContainer">
       <v-card class="innerBox">
-        <span id="x" @click="closeMobileCart()">X</span>
+        <div class="d-flex justify-space-between align-center">
+          <div v-if="this.cart.length==0"></div> <!-- fantom div to keep the x btn to the right -->
+          <v-btn
+            class="red white--text"
+            @click="emptyCart"
+            v-if="this.cart.length!=0" 
+          >
+            Empty
+          </v-btn>
+          <v-btn
+            class="red white--text"
+            text
+            fab 
+            width="25px" 
+            height="25px" 
+            @click="closeMobileCart()"
+          >
+            X
+          </v-btn>  
+        </div>
+        
         <h2>Cart</h2>
         <p><span v-if="cart.length == 0">Cart empty! - </span>{{checkoutPrice}} &#163;</p>
         
@@ -21,6 +41,7 @@
             fab
             width="20px"
             height="20px"
+            @click="removeItem(index)"
             >
               x <!-- We now need to make this work. So, it should emit its id to "order, and we remove the item with that index from the cart array" -->
             </v-btn>
@@ -63,6 +84,16 @@ export default {
     closeMobileCart(){
       this.$emit('close-mobile-cart')
     },
+
+    removeItem(index){ //problema
+      // console.log('remove item: ' + index)
+      this.$emit('remove-item', index)
+    },
+
+    emptyCart(){
+      this.$emit('empty-cart')
+    },
+
     checkout(){
       if(this.cart.length == 0){
         console.log('Your cart is empty !')
@@ -122,21 +153,6 @@ export default {
       // border:1px solid red;
     }
   }
-}
-
-#x {
-  // float:right;
-  padding:2px 10px;
-  border-radius:50%;
-  background-color: red;
-  color:#fff;
-  position:absolute;
-  right:25px;
-}
-
-#x:hover {
-  background-color:rgb(248, 47, 47);
-  cursor: pointer;
 }
 
 @media (max-width: 791px){

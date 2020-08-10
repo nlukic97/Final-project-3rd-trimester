@@ -4,7 +4,9 @@
 
     <Cart 
       id="mobile-cart-prompt" 
-      @close-mobile-cart="updateMobileCart" 
+      @close-mobile-cart="updateMobileCart"
+      @remove-item="cartItemDelete"
+      @empty-cart="clearCart"
       :checkoutCart="cart" 
       :checkoutPrice="totalPrice" 
       :displayMobileCart="mobileCartDisplay"
@@ -329,6 +331,10 @@ export default {
       }
       this.calcCartTotal()
     },
+
+    // cartCompItemDelete(index){
+    //   this.cartItemDelete(index) // I wanted to activate this which would activate the cart removal. but it is not necessary
+    // },
 
     clearCart(){
       if(this.cart.length > 0){
