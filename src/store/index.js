@@ -4,7 +4,9 @@ import Vuex from "vuex"
 Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
-    cart: 2 //whenever cart is changed, it needs to emit a function to change this data.
+    cart: [],
+    cartClass: 'checkout-container-closed',
+    animationPlayed:false
   }, 
   getters: {
     cartUpdate(items){

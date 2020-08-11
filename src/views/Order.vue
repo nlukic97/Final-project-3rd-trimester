@@ -82,8 +82,8 @@
             >
               <div class="d-flex justify-space-between">
                 <h4> {{cartItem.size}} {{cartItem.title}}</h4>
-                <div>
-                  <span class="mr-3">{{cartItem.price}} &#163;</span>
+                <div class="d-flex">
+                  <span class="pr-4">{{cartItem.price}}&#163;</span>
                   <v-btn
                     class="red white--text"
                     @click="cartItemDelete(index)"
@@ -252,14 +252,10 @@ export default {
         price: this.items[index].price,
         extras: this.items[index].extras //this is changed later when we add to cart. ovo jos uvek predstavlja problem 
       }
-
       this.promptDisplay = 'true'
     },
 
     cartAdd(response){
-      console.log('Added to cart: ')
-      // console.log(response)
-
       this.promptedItem.extras = ''; //clearing up the extras array to be populated with selected which will be pushed to the cart and re-cleared again
 
       //creating a string to store the chosen extras
@@ -276,26 +272,53 @@ export default {
       } else if (response.length == 0){
         this.promptedItem.extras = '';
       }
-
-      // console.log(response)
-
-
+      
       this.cart.push(this.promptedItem)
-      console.log(this.cart)
-      // console.log(this.cart)
+      this.$store.state.cart = this.cart
+      
       this.updatePrompt()
-      //console.log(this.cart) //ovo kasnije dodajes u cookie
-      this.promptedItem = {}; //ovo iznad sad i ne moras ali sto da ne iz predostroznosti
-      this.calcCartTotal()
+      this.promptedItem = {}; //not necessary but just in case
+      this.calcCartTotal() //calculating final price
       
     },
 
-    cartViewToggle(){
-      if(this.cartClass == 'checkout-container-open'){
-        this.cartClass = 'checkout-container-closed'
+    playCartAnimation(){ //just to show the user that they can open and close their cart view
+      setTimeout(()=>{
+        this.$store.state.cartClass = 'checkout-container-open'
+        this.cartClass = this.$store.state.cartClass
+        this.rotationClass = ''
+      },1000)
+
+      setTimeout(()=>{
+        this.$store.state.cartClass = 'checkout-container-closed'
+        this.cartClass = this.$store.state.cartClass
         this.rotationClass = 'rotate180'
-      } else if(this.cartClass == 'checkout-container-closed') {
+      }, 2000)
+    },
+
+    cartViewCheck(){ //it will check if the animation has been played. If it has, it will check the state in which the user left the cart (open or closed and adjust it accordingly)
+      if(this.$store.state.animationPlayed == false){
+        this.playCartAnimation()
+        this.$store.state.animationPlayed = true;
+      } else if(this.$store.state.animationPlayed == true) {
+        this.cartClass = this.$store.state.cartClass;
+        if(this.cartClass == 'checkout-container-open'){
+          this.rotationClass = ''
+        } else {
+          this.rotationClass = '180'
+        }
+      }
+    },
+
+    cartViewToggle(){
+      if(this.$store.state.cartClass == 'checkout-container-open'){
+        this.cartClass = 'checkout-container-closed'
+        this.$store.state.cartClass = 'checkout-container-closed'
+        this.rotationClass = 'rotate180'
+      } 
+      else if(this.$store.state.cartClass == 'checkout-container-closed') {
         this.cartClass = 'checkout-container-open'
+        this.$store.state.cartClass = 'checkout-container-open'
         this.rotationClass = ''
       }
     },
@@ -328,19 +351,17 @@ export default {
       var answer = confirm('Are you sure you want to delete this item?')
       if(answer){
         this.cart.splice(index,1)
+        this.$store.state.cart = this.cart
       }
       this.calcCartTotal()
     },
-
-    // cartCompItemDelete(index){
-    //   this.cartItemDelete(index) // I wanted to activate this which would activate the cart removal. but it is not necessary
-    // },
 
     clearCart(){
       if(this.cart.length > 0){
         var answer =confirm('Are you sure you want to delete all items from your cart?')
         if(answer == true){
           this.cart = []
+          this.$store.state.cart = this.cart
         }
       }
       this.calcCartTotal()
@@ -351,12 +372,8 @@ export default {
       for(var i = 0; i < this.cart.length; i++){
         price = price + parseFloat(this.cart[i].price)
       }
-
       var priceString = price.toFixed(2).toString()
       this.totalPrice = priceString;
-     
-      
-      console.log('Totalcart price: ' + this.totalPrice) //this is where you push the route to the new view for checkout. with the props in the cart made into a string
     },
 
     checkout(){
@@ -369,20 +386,15 @@ export default {
       }
     }
   },
-  beforeMount(){
-    // document.body.style.opacity="0%"
-  },
   mounted(){
-    // document.body.style.opacity="100%"
+    this.cartViewCheck()
+    this.cart = this.$store.state.cart
+
+    this.calcCartTotal()
     this.priceDecimals()
+
     this.promptDisplay = 'false'
     this.mobileCartDisplay = false;
-    //-------------------------------------------------------------
-    
-    // this.$store.state.cart = 'e'                   // < ----- ovde znaci ide sve za cart
-    // console.log(this.$store.state.cart)
-
-    //-------------------------------------------------------------
   },
   updated(){
     this.priceDecimals()

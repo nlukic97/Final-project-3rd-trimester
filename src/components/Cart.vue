@@ -85,13 +85,17 @@ export default {
       this.$emit('close-mobile-cart')
     },
 
-    removeItem(index){ //problema
-      // console.log('remove item: ' + index)
+    removeItem(index){
       this.$emit('remove-item', index)
     },
 
     emptyCart(){
       this.$emit('empty-cart')
+
+      //Becuase the user probably has no need to stare at an empty cart. This should probably be done with the removeItem function
+      setTimeout(()=>{
+        this.$emit('close-mobile-cart')
+      }, 600)
     },
 
     checkout(){
@@ -99,8 +103,7 @@ export default {
         console.log('Your cart is empty !')
       } else {
         console.log(this.cart)
-        this.$router.push('order/checkout') //redirect to the checkout page
-        //ovde imas sve u cookie, i taj cookie ce da populise cart.
+        this.$router.push('order/checkout') 
       }
     }
   }
