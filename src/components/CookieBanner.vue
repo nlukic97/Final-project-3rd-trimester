@@ -43,9 +43,6 @@ export default {
   beforeMount() {
     this.cookieObj = new this.$cookie;
     this.checkCookie()
-  },
-  mounted(){
-    
   }
 }
 </script>

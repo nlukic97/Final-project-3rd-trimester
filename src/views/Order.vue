@@ -377,6 +377,12 @@ export default {
     this.priceDecimals()
     this.promptDisplay = 'false'
     this.mobileCartDisplay = false;
+    //-------------------------------------------------------------
+    
+    // this.$store.state.cart = 'e'                   // < ----- ovde znaci ide sve za cart
+    // console.log(this.$store.state.cart)
+
+    //-------------------------------------------------------------
   },
   updated(){
     this.priceDecimals()
