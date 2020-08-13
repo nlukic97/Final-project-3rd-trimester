@@ -177,6 +177,8 @@ export default {
 
       if(a == true && b == true){
         //ovde ide axios poziv. Ako je uspesan, onda ide router push. Ako ne, onda baca na error stranicu.
+        console.log(this.cart)
+        //axios zahtev ka api/items post metodi
         this.$router.push('../confirm')
       }
     },

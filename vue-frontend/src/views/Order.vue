@@ -276,6 +276,8 @@ export default {
       } else if (response.length == 0){
         this.promptedItem.extras = '';
       }
+
+      delete this.promptedItem.img; //to delete the image before adding the item to the cart. We do not need it.
       
       this.cart.push(this.promptedItem)
       this.$store.state.cart = this.cart
