@@ -6,7 +6,7 @@ class ApiPostsController {
 
     public function index()
     {
-        $user = api_check_auth();
+//        $user = api_check_auth(); //sa ovom linijom koda ti ne stizu podaci
         $items = App::get('database')->getAll('items');
         echo json_encode($items);
     }

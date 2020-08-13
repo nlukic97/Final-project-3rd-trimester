@@ -34,11 +34,6 @@
             <input type="text" id="extras" name="extras" class="form-control" value="<?= $item->extras ?>">
         </div>
 
-        <div class="form-group">
-            <label for="description">Body</label>
-            <textarea name="description" id="description" cols="30" rows="10" class="form-control"><?= $item->description ?></textarea>
-        </div>
-
         <button type="submit" class="btn btn-primary">Edit</button>
     </form>
 </div>

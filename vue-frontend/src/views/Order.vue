@@ -133,8 +133,9 @@
 </div>
 </template>
 <script>
-import Prompt from '../components/Prompt.vue'
-import Cart from '../components/Cart.vue'
+import Prompt from '../components/Prompt.vue';
+import Cart from '../components/Cart.vue';
+// import axios from 'axios';
 export default {
   name: 'Order',
   components: {
@@ -157,7 +158,7 @@ export default {
           img:'/itemImages/chefs.jpg', //ovako radi, jer je ovo apsolutna putanja
           size: 'Regular',
           price: 4.30,
-          extras: 'salt, vinager'
+          extras: 'salt'
         }
         ,
         {
@@ -214,7 +215,7 @@ export default {
           img: 'https://cdn0.wideopenpets.com/wp-content/uploads/2019/10/Fish-Names-770x405.png',
           size: 'Large',
           price: 5.29,
-          extras:'salt, vinager'
+          extras:'salt, pepper'
         },
         {
           title: 'Burger',
@@ -389,6 +390,13 @@ export default {
       }
     }
   },
+  // beforeMount(){
+  //   axios.get('http://localhost:8087/api/items')
+  //   .then(response=>{
+  //     console.log(response.data)
+  //     this.items = response.data
+  //   })
+  // },
   mounted(){
     this.cartViewCheck()
     this.cart = this.$store.state.cart

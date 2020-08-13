@@ -54,7 +54,7 @@ export default {
   watch: {
     displayPrompt: function(){
       this.promptDisplay()
-      // console.log(this.displayPrompt)
+      this.clearSelectedExtras()
     },
     extras: function(){
       this.extraCheckboxMaker();
@@ -75,10 +75,13 @@ export default {
         document.getElementById('prompt').style.display='block'
     },
 
-    extraCheckboxMaker(){
-      if(this.extras && this.extras.indexOf(',') > 0){
+    extraCheckboxMaker(){ 
+    this.itemExtras = []; //imam neki bug ovde - ovo je resenje. Clearing out the itemExtras before leaving
+      if(this.extras && this.extras.indexOf(',') != -1){ //if there is no , it means there is one extra which will be added
         this.itemExtras = this.extras.split(', ');
-      // console.log(this.itemExtras)
+      } else {
+        this.itemExtras.push(this.extras)
+        console.log(this.itemExtras)
       }
     },
 
@@ -86,7 +89,11 @@ export default {
       for(var i = 0; i < this.itemExtras.length; i++){
         this.selectedExtras[this.itemExtras[i]] = false;
       }
-      // console.log(this.selectedExtras)
+      console.log(this.selectedExtras)
+    },
+
+    clearSelectedExtras(){
+      this.selectedExtras = [];
     },
 
     addingToCart(){
@@ -105,13 +112,14 @@ export default {
     }
   },
   beforeMount(){
-    
+    this.clearSelectedExtras()
   },
   mounted(){
     this.promptDisplay()
-
+    console.log(this.selectedExtras)
     document.getElementById('x').addEventListener('click',()=>{ //ne trebas ovako.
       this.$emit("update-prompt") //ne manjati vrednost propa unutar komponente. Ne saljem nikakve podatke, jer order ih sve vec ima
+      this.clearSelectedExtras()
     })
 
 
@@ -120,6 +128,7 @@ export default {
       if((e.keyCode == '13' || e.which == '13') && this.displayPrompt == 'true'){ //samo ce na enter proizvod da radi ako vidi da je otvorena kutija
         this.addingToCart()
         this.$emit("update-prompt");
+        this.clearSelectedExtras()
       }
     })
 
@@ -127,6 +136,7 @@ export default {
     document.addEventListener("keydown",(e)=>{
       if(e.keyCode == 27 || e.which == 27){
          this.$emit("update-prompt","false") //ako klikne esc, onda mu zatvara ovaj prozor
+         this.clearSelectedExtras()
       }
     })
   }

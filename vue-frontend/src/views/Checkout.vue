@@ -82,7 +82,7 @@
                   <span>{{item.size}} {{item.title}} </span>
                   <span>{{item.price}} 	&#163;</span>
                 </div>
-                <span v-if="item.extras" class="pl-10 extras">+ {{item.extras}}</span>
+                <p v-if="item.extras" class="pl-10 extras">+ {{item.extras}}</p>
               </div>
             </v-card>
 

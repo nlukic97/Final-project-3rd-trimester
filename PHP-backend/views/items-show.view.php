@@ -11,7 +11,6 @@
                         <h5 class="card-title"><?= $item->size ?> <?= $item->title ?> </h5>
                         <p>Price: <?= $item->price ?>&#163;</p>
                         <p class="card-text">Extras: <?= $item->extras ?></p>
-                        <p class="card-text">Description: <?= $item->description ?></p>
                         <a href="/items/edit?id=<?= $item->id?>" class="btn btn-warning">Edit</a>
                         <a href="/items/destroy?id=<?= $item->id?>" class="btn btn-danger">Delete</a>
                     </div>
