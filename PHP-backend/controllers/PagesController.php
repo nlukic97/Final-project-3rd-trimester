@@ -5,15 +5,15 @@ namespace App\Controllers;
 use App\Core\App;
 
 class PagesController {
-    public function home() //redirect to items, since there is no specific home page
+    public function home() //redirect to orders, since there is no specific home page
     {
-        redirect("/items");
+        redirect("/orders");
     }
 
     public function items()
     {
         check_auth();
-        $items = App::get('database')->getAll('items'); //ovaj treba da ne bude descenging. Orders treba
+        $items = App::get('database')->getAll('items');
 
         return view('items', compact('items'));
     }
