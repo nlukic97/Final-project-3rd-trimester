@@ -290,7 +290,7 @@ export default {
       setTimeout(()=>{
         this.$store.state.cartClass = 'checkout-container-open'
         this.cartClass = this.$store.state.cartClass
-        this.rotationClass = ''
+        this.rotationClass = 'rotate0'
       },1000)
 
       setTimeout(()=>{
@@ -307,9 +307,9 @@ export default {
       } else if(this.$store.state.animationPlayed == true) {
         this.cartClass = this.$store.state.cartClass;
         if(this.cartClass == 'checkout-container-open'){
-          this.rotationClass = ''
-        } else {
-          this.rotationClass = '180'
+          this.rotationClass = 'rotate0'
+        } else if(this.cartClass == 'checkout-container-closed') {
+          this.rotationClass = 'rotate180'
         }
       }
     },
@@ -474,6 +474,10 @@ export default {
 
 #mobile-cart-prompt { //for it to be closed under normal conditions
     display:none;
+  }
+
+.rotate0 {
+   transform: rotate(0deg);
   }
 
 .rotate180 {

@@ -54,11 +54,10 @@ export default {
   watch: {
     displayPrompt: function(){
       this.promptDisplay()
-      this.clearSelectedExtras()
     },
     extras: function(){
+      this.createSelectedExtras(); //this must go first.
       this.extraCheckboxMaker();
-      this.createSelectedExtras();
     }
   },
   data(){
@@ -89,11 +88,6 @@ export default {
       for(var i = 0; i < this.itemExtras.length; i++){
         this.selectedExtras[this.itemExtras[i]] = false;
       }
-      console.log(this.selectedExtras)
-    },
-
-    clearSelectedExtras(){
-      this.selectedExtras = [];
     },
 
     addingToCart(){
@@ -106,20 +100,18 @@ export default {
         }
       }
 
+      // this.clearSelectedExtras() //maybe this ???
       this.$emit("adding-to-cart",chosenExtras) //ne saljem nikakav podatak tako da mi ne treba ovo
       this.selectedExtras = [];
-      this.itemExtras = [];
+      // this.itemExtras = []; //just a precaution but not necessary
     }
-  },
-  beforeMount(){
-    this.clearSelectedExtras()
   },
   mounted(){
     this.promptDisplay()
     console.log(this.selectedExtras)
     document.getElementById('x').addEventListener('click',()=>{ //ne trebas ovako.
       this.$emit("update-prompt") //ne manjati vrednost propa unutar komponente. Ne saljem nikakve podatke, jer order ih sve vec ima
-      this.clearSelectedExtras()
+      this.selectedExtras = [];
     })
 
 
@@ -128,15 +120,14 @@ export default {
       if((e.keyCode == '13' || e.which == '13') && this.displayPrompt == 'true'){ //samo ce na enter proizvod da radi ako vidi da je otvorena kutija
         this.addingToCart()
         this.$emit("update-prompt");
-        this.clearSelectedExtras()
       }
     })
 
     //escape
     document.addEventListener("keydown",(e)=>{
       if(e.keyCode == 27 || e.which == 27){
-         this.$emit("update-prompt","false") //ako klikne esc, onda mu zatvara ovaj prozor
-         this.clearSelectedExtras()
+         this.$emit("update-prompt") //ako klikne esc, onda mu zatvara ovaj prozor
+         this.selectedExtras = [];
       }
     })
   }
