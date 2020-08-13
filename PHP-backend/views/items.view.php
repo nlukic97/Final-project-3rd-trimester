@@ -11,7 +11,7 @@
                 <div class="col-lg-4 col-md-12 col-sm-12 p-3"> <!-- how to align to center when it becomes mobile ?? -->
                     <div class="card m-auto" style="width: 18rem"> <!-- for each here -->
                         <div style="height:192px; overflow: hidden; display: flex; align-items: center;">
-                            <img src="<?= $item->img?>" alt="" style="width: 18rem">
+                            <img src="../public/item-images/<?= $item->img?>" alt="" style="width: 18rem">
                         </div>
                         <div class="card-body">
                             <h5 class="card-title"><?= $item->size ?> <?= $item->title ?> - <?= $item->price ?>&#163;</h5>

@@ -47,7 +47,11 @@ class itemsController {
 
     public function destroy()
     {
-        App::get('database')->delete('items', $_GET['id']);
+        //getting all the info on the item, not just id. We will need the img name to be able to delete
+        //it from our directory. This change has also affected the destroy method in the "usersController.php" file
+        $item = App::get('database')->getOneAssoc('items', $_GET['id']);
+
+        App::get('database')->delete('items', $item);
 
         return redirect('/items');
 

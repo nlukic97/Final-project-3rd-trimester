@@ -2,7 +2,7 @@
 namespace App\Controllers;
 use App\Core\App;
 
-class UsersController {
+class   UsersController {
 
     public function index()
     {
@@ -48,7 +48,8 @@ class UsersController {
 
     public function destroy()
     {
-        App::get('database')->delete('users', $_GET['id']);
+        $item = App::get('database')->getOneAssoc('users', $_GET['id']);
+        App::get('database')->delete('users', $item);
 
         return redirect('/users');
 

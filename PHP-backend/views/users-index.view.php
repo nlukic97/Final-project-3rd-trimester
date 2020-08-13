@@ -1,6 +1,6 @@
 <?php require_once "views/partials/header.php"; ?>
 <div class="mb-3">
-    <a href="/users/create" class="btn btn-info">Add new Post</a>
+    <a href="/users/create" class="btn btn-info">Add new user</a>
 </div>
 <table class="table">
     <thead class="thead-dark">
@@ -14,6 +14,7 @@
         <tr>
             <td><?= $user->id ?></td>
             <td><?= $user->name ?></td>
+            <td><?= $user->email ?></td>
             <td><a href="/users/show?id=<?= $user->id ?>" class="btn btn-info">Show</a> <a href="/users/edit?id=<?=
                 $user->id ?>" class="btn btn-warning">Edit</a> <a href="/users/destroy?id=<?=
                 $user->id ?>" class="btn btn-danger">Delete</a></td>

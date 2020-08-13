@@ -12,7 +12,8 @@ class AuthController {
 
     public function login()
     {
-        $_POST['password'] = md5($_POST['password']);
+        //validacija
+        $_POST['password'] = md5($_POST['password']); //ovo promeni posle da bude jace
         $user = App::get('database')->getOneByField('users', $_POST);
         if(!$user) {
             return redirect('/login');

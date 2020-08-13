@@ -29,12 +29,12 @@ $router->post('register', 'AuthController@register');
 $router->get('logout', 'AuthController@logout');
 
 //pages
-$router->get('', 'PagesController@items');
-//$router->get('items', 'PagesController@items'); // --------------  ???
+$router->get('', 'PagesController@home'); //redirects to items
+$router->get('items', 'PagesController@items');
 $router->get('orders', 'PagesController@orders');
 
 // ITEMS
-$router->get('items', 'itemsController@index');
+//$router->get('items', 'itemsController@index');
 $router->get('items/create', 'itemsController@create');
 $router->post('items/create', 'itemsController@store');
 $router->get('posts/show', 'itemsController@show');

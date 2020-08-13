@@ -35,6 +35,9 @@
             <h3>{{item.size}} {{item.title}}</h3>
             <div class="img-container d-flex align-center">
               <img :src="item.img" alt="">
+
+              <!-- <img src="../../../item-images/dule.jpg" alt="">  --> <!-- --------------!!!!!!!!!!!!!!!!!!!--------- --> 
+              <!-- funkciju koja ce napraviti string za svakku ovo -->
             </div>
             <span><strong>Price: </strong>{{item.price}} &#163;</span>
             <div class="text-center">
@@ -151,7 +154,7 @@ export default {
       items: [
         {
           title: 'Cod',
-          img:'https://www.thesprucepets.com/thmb/FOLwbR72UrUpF9sZ45RYKzgO8dg=/3072x2034/filters:fill(auto,1)/yellow-tang-fish-508304367-5c3d2790c9e77c000117dcf2.jpg',
+          img:'/itemImages/chefs.jpg', //ovako radi, jer je ovo apsolutna putanja
           size: 'Regular',
           price: 4.30,
           extras: 'salt, vinager'

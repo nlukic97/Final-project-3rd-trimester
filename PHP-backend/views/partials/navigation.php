@@ -8,7 +8,8 @@
             <div class="navbar-nav ml-auto">
                 <a class="nav-link" href="/orders">Orders<span class="sr-only">Items</span></a>
                 <a class="nav-link" href="/items">Items</a>
-                <a class="nav-link" href="#">Logout</a>
+                <a class="nav-link" href="/users">Users</a>
+                <a class="nav-link" href="/logout">Logout</a>
             </div>
         </div>
     </div>

@@ -38,6 +38,15 @@ class QueryBuilder
         return $query->fetch(\PDO::FETCH_OBJ);
     }
 
+    public function getOneAssoc($table, $id) //function added so that line 155 on this page could work (stdClass cannot be used)
+    {
+        $query = $this->pdo->prepare("SELECT * FROM {$table} WHERE id='{$id}'");
+
+        $query->execute();
+
+        return $query->fetch(\PDO::FETCH_ASSOC);
+    }
+
     public function getOneByField($table, $parameters)
     {
 
@@ -57,7 +66,32 @@ class QueryBuilder
 
     public function insert($table, $data)
     {
-        //ista prica kao dole za update. Moras da proveris ima li slika.
+
+        //handling image upload for new item
+
+        if(isset($_FILES['img'])){
+            if($_FILES['img']['tmp_name'] != '' OR $_FILES['img']['name'] != ''){
+
+                if($_FILES['img']['type'] == 'image/jpeg'
+                    OR $_FILES['img']['type'] == 'image/png'
+                    OR $_FILES['img']['type'] == 'image/jpg'){
+
+                    $uploadDir = getcwd()."\\public\\item-images";
+
+                    $imageName = "chippie-item-".time().$_FILES['img']['name'];
+
+                    //inserting into PHP admin section
+                    move_uploaded_file($_FILES['img']['tmp_name'],$uploadDir."\\".$imageName);
+
+                    $data['img'] = $imageName;
+                }
+            }
+        }
+        //notice: undefined;
+        if(isset($data['password'])){
+            $data['password'] = md5($data['password']); //pojacaj ovo ovde isto
+        }
+
         $sql = sprintf("INSERT INTO %s (%s) VALUES (%s)",
             $table,
             implode(", " , array_keys($data)),
@@ -71,25 +105,36 @@ class QueryBuilder
 
     public function update($table, $data)
     {
-        if(!isset($_FILES['img']) OR $_FILES['img'] == '' OR $_FILES['img']['name'] == ''){
-            echo "It is not set. Only work with the data"."<br>";
-            var_dump($data); //image stays the same
-        } else {
-            echo "image is set. working with both."."<br>";
-            echo "<pre>";
-            var_dump($data);
-            //uploading ass usual, except we must now add
-            // 'img'=> 'new upload location' and the link to the location you have just uploaded the image to.
-            echo "</pre>";
+        //handling image upload. Only executed when new image is selected
+        if($_FILES['img']['tmp_name'] != '' OR $_FILES['img']['name'] != ''){
 
-            echo "<pre>";
-            var_dump($_FILES['img']);
-            //here, perform the transfer of this image into the image location.
-            echo "</pre>";
+            if($_FILES['img']['type'] == 'image/jpeg'
+                OR $_FILES['img']['type'] == 'image/png'
+                OR $_FILES['img']['type'] == 'image/jpg') {
+
+                $uploadDir = getcwd() . "\\public\\item-images";
+
+                $newImageName = "chippie-item-" . time() . $_FILES['img']['name'];
+
+                //inserting image into PHP directory and preparing to add to database table
+                move_uploaded_file($_FILES['img']['tmp_name'], $uploadDir . "\\" . $newImageName);
+                $data['img'] = $newImageName;
+
+                //deleting the replaced image
+                if(is_file($uploadDir."\\".$data['oldImageName'])){
+                    unlink($uploadDir."\\".$data['oldImageName']);
+                };
+
+                echo "<pre>";
+                var_dump($data);
+                var_dump($_FILES['img']);
+                //here, perform the transfer of this image into the image location.
+                echo "</pre>";
+
+            }
         }
 
-//        die();
-
+        unset($data['oldImageName']);
         $id = $data['id'];
         unset($data['id']);
 
@@ -109,12 +154,18 @@ class QueryBuilder
 
     }
 
-    public function delete($table, $id)
+    public function delete($table, $item)
     {
+        if(isset($item['img'])){
+            if(is_file(getcwd()."\\public\\item-images\\".$item['img'])){
+                unlink(getcwd()."\\public\\item-images\\".$item['img']);
+            }
+        }
+
         // DELETE FROM table WHERE id
         $sql = sprintf("DELETE FROM %s WHERE id='%s'",
             $table,
-            $id);
+            $item['id']);
 
         $query = $this->pdo->prepare($sql);
         $query->execute();

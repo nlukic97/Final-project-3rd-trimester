@@ -35,7 +35,7 @@ function api_check_auth() {
     } else {
         $credentials = [
             'email' => $_SERVER['PHP_AUTH_USER'],
-            'password' =>  md5($_SERVER['PHP_AUTH_PW'])
+            'password' =>  md5($_SERVER['PHP_AUTH_PW']) //promeni i ovo ovde
         ];
 
         $user = App::get('database')->getOneByField('users', $credentials);
