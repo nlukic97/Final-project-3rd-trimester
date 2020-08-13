@@ -16,7 +16,8 @@
                         <div class="card-body">
                             <h5 class="card-title"><?= $item->size ?> <?= $item->title ?> - <?= $item->price ?>&#163;</h5>
                             <p class="card-text">Extras: <?= $item->extras ?></p>
-                            <a href="/items/edit?id=<?= $item->id?>" class="btn btn-success">Edit</a>
+                            <a href="/items/show?id=<?= $item->id?>" class="btn btn-success">View</a>
+                            <a href="/items/edit?id=<?= $item->id?>" class="btn btn-warning">Edit</a>
                             <a href="/items/destroy?id=<?= $item->id?>" class="btn btn-danger">Delete</a>
                         </div>
                     </div>

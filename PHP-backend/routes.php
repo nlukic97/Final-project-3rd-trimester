@@ -24,31 +24,31 @@
 //
 $router->get('login', 'AuthController@login_form');
 $router->post('login', 'AuthController@login');
-$router->get('register', 'AuthController@register_form');
-$router->post('register', 'AuthController@register');
+$router->get('register', 'AuthController@register_form'); // !!!
+$router->post('register', 'AuthController@register'); // !!!
 $router->get('logout', 'AuthController@logout');
 
 //pages
 $router->get('', 'PagesController@home'); //redirects to items
-$router->get('items', 'PagesController@items');
+$router->get('items', 'PagesController@items'); // ?????
 $router->get('orders', 'PagesController@orders');
 
 // ITEMS
-//$router->get('items', 'itemsController@index');
+//$router->get('items', 'itemsController@index'); // ????
 $router->get('items/create', 'itemsController@create');
 $router->post('items/create', 'itemsController@store');
-$router->get('posts/show', 'itemsController@show');
+$router->get('items/show', 'itemsController@show');
 $router->get('items/edit', 'itemsController@edit');
 $router->post('items/edit', 'itemsController@update');
 $router->get('items/destroy', 'itemsController@destroy');
 
 
 //API ORDERS
-$router->get('api/posts', 'ApiPostsController@index');
-$router->post('api/posts', 'ApiPostsController@store');
-$router->get('api/posts/show', 'ApiPostsController@show');
-$router->post('api/posts/edit', 'ApiPostsController@update');
-$router->get('api/posts/destroy', 'ApiPostsController@destroy');
+$router->get('api/items', 'ApiPostsController@index');
+$router->post('api/items', 'ApiPostsController@store');
+//$router->get('api/items/show', 'ApiPostsController@show');
+//$router->post('api/items/edit', 'ApiPostsController@update');
+//$router->get('api/items/destroy', 'ApiPostsController@destroy');
 
 
 //USERS
@@ -63,12 +63,3 @@ $router->get('users/destroy', 'UsersController@destroy');
 
 
 //$router->post('ovo/je/ruta', 'OvoJeKontroler@metodUKontroleru');
-
-
-// 5 or 7
-// index - get all posts
-// show(id) - one post
-// insert
-
-//$router->get('api/tasks', 'controllers/api.tasks.php');
-$router->post('contact-submit', 'PagesController@contactFormSubmit');

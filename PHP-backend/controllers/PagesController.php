@@ -7,6 +7,7 @@ use App\Core\App;
 class PagesController {
     public function home() //redirect to orders, since there is no specific home page
     {
+        check_auth();
         redirect("/orders");
     }
 
@@ -25,21 +26,11 @@ class PagesController {
         return view('orders', compact('orders'));
     }
 
-    public function contact()
+    public function users()
     {
-
-        return view('contact');
-    }
-
-    public function contactFormSubmit()
-    {
-        App::get('database')->insert('messages', [
-            'subject' => $_POST['subject'],
-            'message' => $_POST['message']
-        ]);
-
-        return redirect('/');
-
+        check_auth();
+        $users = App::get('database')->getAll('users');
+        return view('users', compact('users'));
     }
 
 }

@@ -6,6 +6,7 @@ class   UsersController {
 
     public function index()
     {
+        check_auth();
         $users = App::get('database')->getAll('users');
 
         return view('users-index', compact('users'));
@@ -13,12 +14,14 @@ class   UsersController {
 
     public function create()
     {
+        check_auth();
         return view('users-create');
     }
 
     public function store()
     {
         //uraditi prethodno sanitizaciju i validaciju !
+        check_auth();
         App::get('database')->insert('users', $_POST);
 
         return redirect('/users');
@@ -26,6 +29,7 @@ class   UsersController {
 
     public function show()
     {
+        check_auth();
         $user = App::get('database')->getOne('users', $_GET['id']);
 
         return view('users-show', compact('user'));
@@ -33,6 +37,7 @@ class   UsersController {
 
     public function edit()
     {
+        check_auth();
         $user = App::get('database')->getOne('users', $_GET['id']);
 
         return view('users-edit', compact('user'));
@@ -41,6 +46,7 @@ class   UsersController {
     public function update()
     {
         //uraditi validaciju
+        check_auth();
         App::get('database')->update('users', $_POST);
 
         return redirect('/users');
@@ -48,6 +54,7 @@ class   UsersController {
 
     public function destroy()
     {
+        check_auth();
         $item = App::get('database')->getOneAssoc('users', $_GET['id']);
         App::get('database')->delete('users', $item);
 

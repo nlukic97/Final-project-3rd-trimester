@@ -1,6 +1,6 @@
 <?php require_once "views/partials/header.php"; ?>
 <div class="container">
-    <div class="mb-3">
+    <div class="mb-3 text-center mt-4 mb-4">
         <a href="/users/create" class="btn btn-info">Add new user</a>
     </div>
     <table class="table">

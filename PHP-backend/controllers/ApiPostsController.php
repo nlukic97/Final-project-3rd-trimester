@@ -7,9 +7,8 @@ class ApiPostsController {
     public function index()
     {
         $user = api_check_auth();
-        $posts = App::get('database')->getOneByField('posts', ['user_id' => $user->id]);
-
-        echo json_encode($posts);
+        $items = App::get('database')->getAll('items');
+        echo json_encode($items);
     }
 
 
@@ -25,7 +24,7 @@ class ApiPostsController {
 
     public function show()
     {
-        $post = App::get('database')->getOne('posts', $_GET['id']);
+        $post = App::get('database')->getOne('items', $_GET['id']);
 
         echo json_encode($post);
     }
