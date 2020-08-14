@@ -14,7 +14,7 @@
                             <img src="../public/item-images/<?= $item->img?>" alt="" style="width: 18rem">
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title"><?= $item->size ?> <?= $item->title ?> - <?= $item->price ?>&#163;</h5>
+                            <h5 class="card-title"><?= $item->title ?> - <?= $item->price ?>&#163;</h5>
                             <p class="card-text">Extras: <?= $item->extras ?></p>
                             <a href="/items/show?id=<?= $item->id?>" class="btn btn-success">View</a>
                             <a href="/items/edit?id=<?= $item->id?>" class="btn btn-warning">Edit</a>

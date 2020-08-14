@@ -9,10 +9,6 @@
                     <input type="text" class="form-control" id="title" name="title">
                 </div>
                 <div class="form-group">
-                    <label for="size">Size</label>
-                    <input type="text" class="form-control" id="size" name="size">
-                </div>
-                <div class="form-group">
                     <label for="img">Image</label>
                     <div>
                         <input type="file" id="img" name="img">

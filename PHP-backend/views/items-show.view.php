@@ -8,7 +8,7 @@
                         <img src="../public/item-images/<?= $item->img?>" alt="" style="width: 18rem">
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title"><?= $item->size ?> <?= $item->title ?> </h5>
+                        <h5 class="card-title"><?= $item->title ?> </h5>
                         <p>Price: <?= $item->price ?>&#163;</p>
                         <p class="card-text">Extras: <?= $item->extras ?></p>
                         <a href="/items/edit?id=<?= $item->id?>" class="btn btn-warning">Edit</a>
