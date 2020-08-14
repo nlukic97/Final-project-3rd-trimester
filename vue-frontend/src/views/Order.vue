@@ -17,7 +17,7 @@
       @adding-to-cart="cartAdd"
       msg="Are you sure you would like to order this?" :displayPrompt='promptDisplay' 
       :title="promptedItem.title"
-      :img="promptedItem.img"
+      :img="imgUrlSetup(promptedItem.img)"
       :price="promptedItem.price"
       :extras="promptedItem.extras"
     />
