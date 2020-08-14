@@ -34,7 +34,7 @@
           v-for="(item, index) in cart" :key="index"
         >
           <div class="d-flex justify-space-between text-left">
-            <span>{{item.size}} {{item.title}}</span>
+            <span>{{item.title}}</span>
             <span>{{item.price}} &#163;</span>
             <v-btn
             class="red white--text"

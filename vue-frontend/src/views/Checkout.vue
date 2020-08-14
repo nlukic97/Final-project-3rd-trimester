@@ -79,7 +79,7 @@
               class="pb-2 pt-2 text-left cartItems"
               >
                 <div class="d-flex justify-space-between pl-7 pr-7">
-                  <span>{{item.size}} {{item.title}} </span>
+                  <span>{{item.title}} </span>
                   <span>{{item.price}} 	&#163;</span>
                 </div>
                 <p v-if="item.extras" class="pl-10 extras">+ {{item.extras}}</p>
@@ -102,7 +102,6 @@ export default {
         // {
         //   title: 'Cod',
         //   img:'https://www.thesprucepets.com/thmb/FOLwbR72UrUpF9sZ45RYKzgO8dg=/3072x2034/filters:fill(auto,1)/yellow-tang-fish-508304367-5c3d2790c9e77c000117dcf2.jpg',
-        //   size: 'Regular',
         //   price: 4.30,
         //   extras: ''
         // }
@@ -110,14 +109,12 @@ export default {
         // {
         //   title: 'Cod',
         //   img: 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-        //   size: 'Regular',
         //   price: 5.03,
         //   extras: "pepper, salt"
         // },
         // {
         //   title: 'Cod',
         //   img: 'https://www.hakaimagazine.com/wp-content/uploads/header-fish-feel.jpg',
-        //   size: 'Regular',
         //   price: 5.25,
         //   extras: 'salt, vinager'
         // }
