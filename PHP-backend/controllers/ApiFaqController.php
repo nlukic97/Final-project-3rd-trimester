@@ -2,13 +2,13 @@
 namespace App\Controllers;
 use App\Core\App;
 
-class ApiPostsController {
-
+class ApiFaqController
+{
     public function index()
     {
 //        $user = api_check_auth(); //sa ovom linijom koda ti ne stizu podaci
-        $items = App::get('database')->getAll('items');
-        echo json_encode($items);
+        $faq = App::get('database')->getAll('faq');
+        echo json_encode($faq);
     }
 
 

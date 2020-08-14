@@ -44,11 +44,18 @@ $router->get('items/destroy', 'itemsController@destroy');
 
 
 //API ORDERS
-$router->get('api/items', 'ApiPostsController@index');
-$router->post('api/items', 'ApiPostsController@store');
-//$router->get('api/items/show', 'ApiPostsController@show');
-//$router->post('api/items/edit', 'ApiPostsController@update');
-//$router->get('api/items/destroy', 'ApiPostsController@destroy');
+$router->get('api/items', 'ApiItemsController@index');
+$router->post('api/items', 'ApiItemsController@store');
+//$router->get('api/items/show', 'ApiItemsController@show');
+//$router->post('api/items/edit', 'ApiItemsController@update');
+//$router->get('api/items/destroy', 'ApiItemsController@destroy');
+
+//API FAQ
+$router->get('api/faq', 'ApiFaqController@index');
+$router->post('api/faq', 'ApiFaqController@store');
+//$router->get('api/items/show', 'ApiItemsController@show');
+//$router->post('api/items/edit', 'ApiItemsController@update');
+//$router->get('api/items/destroy', 'ApiItemsController@destroy');
 
 
 //USERS

@@ -4,7 +4,7 @@
     <div class="promptContainer">
       <v-card class="innerBox">
         <span id="x">X</span>
-        <h2>{{size}} {{title}}</h2>
+        <h2>{{title}}</h2>
         <img :src="img" alt="">
         <p>{{msg}}</p>
         <p>{{price}} &#163;</p>
@@ -46,7 +46,6 @@ export default {
     msg: String,
     displayPrompt: String,
     title:String,
-    size:String,
     img: String,
     price:String,
     extras:String
