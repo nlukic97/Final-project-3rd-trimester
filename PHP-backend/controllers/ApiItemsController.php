@@ -16,8 +16,12 @@ class ApiItemsController {
     {
 
         //uraditi prethodno sanitizaciju i validaciju !
-        echo json_encode($_POST);
+        var_dump($_REQUEST);
+//        echo json_encode(['name' => 'Vlada', 'lastname' =>'Bla'], JSON_FORCE_OBJECT);
+
+        //forEach na Post['items'] i da ubacujes u bazu jedan po jedan
         die();
+
         App::get('database')->insert('orders', $_POST);
         return [
             'status' => 'ok'

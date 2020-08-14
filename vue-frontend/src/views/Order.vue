@@ -17,10 +17,11 @@
       @adding-to-cart="cartAdd"
       msg="Are you sure you would like to order this?" :displayPrompt='promptDisplay' 
       :title="promptedItem.title"
-      :img="imgUrlSetup(promptedItem.img)"
+      :img="imgUrlSetup(promptedItem.img)" 
       :price="promptedItem.price"
       :extras="promptedItem.extras"
     />
+    <!-- Imas error gore kada radis :img. kada zatvoris prop -->
     <!-- -------------------- Food menu -------------------- -->
     <v-row class="pb-10">
       <v-col lg='9' md="9" sm="12" cols="12">

@@ -182,16 +182,15 @@ export default {
     },
 
     submit(){
-      // axios.post('http://localhost:8087/api/items','e') //saljemo cart. Ali ovo se ne salje
-      // .then(response=>{
-      //   console.log(response.data)
-      // })
-      var theData = this.cart
-      axios({
-        method:'post',
-        url:'/addUser',
-        data: theData
+      axios.post('http://localhost:8087/api/items',{
+        items: this.cart
+      }, {
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      }) //saljemo cart. Ali ovo se ne salje
+      .then(response=>{
+        console.log(response.data)
       })
+      
     }
   },
   beforeMount(){
