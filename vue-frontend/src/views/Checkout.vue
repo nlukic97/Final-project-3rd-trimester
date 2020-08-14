@@ -68,7 +68,7 @@
             <v-btn
             class="red white--text mb-7"
             width="60%"
-            @click="validation()"
+            @click="submit()"
             >
               Order now
             </v-btn>
@@ -94,6 +94,7 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   name:'Checkout',
   data(){
@@ -174,21 +175,29 @@ export default {
 
       if(a == true && b == true){
         //ovde ide axios poziv. Ako je uspesan, onda ide router push. Ako ne, onda baca na error stranicu.
-        console.log(this.cart)
+        this.submit()
         //axios zahtev ka api/items post metodi
         this.$router.push('../confirm')
       }
     },
 
     submit(){
-      console.log(this.cart)
+      // axios.post('http://localhost:8087/api/items','e') //saljemo cart. Ali ovo se ne salje
+      // .then(response=>{
+      //   console.log(response.data)
+      // })
+      var theData = this.cart
+      axios({
+        method:'post',
+        url:'/addUser',
+        data: theData
+      })
     }
   },
   beforeMount(){
-    
+    this.cart = this.$store.state.cart
   },
   mounted(){
-    this.cart = this.$store.state.cart
     if(this.cart.length == 0){
       this.backToOrderPage()
     }

@@ -33,7 +33,7 @@
           >
             <h3>{{item.title}}</h3>
             <div class="img-container d-flex align-center">
-              <img :src="imgUrlSetup(imgPath, item.img)" alt=""> <!-- kako ubaciti ovaj path u varijablu ? -->
+              <img :src="imgUrlSetup(item.img)" alt=""> <!-- kako ubaciti ovaj path u varijablu ? -->
             </div>
             <span><strong>Price: </strong>{{item.price}} &#163;</span>
             <div class="text-center">
@@ -140,7 +140,7 @@ export default {
   },
   data(){
     return {
-      imgPath:'../../../PHP-backend/public/item-images/',
+      imgPath:'http://localhost:8087/public/item-images/',
       promptDisplay:'true',
       mobileCartDisplay:false,
       promptedItem:{
@@ -225,16 +225,10 @@ export default {
     }
   },
   methods: {
-    imgUrlSetup(path, img){
-      // return require(this.imgPath + img);
-
-      // return require(`${this.imgPath + img}`);
-
-      // var fullUrl = path + img;
-      // console.log(fullUrl)
-      // return require(`${fullUrl}`)
-
-      return require(`../../../PHP-backend/public/item-images/${img}`)
+    imgUrlSetup(img){
+      var fullUrl = this.imgPath + img;
+      console.log(fullUrl)
+      return (fullUrl)
     },
     
     priceDecimals(){

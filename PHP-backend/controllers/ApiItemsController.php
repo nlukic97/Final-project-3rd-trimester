@@ -16,7 +16,9 @@ class ApiItemsController {
     {
 
         //uraditi prethodno sanitizaciju i validaciju !
-        App::get('database')->insert('posts', $_POST);
+        echo json_encode($_POST);
+        die();
+        App::get('database')->insert('orders', $_POST);
         return [
             'status' => 'ok'
         ];
