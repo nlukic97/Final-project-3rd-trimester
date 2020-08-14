@@ -34,7 +34,7 @@ $router->get('', 'PagesController@home'); //redirects to items
 $router->get('orders', 'PagesController@orders');
 
 // ITEMS
-$router->get('items', 'itemsController@index'); // ????
+$router->get('items', 'itemsController@index');
 $router->get('items/create', 'itemsController@create');
 $router->post('items/create', 'itemsController@store');
 $router->get('items/show', 'itemsController@show');

@@ -67,8 +67,7 @@ class QueryBuilder
     public function insert($table, $data)
     {
 
-        //handling image upload for new item
-
+        //handling image upload for new item. Only will execute is there is a $_FILES['img'] set
         if(isset($_FILES['img'])){
             if($_FILES['img']['tmp_name'] != '' OR $_FILES['img']['name'] != ''){
 
@@ -90,6 +89,11 @@ class QueryBuilder
         //notice: undefined;
         if(isset($data['password'])){
             $data['password'] = md5($data['password']); //pojacaj ovo ovde isto
+        }
+
+        if(isset($data['date'])){ //sta cemo sa ovim ?
+            $data['date'] = "CURRENT_DATE()";
+            $data['time'] = "CURRENT_TIMESTAMP()";
         }
 
         $sql = sprintf("INSERT INTO %s (%s) VALUES (%s)",

@@ -126,7 +126,7 @@ export default {
       phoneNumber:'',
       cardNumber:'',
       cvc:'',
-      total:0,
+      total:'0',
       valid:false,
       nameRules: [
         v => !!v || 'Name is required',
@@ -161,7 +161,7 @@ export default {
       for(var i = 0; i < this.cart.length; i++){
         price = price + parseFloat(this.cart[i].price)
       }
-      this.total = price.toFixed(2);
+      this.total = price.toFixed(2).toString()
       console.log(this.total)
     },
 
@@ -183,20 +183,28 @@ export default {
 
     submit(){
       axios.post('http://localhost:8087/api/items',{
-        items: this.cart
+        orderInfo: {
+          name: this.name,
+          address: this.address,
+          email: this.email,
+          phone: this.phoneNumber,
+          total: this.total,
+          date:'' //ovim naglasavam da zelim da ubacim datum i vreme. Samo je problem u heidisql to ne radi.
+        }
+         //dodaj i total i ostale informacije iz forme.
       }, {
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       }) //saljemo cart. Ali ovo se ne salje
       .then(response=>{
         console.log(response.data)
       })
-      
     }
   },
   beforeMount(){
     this.cart = this.$store.state.cart
   },
   mounted(){
+    console.log(this.cart)
     if(this.cart.length == 0){
       this.backToOrderPage()
     }
