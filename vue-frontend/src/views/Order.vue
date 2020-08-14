@@ -34,10 +34,7 @@
           >
             <h3>{{item.size}} {{item.title}}</h3>
             <div class="img-container d-flex align-center">
-              <img :src="item.img" alt="">
-
-              <!-- <img src="../../../item-images/dule.jpg" alt="">  --> <!-- --------------!!!!!!!!!!!!!!!!!!!--------- --> 
-              <!-- funkciju koja ce napraviti string za svakku ovo -->
+              <img :src="require(`../../../PHP-backend/public/item-images/${item.img}`)" alt=""> <!-- kako ubaciti ovaj path u varijablu ? -->
             </div>
             <span><strong>Price: </strong>{{item.price}} &#163;</span>
             <div class="text-center">
@@ -135,7 +132,7 @@
 <script>
 import Prompt from '../components/Prompt.vue';
 import Cart from '../components/Cart.vue';
-// import axios from 'axios';
+import axios from 'axios';
 export default {
   name: 'Order',
   components: {
@@ -153,84 +150,84 @@ export default {
         extras: ''
       },
       items: [
-        {
-          title: 'Cod',
-          img:'/itemImages/chefs.jpg', //ovako radi, jer je ovo apsolutna putanja
-          size: 'Regular',
-          price: 4.30,
-          extras: 'salt'
-        }
-        ,
-        {
-          title: 'Cod',
-          img: 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-          size: 'Regular',
-          price: 5.03,
-          extras: "pepper, salt"
-        },
-        {
-          title: 'Cod',
-          img: 'https://www.hakaimagazine.com/wp-content/uploads/header-fish-feel.jpg',
-          size: 'Regular',
-          price: 5.25,
-          extras: 'salt, vinager'
-        },
-        {
-          title: 'Cod',
-          img: 'https://cdn0.wideopenpets.com/wp-content/uploads/2019/10/Fish-Names-770x405.png',
-          size: 'Large',
-          price: 5.29,
-          extras:'salt, vinager'
-        },
-        {
-          title: 'Burger',
-          img: 'https://media-cdn.tripadvisor.com/media/photo-s/17/ba/a6/31/burger.jpg',
-          size: 'Regular',
-          price: 2.30,
-          extras: 'mayo, burger sauce, BH sauce, ketchup'
-        },
-        {
-          title: 'Cod',
-          img: 'https://cdn.pixabay.com/photo/2014/03/24/13/49/trout-294469__340.png',
-          size: 'Large',
-          price: 5.24,
-          extras: 'salt, vinager'
-        },
-        {
-          title: 'Cod',
-          img: 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-          size: 'Regular',
-          price: 5.03,
-          extras: "pepper, salt"
-        },
-        {
-          title: 'Cod',
-          img: 'https://www.hakaimagazine.com/wp-content/uploads/header-fish-feel.jpg',
-          size: 'Regular',
-          price: 5.25,
-          extras: 'salt, vinager'
-        },
-        {
-          title: 'Cod',
-          img: 'https://cdn0.wideopenpets.com/wp-content/uploads/2019/10/Fish-Names-770x405.png',
-          size: 'Large',
-          price: 5.29,
-          extras:'salt, pepper'
-        },
-        {
-          title: 'Burger',
-          img: 'https://media-cdn.tripadvisor.com/media/photo-s/17/ba/a6/31/burger.jpg',
-          size: 'Regular',
-          price: 2.30,
-          extras: 'mayo, burger sauce, BH sauce, ketchup'
-        },
-        {
-          title: 'Cod',
-          img: 'https://cdn.pixabay.com/photo/2014/03/24/13/49/trout-294469__340.png',
-          size: 'Large',
-          price: 5.24,
-          extras: 'salt, vinager'
-        }
+        // {
+        //   title: 'Cod',
+        //   img:'chippie-item-159731861367835945_2480903818805305_6230885824027492835_n.jpg', //ovako radi, jer je ovo apsolutna putanja
+        //   size: 'Regular',
+        //   price: 4.30,
+        //   extras: 'salt'
+        // }
+        // ,
+        // {
+        //   title: 'Cod',
+        //   img: '/itemImages/chefs.jpg',
+        //   size: 'Regular',
+        //   price: 5.03,
+        //   extras: "pepper, salt"
+        // },
+        // {
+        //   title: 'Cod',
+        //   img: 'https://www.hakaimagazine.com/wp-content/uploads/header-fish-feel.jpg',
+        //   size: 'Regular',
+        //   price: 5.25,
+        //   extras: 'salt, vinager'
+        // },
+        // {
+        //   title: 'Cod',
+        //   img: 'https://cdn0.wideopenpets.com/wp-content/uploads/2019/10/Fish-Names-770x405.png',
+        //   size: 'Large',
+        //   price: 5.29,
+        //   extras:'salt, vinager'
+        // },
+        // {
+        //   title: 'Burger',
+        //   img: 'https://media-cdn.tripadvisor.com/media/photo-s/17/ba/a6/31/burger.jpg',
+        //   size: 'Regular',
+        //   price: 2.30,
+        //   extras: 'mayo, burger sauce, BH sauce, ketchup'
+        // },
+        // {
+        //   title: 'Cod',
+        //   img: 'https://cdn.pixabay.com/photo/2014/03/24/13/49/trout-294469__340.png',
+        //   size: 'Large',
+        //   price: 5.24,
+        //   extras: 'salt, vinager'
+        // },
+        // {
+        //   title: 'Cod',
+        //   img: 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+        //   size: 'Regular',
+        //   price: 5.03,
+        //   extras: "pepper, salt"
+        // },
+        // {
+        //   title: 'Cod',
+        //   img: 'https://www.hakaimagazine.com/wp-content/uploads/header-fish-feel.jpg',
+        //   size: 'Regular',
+        //   price: 5.25,
+        //   extras: 'salt, vinager'
+        // },
+        // {
+        //   title: 'Cod',
+        //   img: 'https://cdn0.wideopenpets.com/wp-content/uploads/2019/10/Fish-Names-770x405.png',
+        //   size: 'Large',
+        //   price: 5.29,
+        //   extras:'salt, pepper'
+        // },
+        // {
+        //   title: 'Burger',
+        //   img: 'https://media-cdn.tripadvisor.com/media/photo-s/17/ba/a6/31/burger.jpg',
+        //   size: 'Regular',
+        //   price: 2.30,
+        //   extras: 'mayo, burger sauce, BH sauce, ketchup'
+        // },
+        // {
+        //   title: 'Cod',
+        //   img: 'https://cdn.pixabay.com/photo/2014/03/24/13/49/trout-294469__340.png',
+        //   size: 'Large',
+        //   price: 5.24,
+        //   extras: 'salt, vinager'
+        // }
       ],
       cart:[
       ],
@@ -240,6 +237,12 @@ export default {
     }
   },
   methods: {
+    setUpImageUrl(){
+      for(var i = 0; i < this.items.length; i++){
+        this.items[i].img = this.imgPath + this.items[i].img;
+      }
+    },
+    
     priceDecimals(){
       for(var a = 0; a < this.items.length; a++){
         var check = parseFloat((this.items[a].price));
@@ -254,7 +257,7 @@ export default {
         size: this.items[index].size,
         img: this.items[index].img,
         price: this.items[index].price,
-        extras: this.items[index].extras //this is changed later when we add to cart. ovo jos uvek predstavlja problem 
+        extras: this.items[index].extras
       }
       this.promptDisplay = 'true'
     },
@@ -283,7 +286,7 @@ export default {
       this.$store.state.cart = this.cart
       
       this.updatePrompt()
-      this.promptedItem = {}; //not necessary but just in case
+      this.promptedItem = {}; //precaution for when we load the next item props
       this.calcCartTotal() //calculating final price
       
     },
@@ -302,7 +305,7 @@ export default {
       }, 2000)
     },
 
-    cartViewCheck(){ //it will check if the animation has been played. If it has, it will check the state in which the user left the cart (open or closed and adjust it accordingly)
+    cartViewCheck(){ //it will check if the animation has been played, and the state in which the user left the cart (open/ closed), and will re-adjust accordingly.
       if(this.$store.state.animationPlayed == false){
         this.playCartAnimation()
         this.$store.state.animationPlayed = true;
@@ -387,18 +390,17 @@ export default {
         console.log('Your cart is empty !')
       } else {
         console.log(this.cart)
-        this.$router.push('order/checkout') //redirect to the checkout page
-        //ovde imas sve u cookie, i taj cookie ce da populise cart.
+        this.$router.push('order/checkout') //redirect to the checkout page. Only happens if there is anything in the cart
       }
     }
   },
-  // beforeMount(){
-  //   axios.get('http://localhost:8087/api/items')
-  //   .then(response=>{
-  //     console.log(response.data)
-  //     this.items = response.data
-  //   })
-  // },
+  beforeMount(){
+    axios.get('http://localhost:8087/api/items')
+    .then(response=>{
+      // console.log(response.data)
+      this.items = response.data
+    })
+  },
   mounted(){
     this.cartViewCheck()
     this.cart = this.$store.state.cart

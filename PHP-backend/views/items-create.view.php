@@ -23,10 +23,6 @@
                     <input type="text" class="form-control" id="price" name="price">
                 </div>
                 <div class="form-group">
-                    <label for="description">Description</label>
-                    <input type="text" class="form-control" id="description" name="description">
-                </div>
-                <div class="form-group">
                     <label for="extras">Extras (separate with commas)</label>
                     <input type="text" class="form-control" id="extras" name="extras">
                     <small>Correct: salt, pepper</small><br>
