@@ -15,11 +15,7 @@ class ApiItemsController {
     public function store()
     {
 
-        //uraditi prethodno sanitizaciju i validaciju !
-
         $orderData = json_decode(file_get_contents('php://input'),ARRAY_FILTER_USE_KEY);
-//        $orderInfo = $_POST;
-//        var_dump($orderData);
 
         App::get('database')->insert('orders', $orderData['orderInfo']);
 

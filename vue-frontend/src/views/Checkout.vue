@@ -205,6 +205,7 @@ export default {
       }) //saljemo cart. Ali ovo se ne salje
       .then(response=>{
         console.log(response.data)
+        this.$store.state.cart = [];
       })
     }
   },

@@ -24,13 +24,15 @@
                                             <th>Price</th>
                                         </tr>
                                         </thead>
-                                        <?php foreach ($item_orders as $item_order):?>
-                                            <tr>
-                                                <td class="border border-secondary"><?= ($item_order->order_id == $order->id) ? $item_order->title : ''; ?></td>
-                                                <td class="border border-secondary"><?= ($item_order->order_id == $order->id) ? $item_order->extras : ''; ?></td>
-                                                <td class="border border-secondary"><?= ($item_order->order_id == $order->id) ? $item_order->price."&#163;" : ''; ?></td>
+                                        <?php foreach ($item_orders as $item_order):?> <!-- I am not selecting all fields but printing the ones which have the number-->
+                                            <?php if($item_order->order_id == $order->id):?>
+                                                <tr>
+                                                    <td class="border border-secondary"><?= ($item_order->order_id == $order->id) ? $item_order->title : ''; ?></td>
+                                                    <td class="border border-secondary"><?= ($item_order->order_id == $order->id) ? $item_order->extras : ''; ?></td>
+                                                    <td class="border border-secondary"><?= ($item_order->order_id == $order->id) ? $item_order->price."&#163;" : ''; ?></td>
 
-                                            </tr>
+                                                </tr>
+                                            <?php endif;?>
                                         <?php endforeach; ?>
                                         <tr>
                                             <td></td>
