@@ -405,6 +405,9 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.order {
+  background-color: #f1efef;
+}
 #item-card {
   max-width: 240px;
   .img-container {

@@ -48,8 +48,11 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-ul {
+.faq {
+  background-color: #f1efef;
+  ul {
     border:1px solid #333;
+    background-color: white;
     margin-bottom: 10px;
     padding:30px 60px;
   h3 {
@@ -59,5 +62,6 @@ ul {
     list-style-type: none;
     text-align: left;
   }
+}
 }
 </style>
