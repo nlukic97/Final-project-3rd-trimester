@@ -17,13 +17,26 @@ class ApiItemsController {
 
         //uraditi prethodno sanitizaciju i validaciju !
 
-        $orderForm = json_decode(file_get_contents('php://input'),ARRAY_FILTER_USE_KEY);
+        $orderData = json_decode(file_get_contents('php://input'),ARRAY_FILTER_USE_KEY);
 //        $orderInfo = $_POST;
-        var_dump($orderForm['orderInfo']);
-        App::get('database')->insert('orders', $orderForm['orderInfo']);
-        die();
+//        var_dump($orderData);
 
-        App::get('database')->insert('orders', $_POST);
+        App::get('database')->insert('orders', $orderData['orderInfo']);
+
+        $recentId = App::get('database')->getLastInsertedId();
+
+//        echo $recentId;
+//        var_dump($orderData);
+        $cart = $orderData['cartInfo']['cart'];
+//        var_dump($cart);
+        echo "<pre>";
+        foreach ($cart as $item){
+            $item['order_id'] = $recentId;#
+            App::get('database')->insert('item_order',$item);
+            var_dump($item);
+        }
+        echo "</pre>";
+
         return [
             'status' => 'ok'
         ];

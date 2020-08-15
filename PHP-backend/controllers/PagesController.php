@@ -23,7 +23,10 @@ class PagesController {
     {
         check_auth();
         $orders = App::get('database')->getAllDesc('orders');
-        return view('orders', compact('orders'));
+
+        $item_orders = App::get('database')->getAll('item_order'); // ??? kako ovo da upakujem u text ?
+
+        return view('orders', compact('orders','item_orders'));
     }
 
     public function users()

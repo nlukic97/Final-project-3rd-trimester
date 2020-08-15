@@ -64,6 +64,11 @@ class QueryBuilder
         return $query->fetch(\PDO::FETCH_OBJ);
     }
 
+    public function getLastInsertedId()
+    {
+        return $this->pdo->lastInsertId();
+    }
+
     public function insert($table, $data)
     {
 

@@ -68,7 +68,7 @@
             <v-btn
             class="red white--text mb-7"
             width="60%"
-            @click="submit()"
+            @click="validation()"
             >
               Order now
             </v-btn>
@@ -183,8 +183,8 @@ export default {
 
     submit(){
       var today = new Date();
-      var currentDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-      var currentTime = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      var currentDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(); //heidi sql is not able to auto input dates
+      var currentTime = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(); //heidi sql is not able to auto input dates
 
       axios.post('http://localhost:8087/api/items',{
         orderInfo: {
@@ -195,6 +195,9 @@ export default {
           total: this.total,
           date: currentDate,
           time: currentTime
+        },
+        cartInfo: {
+          cart: this.cart
         }
          //dodaj i total i ostale informacije iz forme.
       }, {
