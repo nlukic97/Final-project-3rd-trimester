@@ -20,6 +20,7 @@
                 <td class="border-bottom border-secondary">
                     <a href="/users/show?id=<?= $user->id ?>" class="btn btn-info">Show</a>
                     <a href="/users/edit?id=<?= $user->id ?>" class="btn btn-warning">Edit</a>
+                    <a href="/users/editPassword?id=<?= $user->id ?>" class="btn btn-warning">New Password</a>
                     <a href="/users/destroy?id=<?= $user->id ?>" class="btn btn-danger">Delete</a>
                 </td>
             </tr>

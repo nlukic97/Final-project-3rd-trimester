@@ -65,6 +65,8 @@ $router->post('users', 'UsersController@store');
 $router->get('users/show', 'UsersController@show');
 $router->get('users/edit', 'UsersController@edit');
 $router->post('users/edit', 'UsersController@update');
+$router->get('users/editPassword', 'UsersController@editPassword');
+$router->post('users/editPassword', 'UsersController@updatePassword');
 $router->get('users/destroy', 'UsersController@destroy');
 
 

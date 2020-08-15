@@ -22,6 +22,11 @@ class   UsersController {
     {
         //uraditi prethodno sanitizaciju i validaciju !
         check_auth();
+
+        if(isset($_POST['password'])){
+            $_POST['password'] = md5($_POST['password']); //pojacaj ovo ovde isto
+        }
+
         App::get('database')->insert('users', $_POST);
 
         return redirect('/users');
@@ -40,14 +45,50 @@ class   UsersController {
         check_auth();
         $user = App::get('database')->getOne('users', $_GET['id']);
 
-        return view('users-edit', compact('user'));
+        return view('users-edit-name-email', compact('user'));
+    }
+
+    public function editPassword()
+    {
+        check_auth();
+        $user = App::get('database')->getOne('users', $_GET['id']);
+
+        return view('users-edit-password', compact('user'));
     }
 
     public function update()
     {
         //uraditi validaciju
         check_auth();
-        App::get('database')->update('users', $_POST);
+        $user = App::get('database')->getOneAssoc('users', $_POST['id']);
+
+        if($user['password'] == md5($_POST['password'])){
+
+            unset($_POST['password']);
+
+            App::get('database')->update('users', $_POST);
+
+        }
+
+        return redirect('/users');
+    }
+
+    public function updatePassword()
+    {
+        //uraditi validaciju
+        check_auth();
+        var_dump($_POST);
+
+        $user = App::get('database')->getOneAssoc('users', $_POST['id']);
+
+        if($user['password'] == md5($_POST['currentPassword'])){
+
+            unset($_POST['currentPassword']);
+            $_POST['password'] = md5($_POST['password']);
+
+            App::get('database')->update('users', $_POST);
+
+        }
 
         return redirect('/users');
     }

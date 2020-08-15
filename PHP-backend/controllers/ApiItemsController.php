@@ -27,7 +27,7 @@ class ApiItemsController {
 //        var_dump($cart);
         echo "<pre>";
         foreach ($cart as $item){
-            $item['order_id'] = $recentId;#
+            $item['order_id'] = $recentId;
             App::get('database')->insert('item_order',$item);
             var_dump($item);
         }

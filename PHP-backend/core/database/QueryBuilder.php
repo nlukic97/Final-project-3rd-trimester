@@ -91,16 +91,7 @@ class QueryBuilder
                 }
             }
         }
-        //notice: undefined;
-        if(isset($data['password'])){
-            $data['password'] = md5($data['password']); //pojacaj ovo ovde isto
-        }
 
-//        if(isset($data['date'])){ //sta cemo sa ovim ?
-//            $data['date'] = "CURRENT_DATE()";
-//            $data['time'] = "CURRENT_TIMESTAMP()";
-////            INSERT INTO orders (NAME,total,address,email,phone,DATE,TIME) VALUES('Sir',12,'nice street','awesome@gmail.com',111,CURRENT_DATE,CURRENT_TIMESTAMP)
-//        }
 
         $sql = sprintf("INSERT INTO %s (%s) VALUES (%s)",
             $table,

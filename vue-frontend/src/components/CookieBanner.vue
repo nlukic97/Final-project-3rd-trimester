@@ -1,6 +1,6 @@
 <template>
   <div v-if="CookiePromptDisplay">
-    <v-card id="cookieBanner" class="pt-0 pr-0 pb-0 pl-0">
+    <v-card id="cookieBanner" class="pt-0 pr-0 pb-0 pl-0"> 
       <div class="d-flex justify-center  align-center red pt-5 pb-5">
         <span class="ml-5 mr-10 white--text">Our site uses cookies. By browsing this site, you consent to the use of these cookies.</span>
         <v-btn
