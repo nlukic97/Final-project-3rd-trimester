@@ -5,7 +5,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Monday - <?= $order->date; ?> - <?= $order->time?></h5>
+                        <h5 class="card-title"> <?= date('D',strtotime($order->date)); ?> - <?= $order->date; ?> - <?= $order->time?></h5>
                         <p class="card-text">Name: <?= $order->name?></p>
                         <p class="card-text">Address: <?= $order->address?></p>
                         <p class="card-text">Email: <?= $order->email?></p>

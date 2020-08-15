@@ -182,6 +182,10 @@ export default {
     },
 
     submit(){
+      var today = new Date();
+      var currentDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      var currentTime = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
       axios.post('http://localhost:8087/api/items',{
         orderInfo: {
           name: this.name,
@@ -189,7 +193,8 @@ export default {
           email: this.email,
           phone: this.phoneNumber,
           total: this.total,
-          date:'' //ovim naglasavam da zelim da ubacim datum i vreme. Samo je problem u heidisql to ne radi.
+          date: currentDate,
+          time: currentTime
         }
          //dodaj i total i ostale informacije iz forme.
       }, {
