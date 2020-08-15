@@ -20,12 +20,25 @@ class   UsersController {
 
     public function store()
     {
-        //uraditi prethodno sanitizaciju i validaciju !
+        //uraditi prethodno sanitizaciju i validaciju ! Proveri ima li vec taj korisnik.
         check_auth();
 
-        if(isset($_POST['password'])){
-            $_POST['password'] = md5($_POST['password']); //pojacaj ovo ovde isto
+        $pass = $_POST['password'];
+
+        unset($_POST['password']);
+
+        $user = App::get('database')->getOneByField('users',$_POST);
+
+        //if the user exists or there is a missing input field, it will redirect to /users without creating a new account
+        if($user OR $pass == '' or $_POST['name'] == '' OR $_POST['email'] == ''){
+
+            return redirect('/users');
+
         }
+
+        //creating hashed password
+        $salt = substr(md5(time()),0,22);
+        $_POST['password'] = crypt($pass,'$2a$10$'.$salt);
 
         App::get('database')->insert('users', $_POST);
 
@@ -62,7 +75,11 @@ class   UsersController {
         check_auth();
         $user = App::get('database')->getOneAssoc('users', $_POST['id']);
 
-        if($user['password'] == md5($_POST['password'])){
+        $full_salt = substr($user['password'],0,29);
+
+        $inputPass = crypt($_POST['password'],$full_salt);
+
+        if($user['password'] == $inputPass){
 
             unset($_POST['password']);
 
@@ -77,14 +94,21 @@ class   UsersController {
     {
         //uraditi validaciju
         check_auth();
-        var_dump($_POST);
 
         $user = App::get('database')->getOneAssoc('users', $_POST['id']);
 
-        if($user['password'] == md5($_POST['currentPassword'])){
+
+        $full_salt = substr($user['password'],0,29);
+        $inputPass = crypt($_POST['currentPassword'],$full_salt);
+
+
+        echo $inputPass == $user['password'];
+
+        if($inputPass == $user['password']){
 
             unset($_POST['currentPassword']);
-            $_POST['password'] = md5($_POST['password']);
+
+            $_POST['password'] = crypt($_POST['password'],$full_salt);
 
             App::get('database')->update('users', $_POST);
 

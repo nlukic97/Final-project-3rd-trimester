@@ -129,7 +129,6 @@ class QueryBuilder
                 echo "<pre>";
                 var_dump($data);
                 var_dump($_FILES['img']);
-                //here, perform the transfer of this image into the image location.
                 echo "</pre>";
 
             }
@@ -138,6 +137,8 @@ class QueryBuilder
         unset($data['oldImageName']);
         $id = $data['id'];
         unset($data['id']);
+
+
 
         $preparedParams = array_map(function($item) {
             return $item . "=:" . $item;

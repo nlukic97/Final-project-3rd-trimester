@@ -13,10 +13,25 @@ class AuthController {
     public function login()
     {
         //validacija
-        $_POST['password'] = md5($_POST['password']); //ovo promeni posle da bude jace
+
+        $pass = $_POST['password'];
+        unset($_POST['password']);
+
         $user = App::get('database')->getOneByField('users', $_POST);
+
+
+        $full_salt = substr($user->password,0,29);
+
+        $inputPass = crypt($pass,$full_salt);
+
+
         if(!$user) {
             return redirect('/login');
+        }
+
+        if($inputPass != $user->password){
+            return redirect('/login');
+
         }
 
         $_SESSION['user'] = $user;
