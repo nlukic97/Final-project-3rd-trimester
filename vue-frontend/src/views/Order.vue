@@ -123,7 +123,7 @@
       fab
       @click="mobileCartToggle"
       >
-      Cart
+      <i class="fas fa-shopping-cart"></i>
       </v-btn>
     </v-row>
   </v-container>
@@ -492,6 +492,10 @@ export default {
     left:5%;
     width:70px;
     height:70px;
+    z-index: 23;
+    i {
+      font-size:25px;
+    }
   }
 
   #mobile-cart-prompt { 

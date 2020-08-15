@@ -16,7 +16,7 @@
                             <p class="card-text">Order:</p> <!-- This needs to be gotten from the item_order table. So id is this one, so we want id of those orders to be gotten -->
                             <div class="card">
                                 <div class="card-body">
-                                    <table style="width: 80%; margin: 0 auto;" class="text-center">
+                                    <table style="width: 95%;" class="text-center ml-auto mr-auto">
                                         <thead class="thead-dark">
                                         <tr>
                                             <th>Title</th>
