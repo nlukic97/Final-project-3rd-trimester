@@ -15,7 +15,39 @@ class ApiItemsController {
     public function store()
     {
 
-        $orderData = json_decode(file_get_contents('php://input'),ARRAY_FILTER_USE_KEY);
+        $orderData = json_decode(file_get_contents('php://input'), ARRAY_FILTER_USE_KEY);
+
+        //validation and sanitization
+            //name
+            $orderData['orderInfo']['name'] = filter_var($orderData['orderInfo']['name'], FILTER_SANITIZE_STRING);
+
+            //address
+            $orderData['orderInfo']['address'] = filter_var($orderData['orderInfo']['address'], FILTER_SANITIZE_STRING);
+
+            //email
+            $email = filter_var($orderData['orderInfo']['email'], FILTER_SANITIZE_EMAIL);
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)){
+                $orderData['orderInfo']['email'] = $email;
+            } else {
+                $orderData['orderInfo']['email'] = '';
+            }
+
+            //phone
+            $phone = filter_var($orderData['orderInfo']['phone'], FILTER_SANITIZE_NUMBER_INT);
+            if(filter_var($phone, FILTER_VALIDATE_INT)){
+                $orderData['orderInfo']['phone'] = $phone;
+            } else {
+                $orderData['orderInfo']['phone'] = '';
+            }
+            //total
+            $orderData['orderInfo']['total'] = filter_var($orderData['orderInfo']['total'], FILTER_SANITIZE_STRING);
+
+            //date
+            $orderData['orderInfo']['date'] = filter_var($orderData['orderInfo']['date'], FILTER_SANITIZE_STRING);
+
+            //time
+            $orderData['orderInfo']['time'] = filter_var($orderData['orderInfo']['time'], FILTER_SANITIZE_STRING);
+
 
         App::get('database')->insert('orders', $orderData['orderInfo']);
 
@@ -25,13 +57,13 @@ class ApiItemsController {
 //        var_dump($orderData);
         $cart = $orderData['cartInfo']['cart'];
 //        var_dump($cart);
-        echo "<pre>";
+//        echo "<pre>";
         foreach ($cart as $item){
             $item['order_id'] = $recentId;
             App::get('database')->insert('item_order',$item);
-            var_dump($item);
+//            var_dump($item);
         }
-        echo "</pre>";
+//        echo "</pre>";
 
         return [
             'status' => 'ok'
@@ -45,7 +77,7 @@ class ApiItemsController {
         echo json_encode($post);
     }
 
-    public function update()
+    public function update() //ne treba
     {
         //uraditi validaciju
         App::get('database')->update('posts', $_POST);

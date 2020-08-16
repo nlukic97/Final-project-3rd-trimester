@@ -74,10 +74,12 @@ export default {
     },
 
     extraCheckboxMaker(){ 
-    this.itemExtras = []; //imam neki bug ovde - ovo je resenje. Clearing out the itemExtras before leaving
-      if(this.extras && this.extras.indexOf(',') != -1){ //if there is no , it means there is one extra which will be added
+    this.itemExtras = []; //imam neki bug ovde - ovo je resenje. Clearing out the itemExtras before leaving SREDJENO
+      if(this.extras && this.extras.indexOf(',') != -1){ //if there is no ',' that  means there is only one extra
         this.itemExtras = this.extras.split(', ');
-      } else {
+        console.log('extras')
+        console.log(this.itemExtras)
+      } else if(this.extras != "" && this.extras != null) { //if the prop is any of these, it means there are no extrasw
         this.itemExtras.push(this.extras)
         console.log(this.itemExtras)
       }

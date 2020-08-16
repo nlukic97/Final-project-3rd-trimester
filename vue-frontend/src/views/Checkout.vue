@@ -123,9 +123,9 @@ export default {
       name:'',
       address:'',
       email:'',
-      phoneNumber:'',
-      cardNumber:'',
-      cvc:'',
+      phoneNumber:null,
+      cardNumber:null,
+      cvc:null,
       total:'0',
       valid:false,
       nameRules: [

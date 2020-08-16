@@ -12,7 +12,7 @@ class ApiFaqController
     }
 
 
-    public function store()
+    public function store() //ne treba
     {
 
         //uraditi prethodno sanitizaciju i validaciju !
@@ -29,7 +29,7 @@ class ApiFaqController
         echo json_encode($post);
     }
 
-    public function update()
+    public function update() //ne treba
     {
         //uraditi validaciju
         App::get('database')->update('posts', $_POST);
