@@ -7,7 +7,7 @@
 
     <div class="form-group">
         <label for="currentPassword">Current password:</label>
-        <input type="text" id="currentPassword" name="currentPassword" class="form-control" value="">
+        <input type="password" id="currentPassword" name="currentPassword" class="form-control" value="">
     </div>
 
     <div class="form-group">

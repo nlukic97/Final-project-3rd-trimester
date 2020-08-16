@@ -23,9 +23,26 @@ class   UsersController {
         //uraditi prethodno sanitizaciju i validaciju ! Proveri ima li vec taj korisnik.
         check_auth();
 
-        $pass = $_POST['password'];
-
+        //password
+        $pass = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
         unset($_POST['password']);
+        if($pass == '' OR $pass == null){
+            return redirect('/users');
+        }
+
+        //name
+        $_POST['name'] = filter_var($_POST['name'],FILTER_SANITIZE_STRING);
+        if($_POST['name'] == '' OR $_POST['name'] == null){
+            return redirect('/users');
+        }
+
+        //email
+        $_POST['email'] = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+        if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+            return redirect('/users');
+        }
+
+
 
         $user = App::get('database')->getOneByField('users',$_POST);
 
@@ -71,8 +88,44 @@ class   UsersController {
 
     public function update()
     {
-        //uraditi validaciju
         check_auth();
+
+        //sanitization and validation
+            $id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
+            if(!filter_var($id,FILTER_VALIDATE_INT)){
+//                echo "problem 1";
+//                die();
+                return redirect('/users');
+            }
+
+            //name - trim spaces
+            $_POST['name'] = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+            if($_POST['name'] == '' OR $_POST['name'] == null ) {
+//                echo "problem 2";
+//                die();
+                return redirect('/users');
+            }
+
+            //email -- trim spaces
+            $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+            if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+//                echo "problem 3";
+//                die();
+                return redirect('/users');
+            }
+
+            //password -- ? trim spaces ?
+            $_POST['password'] = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+            if($_POST['password'] == '' OR $_POST['password'] == null){
+
+//                echo "problem 4";
+//                die();
+                return redirect('/users');
+            }
+
+    //        var_dump($_POST);
+    //        die();
+
         $user = App::get('database')->getOneAssoc('users', $_POST['id']);
 
         $full_salt = substr($user['password'],0,29);
@@ -95,14 +148,27 @@ class   UsersController {
         //uraditi validaciju
         check_auth();
 
+
+        $_POST['id'] = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
+        if(!filter_var($_POST['id'],FILTER_VALIDATE_INT)){
+//                echo "problem 1";
+//                die();
+            return redirect('/users');
+        }
+
+        $_POST['currentPassword'] = filter_var($_POST['currentPassword'], FILTER_SANITIZE_STRING);
+        $_POST['password'] = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+        if($_POST['password'] == '' OR $_POST['password'] == ''){
+            return redirect('/users');
+        }
+
+
         $user = App::get('database')->getOneAssoc('users', $_POST['id']);
 
 
         $full_salt = substr($user['password'],0,29);
         $inputPass = crypt($_POST['currentPassword'],$full_salt);
 
-
-        echo $inputPass == $user['password'];
 
         if($inputPass == $user['password']){
 

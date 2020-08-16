@@ -73,25 +73,6 @@ class QueryBuilder
     {
 
         //handling image upload for new item. Only will execute is there is a $_FILES['img'] set
-        if(isset($_FILES['img'])){
-            if($_FILES['img']['tmp_name'] != '' OR $_FILES['img']['name'] != ''){
-
-                if($_FILES['img']['type'] == 'image/jpeg'
-                    OR $_FILES['img']['type'] == 'image/png'
-                    OR $_FILES['img']['type'] == 'image/jpg'){
-
-                    $uploadDir = getcwd()."\\public\\item-images";
-
-                    $imageName = "chippie-item-".time().$_FILES['img']['name'];
-
-                    //inserting into PHP admin section
-                    move_uploaded_file($_FILES['img']['tmp_name'],$uploadDir."\\".$imageName);
-
-                    $data['img'] = $imageName;
-                }
-            }
-        }
-
 
         $sql = sprintf("INSERT INTO %s (%s) VALUES (%s)",
             $table,
@@ -106,39 +87,6 @@ class QueryBuilder
 
     public function update($table, $data)
     {
-        //handling image upload. Only executed when new image is selected
-        if($_FILES['img']['tmp_name'] != '' OR $_FILES['img']['name'] != ''){
-
-            if($_FILES['img']['type'] == 'image/jpeg'
-                OR $_FILES['img']['type'] == 'image/png'
-                OR $_FILES['img']['type'] == 'image/jpg') {
-
-                $uploadDir = getcwd() . "\\public\\item-images";
-
-                $newImageName = "chippie-item-" . time() . $_FILES['img']['name'];
-
-                //inserting image into PHP directory and preparing to add to database table
-                move_uploaded_file($_FILES['img']['tmp_name'], $uploadDir . "\\" . $newImageName);
-                $data['img'] = $newImageName;
-
-                //deleting the replaced image
-                if(is_file($uploadDir."\\".$data['oldImageName'])){
-                    unlink($uploadDir."\\".$data['oldImageName']);
-                };
-
-                echo "<pre>";
-                var_dump($data);
-                var_dump($_FILES['img']);
-                echo "</pre>";
-
-            }
-        }
-
-        unset($data['oldImageName']);
-        $id = $data['id'];
-        unset($data['id']);
-
-
 
         $preparedParams = array_map(function($item) {
             return $item . "=:" . $item;
