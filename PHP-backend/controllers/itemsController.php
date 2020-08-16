@@ -68,6 +68,8 @@ class itemsController {
     {
         check_auth();
 
+        //sanitize and validate
+
         //handling image upload. Only executed when new image is selected
         if($_FILES['img']['tmp_name'] != '' OR $_FILES['img']['name'] != ''){
 
@@ -81,25 +83,20 @@ class itemsController {
 
                 //inserting image into PHP directory and preparing to add to database table
                 move_uploaded_file($_FILES['img']['tmp_name'], $uploadDir . "\\" . $newImageName);
+
                 $_POST['img'] = $newImageName;
 
                 //deleting the replaced image
                 if(is_file($uploadDir."\\".$_POST['oldImageName'])){
+
                     unlink($uploadDir."\\".$_POST['oldImageName']);
+
                 }
 
             }
         }
 
         unset($_POST['oldImageName']);
-        $id = $_POST['id'];
-        unset($_POST['id']);
-
-        echo "<pre>";
-        var_dump($_POST);
-        var_dump($_FILES['img']);
-        echo "</pre>";
-        die();
 
         App::get('database')->update('items', $_POST); //ovde ima neki problem. -------- kako da prosledim ID do update query funkcije ??
 
@@ -111,7 +108,6 @@ class itemsController {
         check_auth();
 
         $item = App::get('database')->getOneAssoc('items', $_GET['id']);
-
         App::get('database')->delete('items', $item);
 
         return redirect('/items');

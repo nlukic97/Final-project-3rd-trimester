@@ -44,7 +44,7 @@ class QueryBuilder
 
         $query->execute();
 
-        return $query->fetch(\PDO::FETCH_ASSOC);
+        return $query->fetch(PDO::FETCH_ASSOC);
     }
 
     public function getOneByField($table, $parameters)
@@ -91,6 +91,9 @@ class QueryBuilder
         $preparedParams = array_map(function($item) {
             return $item . "=:" . $item;
         }, array_keys($data));
+
+        $id = $_POST['id'];
+        unset($_POST['id']);
 
         $sql = sprintf("UPDATE %s SET %s WHERE id = '%s'",
             $table,
