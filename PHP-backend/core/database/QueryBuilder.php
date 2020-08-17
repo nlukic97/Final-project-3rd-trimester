@@ -44,7 +44,7 @@ class QueryBuilder
 
         $query->execute();
 
-        return $query->fetch(PDO::FETCH_ASSOC);
+        return $query->fetch(\PDO::FETCH_ASSOC);
     }
 
     public function getOneByField($table, $parameters)

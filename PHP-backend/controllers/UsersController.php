@@ -31,13 +31,13 @@ class   UsersController {
         }
 
         //name
-        $_POST['name'] = filter_var($_POST['name'],FILTER_SANITIZE_STRING);
+        $_POST['name'] = trim(filter_var($_POST['name'],FILTER_SANITIZE_STRING),' ');
         if($_POST['name'] == '' OR $_POST['name'] == null){
             return redirect('/users');
         }
 
         //email
-        $_POST['email'] = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+        $_POST['email'] = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL),' ');
         if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
             return redirect('/users');
         }
@@ -48,9 +48,7 @@ class   UsersController {
 
         //if the user exists or there is a missing input field, it will redirect to /users without creating a new account
         if($user OR $pass == '' or $_POST['name'] == '' OR $_POST['email'] == ''){
-
             return redirect('/users');
-
         }
 
         //creating hashed password
@@ -91,46 +89,46 @@ class   UsersController {
         check_auth();
 
         //sanitization and validation
-            $id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
-            if(!filter_var($id,FILTER_VALIDATE_INT)){
-//                echo "problem 1";
-//                die();
+        $_POST['id'] = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
+
+            if(!filter_var($_POST['id'],FILTER_VALIDATE_INT)){
+
                 return redirect('/users');
+
             }
 
-            //name - trim spaces
-            $_POST['name'] = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+            //name
+            $_POST['name'] = trim(filter_var($_POST['name'], FILTER_SANITIZE_STRING),' ');
+
             if($_POST['name'] == '' OR $_POST['name'] == null ) {
-//                echo "problem 2";
-//                die();
+
                 return redirect('/users');
+
             }
 
-            //email -- trim spaces
-            $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-            if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
-//                echo "problem 3";
-//                die();
+            //email
+        $_POST['email'] = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL),' ');
+
+            if(!filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
+
                 return redirect('/users');
+
             }
 
-            //password -- ? trim spaces ?
+            //password
             $_POST['password'] = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
             if($_POST['password'] == '' OR $_POST['password'] == null){
 
-//                echo "problem 4";
-//                die();
                 return redirect('/users');
+
             }
 
-    //        var_dump($_POST);
-    //        die();
 
         $user = App::get('database')->getOneAssoc('users', $_POST['id']);
-
         $full_salt = substr($user['password'],0,29);
 
         $inputPass = crypt($_POST['password'],$full_salt);
+
 
         if($user['password'] == $inputPass){
 
@@ -145,28 +143,28 @@ class   UsersController {
 
     public function updatePassword()
     {
-        //uraditi validaciju
         check_auth();
 
 
         $_POST['id'] = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
         if(!filter_var($_POST['id'],FILTER_VALIDATE_INT)){
-//                echo "problem 1";
-//                die();
+
             return redirect('/users');
+
         }
 
         $_POST['currentPassword'] = filter_var($_POST['currentPassword'], FILTER_SANITIZE_STRING);
         $_POST['password'] = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
         if($_POST['password'] == '' OR $_POST['password'] == ''){
+
             return redirect('/users');
+
         }
 
 
         $user = App::get('database')->getOneAssoc('users', $_POST['id']);
-
-
         $full_salt = substr($user['password'],0,29);
+
         $inputPass = crypt($_POST['currentPassword'],$full_salt);
 
 

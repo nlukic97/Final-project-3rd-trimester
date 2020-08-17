@@ -1,11 +1,11 @@
 <?php require_once "views/partials/header.php"; ?>
 
-<div class="container">
-    <div class="row">
+<div class="container viewArea">
+    <div class="row pt-4 pb-5">
             <div class="col-12"> <!-- how to align to center when it becomes mobile ?? -->
-                <div class="card m-auto" style="width: 23rem"> <!-- for each here -->
-                    <div style="height:192px; overflow: hidden; display: flex; align-items: center;">
-                        <img src="../public/item-images/<?= $item->img?>" alt="" style="width: 18rem">
+                <div class="card m-auto cardContainer"> <!-- for each here -->
+                    <div class="itemImg">
+                        <img src="../public/item-images/<?= $item->img?>" alt="">
                     </div>
                     <div class="card-body">
                         <h5 class="card-title"><?= $item->title ?> </h5>

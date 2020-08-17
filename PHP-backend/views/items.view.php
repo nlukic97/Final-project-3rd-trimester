@@ -1,9 +1,8 @@
 <?php require_once "views/partials/header.php"; ?>
-<div class="container">
-    <div class="container" style="min-height: 100vh;">
+    <div class="container viewArea">
         <div class="row mt-4 mb-3">
             <div class="col-12 text-center">
-                <a href="/items/create" class="btn btn-primary">New item</a>
+                <a href="/items/create" class="btn btn-success">New item</a>
             </div>
         </div>
         <div class="row">
@@ -16,7 +15,7 @@
                         <div class="card-body">
                             <h5 class="card-title"><?= $item->title ?> - <?= $item->price ?>&#163;</h5>
                             <p class="card-text">Extras: <?= $item->extras ?></p>
-                            <a href="/items/show?id=<?= $item->id?>" class="btn btn-success">View</a>
+                            <a href="/items/show?id=<?= $item->id?>" class="btn btn-info">Show</a>
                             <a href="/items/edit?id=<?= $item->id?>" class="btn btn-warning">Edit</a>
                             <a href="/items/destroy?id=<?= $item->id?>" class="btn btn-danger">Delete</a>
                         </div>
@@ -25,5 +24,4 @@
             <?php endforeach; ?>
         </div>
     </div>
-</div>
 <?php require_once "views/partials/footer.php"; ?>

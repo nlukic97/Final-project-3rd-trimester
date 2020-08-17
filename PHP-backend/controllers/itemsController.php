@@ -20,27 +20,43 @@ class itemsController {
 
     public function store()
     {
-        //uraditi prethodno sanitizaciju i validaciju !
         check_auth();
 
-        if(isset($_FILES['img'])){
-            if($_FILES['img']['tmp_name'] != '' OR $_FILES['img']['name'] != ''){
+        //validation and sanitization
+            //title
+            $_POST['title'] = filter_var($_POST['title'], FILTER_SANITIZE_STRING);
 
-                if($_FILES['img']['type'] == 'image/jpeg'
-                    OR $_FILES['img']['type'] == 'image/png'
-                    OR $_FILES['img']['type'] == 'image/jpg'){
+            //price
+            $_POST['price'] = filter_var($_POST['price'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            if(!filter_var($_POST['price'], FILTER_VALIDATE_FLOAT)){
+                return redirect('/items');
+            }
 
-                    $uploadDir = getcwd()."\\public\\item-images";
+            //extras
+            $_POST['extras'] = trim(filter_var($_POST['extras'], FILTER_SANITIZE_STRING),', ');
 
-                    $imageName = "chippie-item-".time().$_FILES['img']['name'];
+            //image
+            if(isset($_FILES['img'])){
+                if($_FILES['img']['tmp_name'] != '' OR $_FILES['img']['name'] != ''){
 
-                    //inserting into PHP admin section
-                    move_uploaded_file($_FILES['img']['tmp_name'],$uploadDir."\\".$imageName);
+                    //only three allowed formats
+                    if($_FILES['img']['type'] == 'image/jpeg'
+                        OR $_FILES['img']['type'] == 'image/png'
+                        OR $_FILES['img']['type'] == 'image/jpg'){
 
-                    $_POST['img'] = $imageName;
+                        $uploadDir = getcwd()."\\public\\item-images";
+
+                        $imageName = "chippie-item-".time().$_FILES['img']['name'];
+
+                        //inserting into PHP admin section
+                        move_uploaded_file($_FILES['img']['tmp_name'],$uploadDir."\\".$imageName);
+
+                        $_POST['img'] = $imageName;
+                    }
+                } else {
+                    return redirect('/items');
                 }
             }
-        }
 
         App::get('database')->insert('items', $_POST);
 
@@ -68,11 +84,35 @@ class itemsController {
     {
         check_auth();
 
+
         //sanitize and validate
+            //id
+            $_POST['id'] = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
+            if(!filter_var($_POST['id'],FILTER_VALIDATE_INT))
+            {
+                redirect('/items');
+            }
+
+            //title
+            $_POST['title'] = filter_var($_POST['title'], FILTER_SANITIZE_STRING);
+
+            //oldImage
+            $_POST['oldImageName'] = filter_var($_POST['oldImageName'], FILTER_SANITIZE_STRING);
+
+            //price
+            $_POST['price'] = filter_var($_POST['price'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            if(!filter_var($_POST['price'], FILTER_VALIDATE_FLOAT)){
+                return redirect('/items');
+            }
+
+            //extras
+            $_POST['extras'] = trim(filter_var($_POST['extras'], FILTER_SANITIZE_STRING),', ');
+
 
         //handling image upload. Only executed when new image is selected
         if($_FILES['img']['tmp_name'] != '' OR $_FILES['img']['name'] != ''){
 
+            //image types allowed
             if($_FILES['img']['type'] == 'image/jpeg'
                 OR $_FILES['img']['type'] == 'image/png'
                 OR $_FILES['img']['type'] == 'image/jpg') {
@@ -98,7 +138,7 @@ class itemsController {
 
         unset($_POST['oldImageName']);
 
-        App::get('database')->update('items', $_POST); //ovde ima neki problem. -------- kako da prosledim ID do update query funkcije ??
+        App::get('database')->update('items', $_POST);
 
         return redirect('/items');
     }
