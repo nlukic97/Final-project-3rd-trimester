@@ -74,7 +74,7 @@ export default {
     },
 
     extraCheckboxMaker(){ 
-    this.itemExtras = []; //imam neki bug ovde - ovo je resenje. Clearing out the itemExtras before leaving SREDJENO
+    this.itemExtras = [];
       if(this.extras && this.extras.indexOf(',') != -1){ //if there is no ',' that  means there is only one extra
         this.itemExtras = this.extras.split(', ');
         console.log('extras')
