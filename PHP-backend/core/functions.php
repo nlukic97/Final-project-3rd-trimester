@@ -26,7 +26,7 @@ function check_auth() {
     }
 }
 
-function api_check_auth() {
+function api_check_auth() { //ovo ti ne treba
     if (!isset($_SERVER['PHP_AUTH_USER'])) {
         header('WWW-Authenticate: Basic realm="My Realm"');
         header('HTTP/1.0 401 Unauthorized');
@@ -35,10 +35,11 @@ function api_check_auth() {
     } else {
         $credentials = [
             'email' => $_SERVER['PHP_AUTH_USER'],
-            'password' =>  md5($_SERVER['PHP_AUTH_PW']) //promeni i ovo ovde
+            'password' =>  $_SERVER['PHP_AUTH_PW']
         ];
 
         $user = App::get('database')->getOneByField('users', $credentials);
+
         if(!$user) {
             header('WWW-Authenticate: Basic realm="My Realm"');
             header('HTTP/1.0 401 Unauthorized');

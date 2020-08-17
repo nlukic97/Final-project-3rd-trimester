@@ -130,12 +130,7 @@ export default {
       ]
     }
   },
-  methods:{
-    finalCart(){
-      //nesto sto ce da strpa sve iz cookie-a u this.cart. Ovo je final cart pred purchase.
-      //prvo bi ocistio ovaj array da bude prazan, i onda populisao iz cookie-a
-    },
-    
+  methods:{  
     calcTotal(){
       var price = 0;
       for(var i = 0; i < this.cart.length; i++){
@@ -179,10 +174,9 @@ export default {
         cartInfo: {
           cart: this.cart
         }
-         //dodaj i total i ostale informacije iz forme.
       }, {
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-      }) //saljemo cart. Ali ovo se ne salje
+      })
       .then(response=>{
         console.log(response.data)
         this.$store.state.cart = [];

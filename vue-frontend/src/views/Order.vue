@@ -149,75 +149,7 @@ export default {
         price:'' ,
         extras: ''
       },
-      items: [
-        // {
-        //   title: 'Cod',
-        //   img:'chippie-item-159731861367835945_2480903818805305_6230885824027492835_n.jpg', //ovako radi, jer je ovo apsolutna putanja
-        //   price: 4.30,
-        //   extras: 'salt'
-        // }
-        // ,
-        // {
-        //   title: 'Cod',
-        //   img: '/itemImages/chefs.jpg',
-        //   price: 5.03,
-        //   extras: "pepper, salt"
-        // },
-        // {
-        //   title: 'Cod',
-        //   img: 'https://www.hakaimagazine.com/wp-content/uploads/header-fish-feel.jpg',
-        //   price: 5.25,
-        //   extras: 'salt, vinager'
-        // },
-        // {
-        //   title: 'Cod',
-        //   img: 'https://cdn0.wideopenpets.com/wp-content/uploads/2019/10/Fish-Names-770x405.png',
-        //   price: 5.29,
-        //   extras:'salt, vinager'
-        // },
-        // {
-        //   title: 'Burger',
-        //   img: 'https://media-cdn.tripadvisor.com/media/photo-s/17/ba/a6/31/burger.jpg',
-        //   price: 2.30,
-        //   extras: 'mayo, burger sauce, BH sauce, ketchup'
-        // },
-        // {
-        //   title: 'Cod',
-        //   img: 'https://cdn.pixabay.com/photo/2014/03/24/13/49/trout-294469__340.png',
-        //   price: 5.24,
-        //   extras: 'salt, vinager'
-        // },
-        // {
-        //   title: 'Cod',
-        //   img: 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-        //   price: 5.03,
-        //   extras: "pepper, salt"
-        // },
-        // {
-        //   title: 'Cod',
-        //   img: 'https://www.hakaimagazine.com/wp-content/uploads/header-fish-feel.jpg',
-        //   price: 5.25,
-        //   extras: 'salt, vinager'
-        // },
-        // {
-        //   title: 'Cod',
-        //   img: 'https://cdn0.wideopenpets.com/wp-content/uploads/2019/10/Fish-Names-770x405.png',
-        //   price: 5.29,
-        //   extras:'salt, pepper'
-        // },
-        // {
-        //   title: 'Burger',
-        //   img: 'https://media-cdn.tripadvisor.com/media/photo-s/17/ba/a6/31/burger.jpg',
-        //   price: 2.30,
-        //   extras: 'mayo, burger sauce, BH sauce, ketchup'
-        // },
-        // {
-        //   title: 'Cod',
-        //   img: 'https://cdn.pixabay.com/photo/2014/03/24/13/49/trout-294469__340.png',
-        //   price: 5.24,
-        //   extras: 'salt, vinager'
-        // }
-      ],
+      items: [],
       cart:[
       ],
       totalPrice:'0', //you may need to sort this out. It should be a string. We want to send a string prop. maybe when calculating turn it into numbers, and then back into string.

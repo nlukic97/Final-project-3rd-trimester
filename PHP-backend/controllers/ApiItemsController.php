@@ -6,7 +6,7 @@ class ApiItemsController {
 
     public function index()
     {
-//        $user = api_check_auth(); //sa ovom linijom koda ti ne stizu podaci
+        //$user = api_check_auth();
         $items = App::get('database')->getAll('items');
         echo json_encode($items);
     }
@@ -14,7 +14,7 @@ class ApiItemsController {
 
     public function store()
     {
-
+        //$user = api_check_auth(); //ovde nesto ne radi
         $orderData = json_decode(file_get_contents('php://input'), ARRAY_FILTER_USE_KEY);
 
         //validation and sanitization
@@ -53,17 +53,15 @@ class ApiItemsController {
 
         $recentId = App::get('database')->getLastInsertedId();
 
-//        echo $recentId;
-//        var_dump($orderData);
         $cart = $orderData['cartInfo']['cart'];
-//        var_dump($cart);
-//        echo "<pre>";
+
         foreach ($cart as $item){
+
             $item['order_id'] = $recentId;
+
             App::get('database')->insert('item_order',$item);
-//            var_dump($item);
         }
-//        echo "</pre>";
+
 
         return [
             'status' => 'ok'
