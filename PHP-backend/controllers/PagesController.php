@@ -11,14 +11,6 @@ class PagesController {
         redirect("/orders");
     }
 
-    public function items()
-    {
-        check_auth();
-        $items = App::get('database')->getAll('items');
-
-        return view('items', compact('items'));
-    }
-
     public function orders()
     {
         check_auth();
@@ -27,13 +19,6 @@ class PagesController {
         $item_orders = App::get('database')->getAll('item_order'); // ??? kako ovo da upakujem u text ?
 
         return view('orders', compact('orders','item_orders'));
-    }
-
-    public function users()
-    {
-        check_auth();
-        $users = App::get('database')->getAll('users');
-        return view('users', compact('users'));
     }
 
 }

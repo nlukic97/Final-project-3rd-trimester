@@ -99,27 +99,7 @@ export default {
   name:'Checkout',
   data(){
     return {
-      cart:[
-        // {
-        //   title: 'Cod',
-        //   img:'https://www.thesprucepets.com/thmb/FOLwbR72UrUpF9sZ45RYKzgO8dg=/3072x2034/filters:fill(auto,1)/yellow-tang-fish-508304367-5c3d2790c9e77c000117dcf2.jpg',
-        //   price: 4.30,
-        //   extras: ''
-        // }
-        // ,
-        // {
-        //   title: 'Cod',
-        //   img: 'https://images.unsplash.com/photo-1524704654690-b56c05c78a00?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-        //   price: 5.03,
-        //   extras: "pepper, salt"
-        // },
-        // {
-        //   title: 'Cod',
-        //   img: 'https://www.hakaimagazine.com/wp-content/uploads/header-fish-feel.jpg',
-        //   price: 5.25,
-        //   extras: 'salt, vinager'
-        // }
-      ],
+      cart:[],
       name:'',
       address:'',
       email:'',

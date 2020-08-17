@@ -4,12 +4,12 @@
         <div class="cols m-auto">
             <form action="/login" method="post">
                 <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="email" class="m-0">Email</label>
                     <input type="text" id="email" name="email" class="form-control">
                 </div>
 
-                <div class="form-group">
-                    <label for="password">Password</label>
+                <div class="form-group"
+                    <label for="password" class="m-0">Password</label>
                     <input type="password" id="password" name="password" class="form-control">
                 </div>
 

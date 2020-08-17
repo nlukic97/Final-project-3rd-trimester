@@ -1,36 +1,12 @@
 <?php
-//
-//$router->register([
-//    '' => 'controllers/index.php',
-//    'about' => 'controllers/about.php',
-//    'about/culture' => 'controllers/about.culture.php',
-//    'contact' => 'controllers/contact.php',
-//    'api/tasks' => 'controllers/api.tasks.php',
-//    'contact-submit' => 'controllers/contact.submit.php'
-//
-//]);
 
-//$routes = [
-//    'GET' => ['' => 'controllers/index.php',
-//        'about' => 'controllers/about.php',
-//        'about/culture' => 'controllers/about.culture.php',
-//        'contact' => 'controllers/contact.php',
-//        'api/tasks' => 'controllers/api.tasks.php',
-//    ],
-//    'POST' => [
-//        'contact-submit' => 'controllers/contact.submit.php'
-//    ]
-//];
-//
+//login
 $router->get('login', 'AuthController@login_form');
 $router->post('login', 'AuthController@login');
-$router->get('register', 'AuthController@register_form'); // !!!
-$router->post('register', 'AuthController@register'); // !!!
 $router->get('logout', 'AuthController@logout');
 
 //pages
-$router->get('', 'PagesController@home'); //redirects to items
-//$router->get('items', 'PagesController@items'); // ovo ukloni
+$router->get('', 'PagesController@home');
 $router->get('orders', 'PagesController@orders');
 
 // ITEMS
@@ -43,19 +19,13 @@ $router->post('items/edit', 'itemsController@update');
 $router->get('items/destroy', 'itemsController@destroy');
 
 
-//API ORDERS
+//API ITEMS
 $router->get('api/items', 'ApiItemsController@index');
 $router->post('api/items', 'ApiItemsController@store');
-//$router->get('api/items/show', 'ApiItemsController@show');
-//$router->post('api/items/edit', 'ApiItemsController@update');
-//$router->get('api/items/destroy', 'ApiItemsController@destroy');
 
 //API FAQ
 $router->get('api/faq', 'ApiFaqController@index');
 $router->post('api/faq', 'ApiFaqController@store');
-//$router->get('api/items/show', 'ApiItemsController@show');
-//$router->post('api/items/edit', 'ApiItemsController@update');
-//$router->get('api/items/destroy', 'ApiItemsController@destroy');
 
 
 //USERS
