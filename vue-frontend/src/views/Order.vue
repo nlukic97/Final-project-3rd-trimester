@@ -2,6 +2,7 @@
 <div class="order">
   <v-container>
 
+   <!-- Only viewable on small width devices -->
     <Cart 
       id="mobile-cart-prompt" 
       @close-mobile-cart="updateMobileCart"
@@ -12,6 +13,7 @@
       :displayMobileCart="mobileCartDisplay"
     /> 
 
+    <!-- Opens when user clicks on food item -->
     <Prompt id="prompt" 
       @update-prompt="updatePrompt"
       @adding-to-cart="cartAdd"
@@ -339,64 +341,64 @@ export default {
 <style scoped lang="scss">
 .order {
   background-color: #f1efef;
-}
-#item-card {
-  max-width: 240px;
-  .img-container {
-    width:80%;
-    margin:7px auto;
-    height:151px;
-    overflow: hidden;
-    img {
-      width:100%;
-    }
-  }
-}
-
-#cart2-btn {
-  display: none;
-}
-
-#cart {
-  position:relative;
-  padding:0;
-  #clear-cart-btn {
-    z-index: 4;
-    font-size: 10px;
-    height:25px;
-    width:10px;
-  }
-  #open-cart-btn {
-    width:20px;
-    height:20px;
-  }
-  .checkout-container {
-    padding:5px;
-    transition: height 1s;   
-    .cartItemCard {
-      text-align: left;
-      padding:10px 10px 20px;
-      margin-bottom:10px;
-      h4 {
-        display:inline;
+  #item-card {
+    max-width: 240px;
+    .img-container {
+      width:80%;
+      margin:7px auto;
+      height:151px;
+      overflow: hidden;
+      img {
+        width:100%;
       }
     }
   }
+  #cart {
+    position:relative;
+    padding:0;
+    #clear-cart-btn {
+      z-index: 4;
+      font-size: 10px;
+      height:25px;
+      width:10px;
+    }
+    #open-cart-btn {
+      width:20px;
+      height:20px;
+    }
+    .checkout-container {
+      padding:5px;
+      transition: height 1s;   
+      .cartItemCard {
+        text-align: left;
+        padding:10px 10px 20px;
+        margin-bottom:10px;
+        h4 {
+          display:inline;
+        }
+      }
+    }
 
-  //on desktops and larger screens, this is used to toggle the visibility of the cart items
-  .checkout-container-open {
-    max-height:60vh;
-    height:300px;
-    transition: height 0.4s;
-    overflow:hidden;
-    overflow-y:scroll;
+    //on desktops and larger screens, this is used to toggle the visibility of the cart items
+    .checkout-container-open {
+      max-height:60vh;
+      height:300px;
+      transition: height 0.4s;
+      overflow:hidden;
+      overflow-y:scroll;
+    }
+    .checkout-container-closed {
+      height:0px;
+      overflow:hidden;
+      overflow-y: hidden;
+      transition: height 0.4s;
+    }
   }
-  .checkout-container-closed {
-    height:0px;
-    overflow:hidden;
-    overflow-y: hidden;
-    transition: height 0.4s;
-  }
+}
+
+
+#cart2-btn {
+  display: none;
 }
 
 #mobile-cart-prompt { //for it to be closed under normal conditions

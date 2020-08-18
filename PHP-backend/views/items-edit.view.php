@@ -1,7 +1,12 @@
 <?php require_once "views/partials/header.php"; ?>
 
 <div class="container">
-    <div class="row mt-5 mb-5">
+    <div class="row mt-4">
+        <div class="col">
+            <a href="/items" class="btn btn-info">Back</a>
+        </div>
+    </div>
+    <div class="row mb-5">
         <div class="cols m-auto">
             <form action="/items/edit" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?= $item->id ?>">

@@ -9,8 +9,7 @@
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
-            <th>Options</th>
-            <th>Edit</th>
+            <th></th>
         </tr>
         </thead>
         <?php foreach ($users as $user): ?>
@@ -19,13 +18,10 @@
                 <td class="border-bottom border-secondary"><?= $user->name ?></td>
                 <td class="border-bottom border-secondary"><?= $user->email ?></td>
                 <td class="border-bottom border-secondary">
-                    <a href="/users/show?id=<?= $user->id ?>" class="btn btn-info mb-2">Show</a>
-                    <a href="/users/destroy?id=<?= $user->id ?>" class="btn btn-danger mb-2">Delete</a>
+                    <a href="/users/show?id=<?= $user->id ?>" class="btn btn-info mb-2">Settings</a>
+
                 </td>
-                <td class="border-bottom border-secondary">
-                    <a href="/users/edit?id=<?= $user->id ?>" class="btn btn-warning mb-2">Name | Email</a>
-                    <a href="/users/editPassword?id=<?= $user->id ?>" class="btn btn-warning mb-2">Password</a>
-                </td>
+
             </tr>
         <?php endforeach; ?>
     </table>

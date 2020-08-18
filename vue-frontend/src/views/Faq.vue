@@ -1,11 +1,14 @@
 <template>
   <div class="faq">
-    <h1>FAQ page</h1>
+    <h2 class="pt-6 pb-3">FAQ</h2>
     <v-container>
-      <ul v-for="(faq, index) in faqs" :key="index">
+      <v-card 
+      class="white dark--text pt-8 pb-6 pl-8 pr-8 mb-5 text-left"
+      v-for="(faq, index) in faqs" :key="index"
+      >
         <h3>{{index + 1}}. {{faq.question}}</h3>
-        <li>{{faq.answer}}</li>
-      </ul>
+        <p class="pl-4">{{faq.answer}}</p>
+      </v-card>
     </v-container>
   </div>
 </template>
@@ -33,18 +36,5 @@ export default {
 <style scoped lang="scss">
 .faq {
   background-color: #f1efef;
-  ul {
-    border:1px solid #333;
-    background-color: white;
-    margin-bottom: 10px;
-    padding:30px 60px;
-  h3 {
-    text-align: left;
-  }
-  li {
-    list-style-type: none;
-    text-align: left;
-  }
-}
 }
 </style>

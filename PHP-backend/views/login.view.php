@@ -1,7 +1,7 @@
 <?php require_once "views/partials/login-header-navigation.php"; ?>
 <div class="container viewArea">
     <div class="row mt-5">
-        <div class="cols m-auto">
+        <div class="col-lg-5 col-md-6 col-9 card p-5 m-auto">
             <form action="/login" method="post">
                 <div class="form-group">
                     <label for="email" class="m-0">Email</label>
@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-info">Login</button>
                 </div>
             </form>
         </div>
