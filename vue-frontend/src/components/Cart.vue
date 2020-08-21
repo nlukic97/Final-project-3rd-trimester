@@ -1,7 +1,9 @@
 <template>
   <div id="Prompt" v-if="displayMobileCart">
+    <!-- overlay - covers the background order page -->
     <div id="overlay"></div>
 
+    <!-- The prompt -->
     <div class="promptContainer">
       <v-card class="innerBox">
         <div class="d-flex justify-space-between align-center">
@@ -29,25 +31,24 @@
         <p><span v-if="cart.length == 0">Cart empty! - </span>{{checkoutPrice}} &#163;</p>
         
 
-
+        <!-- Item list section -->
         <v-card class="pt-5 pb-5 pl-3 pr-3 mb-4 text-left"
           v-for="(item, index) in cart" :key="index"
         >
           <div class="d-flex justify-space-between text-left">
             <span>{{item.title}}</span>
-            <span>{{item.price}} &#163;</span>
+            <span class="pr-5">{{item.price}} &#163;</span>
             <v-btn
-            class="red white--text"
+            class="red white--text xBtn"
             fab
             width="20px"
             height="20px"
             @click="removeItem(index)"
             >
-              x <!-- We now need to make this work. So, it should emit its id to "order, and we remove the item with that index from the cart array" -->
+              x
             </v-btn>
           </div>
           <span class="pl-5" v-if="item.extras">+ {{item.extras}}</span>
-        <!-- the same card here goes which was used in the cart section for the large screen -->
         </v-card>
 
         <v-btn
@@ -92,7 +93,7 @@ export default {
     emptyCart(){
       this.$emit('empty-cart')
 
-      //Becuase the user probably has no need to stare at an empty cart. This should probably be done with the removeItem function
+      //Becuase the user probably has no need to stare at an empty cart. This closes the cart after 0.6 seconds of the user deleting all the items
       setTimeout(()=>{
         this.$emit('close-mobile-cart')
       }, 600)
@@ -126,47 +127,33 @@ export default {
   left:0;
   top:0;
   z-index: 10;
-
-}
-.innerBox {
-  // width:600px;
-  width:53%;
-  margin:20px auto 0 auto;
-  padding:30px;
-  max-height:90%;
-  overflow-y: scroll;
-  img {
-    width:65%;
-    margin: 0 auto;
-  }
-  .checkbox-container {
-    position:relative;
-    input {
+  .innerBox {
+    width:53%;
+    margin:20px auto 0 auto;
+    padding:30px;
+    max-height:90%;
+    overflow-y: scroll;
+    .xBtn {
       position:absolute;
-      left: 20px;
-      top:10px;
-      // display: none;
-
-    }
-    label {
-      display:inline-block;
-      padding:10px 40px;
-      width:180px;
-      margin-left: 7px; 
-      // border:1px solid red;
+      right:0px; top:-5px;
     }
   }
 }
+
 
 @media (max-width: 791px){
-  .innerBox {
-    width:60%;
+  .promptContainer {
+    .innerBox {
+      width:70%;
+    }
   }
 }
 
 @media (max-width: 575px){
-  .innerBox {
-    width:80%;
+  .promptContainer {
+    .innerBox {
+      width:80%;
+    }
   }
 }
 </style>

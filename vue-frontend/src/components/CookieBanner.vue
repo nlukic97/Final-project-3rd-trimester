@@ -51,7 +51,7 @@ export default {
     margin:0;
     padding:0 ;
     position:fixed;
-    top:86vh; //this needs to be different for some screens sizes
+    top:86vh;
     left:0;
     width:100%;
     z-index: 1000;

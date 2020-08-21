@@ -1,9 +1,12 @@
 <template>
-  <div id="Prompt">
+  <div id="Prompt" :class="promptClass">
     <div id="overlay"></div>
     <div class="promptContainer">
       <v-card class="innerBox">
-        <span id="x">X</span>
+        <span id="x"
+        @click="closePrompt"
+        >X
+        </span>
         <h2>{{title}}</h2>
         <img :src="img" alt="">
         <p>{{msg}}</p>
@@ -55,22 +58,23 @@ export default {
       this.promptDisplay()
     },
     extras: function(){
-      this.createSelectedExtras(); //this must go first.
+      this.createSelectedExtras(); //this must happen first
       this.extraCheckboxMaker();
     }
   },
   data(){
     return {
       itemExtras:[],
-      selectedExtras:[]
+      selectedExtras:[],
+      promptClass:'none'
     }
   },
   methods:{
-    promptDisplay(){ //this should not be here. No document select, use a v-if
+    promptDisplay(){ //prompt class affects the visibility of this entire component
       if(this.displayPrompt == 'false'){
-        document.getElementById('prompt').style.display='none'
+        this.promptClass = 'none'; //display:none
       } else if(this.displayPrompt == 'true')
-        document.getElementById('prompt').style.display='block'
+        this.promptClass = 'block'; //display:block
     },
 
     extraCheckboxMaker(){ 
@@ -79,7 +83,7 @@ export default {
         this.itemExtras = this.extras.split(', ');
         console.log('extras')
         console.log(this.itemExtras)
-      } else if(this.extras != "" && this.extras != null) { //if the prop is any of these, it means there are no extrasw
+      } else if(this.extras != "" && this.extras != null) { //if the prop is any of these, it means there are no extras
         this.itemExtras.push(this.extras)
         console.log(this.itemExtras)
       }
@@ -92,7 +96,7 @@ export default {
     },
 
     addingToCart(){
-      var keys = Object.keys(this.selectedExtras); //change name of this to extraValue
+      var keys = Object.keys(this.selectedExtras);
       var chosenExtras = [];
 
       for(var i = 0; i < keys.length; i++){
@@ -101,33 +105,31 @@ export default {
         }
       }
 
-      // this.clearSelectedExtras() //maybe this ???
-      this.$emit("adding-to-cart",chosenExtras) //ne saljem nikakav podatak tako da mi ne treba ovo
+      this.$emit("adding-to-cart",chosenExtras)
       this.selectedExtras = [];
-      // this.itemExtras = []; //just a precaution but not necessary
+    },
+
+    closePrompt(){
+      this.$emit("update-prompt")
+      this.selectedExtras = [];
     }
   },
   mounted(){
     this.promptDisplay()
     console.log(this.selectedExtras)
-    document.getElementById('x').addEventListener('click',()=>{ //ne trebas ovako.
-      this.$emit("update-prompt") //ne manjati vrednost propa unutar komponente. Ne saljem nikakve podatke, jer order ih sve vec ima
-      this.selectedExtras = [];
-    })
 
-
-    //enter click
+    //adding item to cart with the enter key
     document.addEventListener("keydown",(e)=>{
-      if((e.keyCode == '13' || e.which == '13') && this.displayPrompt == 'true'){ //samo ce na enter proizvod da radi ako vidi da je otvorena kutija
+      if((e.keyCode == '13' || e.which == '13') && this.displayPrompt == 'true'){ //adding an item on enter ONLY if displayPrompt is true
         this.addingToCart()
         this.$emit("update-prompt");
       }
     })
 
-    //escape
+    //closing item prompt with esc key
     document.addEventListener("keydown",(e)=>{
       if(e.keyCode == 27 || e.which == 27){
-         this.$emit("update-prompt") //ako klikne esc, onda mu zatvara ovaj prozor
+         this.$emit("update-prompt")
          this.selectedExtras = [];
       }
     })
@@ -151,37 +153,34 @@ export default {
   left:0;
   top:0;
   z-index: 10;
-
-}
-.innerBox {
-  // width:600px;
-  width:53%;
-  margin:20px auto 0 auto;
-  padding:30px;
-  max-height:90%;
-  overflow-y: scroll;
-  img {
-    width:65%;
-    margin: 0 auto;
-  }
-  .checkbox-container {
-    position:relative;
-    input {
-      position:absolute;
-      left: 20px;
-      top:10px;
-      // display: none;
-
+  .innerBox {
+    width:53%;
+    margin:20px auto 0 auto;
+    padding:30px;
+    max-height:90%;
+    overflow-y: scroll;
+    img {
+      width:65%;
+      margin: 0 auto;
     }
-    label {
-      display:inline-block;
-      padding:10px 40px;
-      width:180px;
-      margin-left: 7px; 
-      // border:1px solid red;
+    .checkbox-container {
+      position:relative;
+      input {
+        position:absolute;
+        left: 20px;
+        top:10px;
+      }
+      label {
+        display:inline-block;
+        padding:10px 40px;
+        width:180px;
+        margin-left: 7px; 
+        // border:1px solid red;
+      }
     }
   }
 }
+
 
 #x {
   // float:right;
@@ -198,15 +197,27 @@ export default {
   cursor: pointer;
 }
 
+.none {
+  display: none;
+}
+
+.block {
+  display: block;
+}
+
 @media (max-width: 791px){
-  .innerBox {
-    width:60%;
+  .promptContainer {
+    .innerBox {
+      width:70%;
+    }
   }
 }
 
 @media (max-width: 575px){
-  .innerBox {
-    width:80%;
+  .promptContainer {
+    .innerBox {
+      width:80%;
+    }
   }
 }
 </style>

@@ -39,9 +39,7 @@
         >
         </v-img>
 
-        <!-- <v-card max-width="50%" class="red" flat> -->
         <h3 id="logo-text">Hillingdon chippie</h3>
-        <!-- </v-card> -->
 
         <v-img id="logo-img-2" 
         class="mr-5"
@@ -80,7 +78,8 @@
       close-on-content-click
       >
         <template v-slot:activator="{ on, attrs }"  >
-          <v-btn style="width:20%"
+          <v-btn 
+            width="20%"
             color="red"
             dark
             v-bind="attrs"

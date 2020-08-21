@@ -2,7 +2,7 @@
 <div class="order">
   <v-container>
 
-   <!-- Only viewable on small width devices -->
+   <!-- Only viewable on small width devices when cart button is visible and pressed -->
     <Cart 
       id="mobile-cart-prompt" 
       @close-mobile-cart="updateMobileCart"
@@ -23,7 +23,7 @@
       :price="promptedItem.price"
       :extras="promptedItem.extras"
     />
-    <!-- Imas error gore kada radis :img. kada zatvoris prop -->
+
     <!-- -------------------- Food menu -------------------- -->
     <v-row class="pb-10">
       <v-col lg='9' md="9" sm="12" cols="12">
@@ -36,7 +36,7 @@
           >
             <h3>{{item.title}}</h3>
             <div class="img-container d-flex align-center">
-              <img :src="imgUrlSetup(item.img)" alt=""> <!-- kako ubaciti ovaj path u varijablu ? -->
+              <img :src="imgUrlSetup(item.img)" alt="">
             </div>
             <span><strong>Price: </strong>{{item.price}} &#163;</span>
             <div class="text-center">
@@ -52,6 +52,7 @@
         </div>
       </v-col>
       <v-col lg='3' md="3" sm="12" cols="12" id="cart">
+
 <!-- ---------------------    desktop/ large screen navigation ----------------------  -->
         <v-card>
           <div class="d-flex justify-space-between align-center">
@@ -100,7 +101,6 @@
 
               <div class="pl-5">
                 <div v-if="cartExtraDisplay(index)"> + {{cartItem.extras}}</div>
-                <!-- <div>{{cartItem.price}} £</div> -->
               </div>
             </v-card>
           </div>
@@ -118,7 +118,7 @@
             </div>
       </v-col>
 
-<!-- ---------------------    mobile/ tablet cart ----------------------  -->
+<!-- ---------------------    mobile/ tablet cart button ----------------------  -->
       <v-btn
       class="red white--text"
       id="cart2-btn"
@@ -135,6 +135,7 @@
 import Prompt from '../components/Prompt.vue';
 import Cart from '../components/Cart.vue';
 import axios from 'axios';
+
 export default {
   name: 'Order',
   components: {
@@ -154,7 +155,7 @@ export default {
       items: [],
       cart:[
       ],
-      totalPrice:'0', //you may need to sort this out. It should be a string. We want to send a string prop. maybe when calculating turn it into numbers, and then back into string.
+      totalPrice:'0',
       cartClass:'checkout-container-closed',
       rotationClass:'rotate180'
     }
@@ -202,7 +203,7 @@ export default {
         this.promptedItem.extras = '';
       }
 
-      delete this.promptedItem.img; //to delete the image before adding the item to the cart. We do not need it.
+      delete this.promptedItem.img; //to delete the image before adding the item to the cart. We do not need this is the checkout process
       
       this.cart.push(this.promptedItem)
       this.$store.state.cart = this.cart
@@ -319,7 +320,6 @@ export default {
   beforeMount(){
     axios.get('http://localhost:8087/api/items')
     .then(response=>{
-      // console.log(response.data)
       this.items = response.data
     })
   },
