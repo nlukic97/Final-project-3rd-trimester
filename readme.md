@@ -14,8 +14,8 @@ This project is a combination of coursework performed in both the WBD5100 and th
 1. run ***git clone https://github.com/nlukic97/Final-project-3rd-trimester***
 2. run ***cd wbd5104-final-project***
 2. run ***cd PHP-backend folder***
-3. run php ***-S localhost:8087***
-4. Import the ***hillingdonchippie.sql*** file into a database hosting software, and make sure to host the database aswell.
+3. run ***php -S localhost:8087***
+4. Import the ***hillingdonchippie.sql*** file into a database hosting software (such as HeidiSql), and make sure to host the database aswell.
 5. You may now view this project in **localhost:8087**
 ##### Admin login details:
 - Email: **admin@admin.com**
@@ -33,10 +33,9 @@ This project is a combination of coursework performed in both the WBD5100 and th
 - ***npm run serve***
 5. You may now view this project in your localhost url - provided by your terminal. 
 ---
-# Notes
-
 # API structure
-
+- **localhost:8087/api/items** - a get request will show us all the items we have in our database table. A post request to this url will submit a new order from the frontend side and display the order on the "orders" page of the admin section.
+- **localhost:8087/api/faq** - A get request will display all of the FAQ from our database table.
 
 
 

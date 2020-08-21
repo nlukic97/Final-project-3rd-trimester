@@ -14,7 +14,6 @@ class ApiItemsController {
 
     public function store()
     {
-        //$user = api_check_auth(); //ovde nesto ne radi
         $orderData = json_decode(file_get_contents('php://input'), ARRAY_FILTER_USE_KEY);
 
         //validation and sanitization
