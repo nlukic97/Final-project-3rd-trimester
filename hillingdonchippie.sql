@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `faq` (
 -- Dumping data for table hillingdonchippie.faq: ~4 rows (approximately)
 /*!40000 ALTER TABLE `faq` DISABLE KEYS */;
 INSERT INTO `faq` (`id`, `question`, `answer`) VALUES
-	(1, 'Is your fish fresh?', 'Our fish is freshly frozen. This means that all fish which our suppliers catch are gutted and frozen within 4 minutes of them leaving the water. This is good for a number of reasons, one of them being I totally made this story up its obviously not fresh bruh we\'re in London you can\'t catch fresh cod here bro'),
+	(1, 'Is your fish fresh?', 'Our fish is freshly frozen. This means that all fish which our suppliers catch are gutted and frozen within 4 minutes of them leaving the water.'),
 	(2, ' Do you cook things other than fish?', 'Although we pride ourselves on our fish, we also make some terrific burgers !'),
 	(3, 'How do I order?', 'Click on the "order" button in the top right corner of our website. Then, select your food. After that, click checkout, enter all your info and we will have your food prepared and delivered in no time !'),
 	(4, 'Does your food contain any alergens?', 'Our non-fish products may contain traces of nuts.');
