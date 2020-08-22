@@ -18,19 +18,19 @@ USE `hillingdonchippie`;
 
 -- Dumping structure for table hillingdonchippie.faq
 CREATE TABLE IF NOT EXISTS `faq` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `question` varchar(255) NOT NULL,
   `answer` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table hillingdonchippie.faq: ~4 rows (approximately)
 /*!40000 ALTER TABLE `faq` DISABLE KEYS */;
 INSERT INTO `faq` (`id`, `question`, `answer`) VALUES
 	(1, 'Is your fish fresh?', 'Our fish is freshly frozen. This means that all fish which our suppliers catch are gutted and frozen within 4 minutes of them leaving the water. This is good for a number of reasons, one of them being I totally made this story up its obviously not fresh bruh we\'re in London you can\'t catch fresh cod here bro'),
-	(2, ' Do you cook things other than fish?', 'Although we pride ourselves with our fish, we also have many different burgers, sausages, fishcakes, spring rolls, savaloyes. We also have a vegetarian burger for our vegetarian visitors'),
+	(2, ' Do you cook things other than fish?', 'Although we pride ourselves on our fish, we also make some terrific burgers !'),
 	(3, 'How do I order?', 'Click on the "order" button in the top right corner of our website. Then, select your food. After that, click checkout, enter all your info and we will have your food prepared and delivered in no time !'),
-	(4, 'Something smells fishy here...', 'Hahaha...');
+	(4, 'Does your food contain any alergens?', 'Our non-fish products may contain traces of nuts.');
 /*!40000 ALTER TABLE `faq` ENABLE KEYS */;
 
 -- Dumping structure for table hillingdonchippie.items
@@ -65,9 +65,9 @@ CREATE TABLE IF NOT EXISTS `item_order` (
   `extras` text NOT NULL,
   `price` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
--- Dumping data for table hillingdonchippie.item_order: ~9 rows (approximately)
+-- Dumping data for table hillingdonchippie.item_order: ~12 rows (approximately)
 /*!40000 ALTER TABLE `item_order` DISABLE KEYS */;
 INSERT INTO `item_order` (`id`, `order_id`, `title`, `extras`, `price`) VALUES
 	(1, 1, 'Burger', 'onion, ketchup, BBQ sauce', 6.85),
@@ -78,7 +78,10 @@ INSERT INTO `item_order` (`id`, `order_id`, `title`, `extras`, `price`) VALUES
 	(6, 2, 'Large Chips', 'salt', 3.5),
 	(7, 2, 'Large Chips', 'salt, vinager', 3.5),
 	(8, 2, 'Large Chips', 'vinager', 3.5),
-	(9, 2, 'Ketchup bottle', '', 1.2);
+	(9, 2, 'Ketchup bottle', '', 1.2),
+	(10, 3, 'Large Cod', '', 5.3),
+	(11, 4, 'Large Cod', 'vinager', 5.3),
+	(12, 5, 'Large Cod', '', 5.3);
 /*!40000 ALTER TABLE `item_order` ENABLE KEYS */;
 
 -- Dumping structure for table hillingdonchippie.orders
@@ -92,13 +95,14 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `date` date NOT NULL,
   `time` time NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table hillingdonchippie.orders: ~2 rows (approximately)
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
 INSERT INTO `orders` (`id`, `name`, `total`, `address`, `email`, `phone`, `date`, `time`) VALUES
 	(1, 'Customer1', 10.35, 'Groove Drive 24, UX74AB London', 'cusomer1@example.com', '555333', '2020-08-17', '10:18:45'),
-	(2, 'customer 2', 32.25, 'Customer2 Drive, 11120 Belgrade', 'cust2@example.com', '123456', '2020-08-17', '10:36:18');
+	(2, 'customer 2', 32.25, 'Customer2 Drive, 11120 Belgrade', 'cust2@example.com', '123456', '2020-08-17', '10:36:18'),
+	(5, 'e', 5.3, 'e', 'e@e1111.com', '222', '2020-08-22', '06:32:47');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 
 -- Dumping structure for table hillingdonchippie.users
