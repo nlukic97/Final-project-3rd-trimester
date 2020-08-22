@@ -21,11 +21,12 @@ $router->get('items/destroy', 'itemsController@destroy');
 
 //API ITEMS
 $router->get('api/items', 'ApiItemsController@index');
-$router->post('api/items', 'ApiItemsController@store');
+
+//API ORDERS
+$router->post('api/orders', 'ApiOrdersController@store');
 
 //API FAQ
 $router->get('api/faq', 'ApiFaqController@index');
-$router->post('api/faq', 'ApiFaqController@store');
 
 
 //USERS

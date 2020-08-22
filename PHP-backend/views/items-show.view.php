@@ -9,7 +9,7 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title"><?= $item->title ?> </h5>
-                        <p>Price: <?= $item->price ?>&#163;</p>
+                        <p>Price: <?= number_format($item->price,2) ?>&#163;</p>
                         <p class="card-text">Extras: <?= $item->extras ?></p>
                         <a href="/items/edit?id=<?= $item->id?>" class="btn btn-warning">Edit</a>
                         <a href="/items/destroy?id=<?= $item->id?>" class="btn btn-danger">Delete</a>

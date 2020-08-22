@@ -33,7 +33,7 @@
 
                 <div class="form-group">
                     <label for="price" class="m-0">Price</label>
-                    <input type="text" id="price" name="price" class="form-control" value="<?= $item->price ?>">
+                    <input type="text" id="price" name="price" class="form-control" value="<?= number_format($item->price,2) ?>">
                 </div>
 
                 <div class="form-group">

@@ -21,4 +21,11 @@ class PagesController {
         return view('orders', compact('orders','item_orders'));
     }
 
+    public function error404()
+    {
+        check_auth();
+
+        return view('404');
+    }
+
 }

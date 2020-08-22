@@ -161,7 +161,7 @@ export default {
       var currentDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(); //heidi sql is not able to auto input dates
       var currentTime = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(); //heidi sql is not able to auto input dates
 
-      axios.post('http://localhost:8087/api/items',{
+      axios.post('http://localhost:8087/api/orders',{
         orderInfo: {
           name: this.name,
           address: this.address,

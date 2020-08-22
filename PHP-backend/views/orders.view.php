@@ -27,7 +27,7 @@
                                         <tr>
                                             <td class="border border-secondary pl-2"><?= ($item_order->order_id == $order->id) ? $item_order->title : ''; ?></td>
                                             <td class="border border-secondary pl-2"><?= ($item_order->order_id == $order->id) ? $item_order->extras : ''; ?></td>
-                                            <td class="border border-secondary pl-2"><?= ($item_order->order_id == $order->id) ? $item_order->price."&#163;" : ''; ?></td>
+                                            <td class="border border-secondary pl-2"><?= ($item_order->order_id == $order->id) ? number_format($item_order->price,2)."&#163;" : ''; ?></td>
 
                                         </tr>
                                     <?php endif;?>
@@ -35,7 +35,7 @@
                                         <tr>
                                             <td></td>
                                             <td class="text-right pl-2"><span class="font-weight-bold pr-3">Price:</span></td>
-                                            <td class="font-weight-bold border-bottom border-dark pl-2"> <?= $order->total."&#163;"?></td>
+                                            <td class="font-weight-bold border-bottom border-dark pl-2"> <?= number_format($order->total,2)."&#163;"?></td>
                                         </tr>
                             </table>
                         </div>

@@ -1,7 +1,22 @@
 <template>
 <div>
-  <h1>Whoops ! It appears that page doesn't exist.</h1>
-  <img src="https://ichef.bbci.co.uk/news/410/cpsprodpb/15C09/production/_107579098_gettyimages-922335640.jpg" alt="">
-  <p>Return to the <router-link to="/">Home</router-link> page.</p>
+  <v-container>
+    <v-row>
+      <v-col cols="12">
+        <h1>Whoops ! This page was not found.</h1>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col xl="4" lg="4" md="5" sm="6" cols="8" class="ml-auto mr-auto">
+        <img id="image" src="../assets/notFound.jpg" alt="">
+        <p>Return to the <router-link to="/">Home</router-link> page.</p>
+      </v-col>
+    </v-row>
+  </v-container>
 </div>
 </template>
+<style lang="scss" scoped>
+  #image {
+    width: 100%;
+  }
+</style>

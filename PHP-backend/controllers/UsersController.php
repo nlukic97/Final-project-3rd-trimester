@@ -20,7 +20,6 @@ class   UsersController {
 
     public function store()
     {
-        //uraditi prethodno sanitizaciju i validaciju ! Proveri ima li vec taj korisnik.
         check_auth();
 
         //password
@@ -46,7 +45,7 @@ class   UsersController {
 
         $user = App::get('database')->getOneByField('users',$_POST);
 
-        //if the user exists or there is a missing input field, it will redirect to /users without creating a new account
+        //if the user already exists or there is a missing input field, it will redirect to /users without creating a new account
         if($user OR $pass == '' or $_POST['name'] == '' OR $_POST['email'] == ''){
             return redirect('/users');
         }

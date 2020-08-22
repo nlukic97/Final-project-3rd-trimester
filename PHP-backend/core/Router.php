@@ -27,13 +27,15 @@ class Router {
 
     public function direct($uri, $method)
     {
+
         if(array_key_exists($uri, $this->routes[$method])) {
 
             $controllerArr = explode("@", $this->routes[$method][$uri]);
             return $this->call(...$controllerArr);
 
         }
-        return "views/404.view.php";
+        //404 page if the route is not found. Auth is also performed before redirect.
+        return $this->call('PagesController','error404');
     }
 
     protected function call($controllerName, $methodName) {
