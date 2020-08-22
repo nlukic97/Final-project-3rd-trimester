@@ -72,9 +72,9 @@ export default {
   methods:{
     promptDisplay(){ //prompt class affects the visibility of this entire component
       if(this.displayPrompt == 'false'){
-        this.promptClass = 'none'; //display:none
+        this.promptClass = 'none'; //therefore, display:none
       } else if(this.displayPrompt == 'true')
-        this.promptClass = 'block'; //display:block
+        this.promptClass = 'block'; //therefore, display:block
     },
 
     extraCheckboxMaker(){ 
@@ -175,7 +175,6 @@ export default {
         padding:10px 40px;
         width:180px;
         margin-left: 7px; 
-        // border:1px solid red;
       }
     }
   }
@@ -183,7 +182,6 @@ export default {
 
 
 #x {
-  // float:right;
   padding:2px 10px;
   border-radius:50%;
   background-color: red;

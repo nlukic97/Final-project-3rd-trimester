@@ -1,5 +1,4 @@
 <template>
-<!-- Obrati paznju na ovaj padding top sto si stavio ovde ispod -->
   <div>
     <!-- regular menu -->
     <v-app-bar id="theBar" height="100"  

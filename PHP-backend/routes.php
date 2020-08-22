@@ -39,7 +39,3 @@ $router->post('users/edit', 'UsersController@update');
 $router->get('users/editPassword', 'UsersController@editPassword');
 $router->post('users/editPassword', 'UsersController@updatePassword');
 $router->get('users/destroy', 'UsersController@destroy');
-
-
-
-//$router->post('ovo/je/ruta', 'OvoJeKontroler@metodUKontroleru');

@@ -32,6 +32,6 @@ export default {
     text-align: center;
   }
   #router-view {
-    min-height: 80vh; //da li treba ovo ? 404 mi bolje izgleda sa njim
+    min-height: 80vh;
   }
 </style>

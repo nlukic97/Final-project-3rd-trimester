@@ -9,22 +9,21 @@ This project is a combination of coursework performed in both the WBD5100 and th
 -- PHP 
 -- SQL
 -- composer
-
-### 1. Backend and admin view instalation (WBD5100)
+---
+### 1. Backend and admin view setup (WBD5100)
 1. run ***git clone https://github.com/nlukic97/Final-project-3rd-trimester***
 2. run ***cd wbd5104-final-project***
-2. run ***cd PHP-backend folder***
-3. run ***php -S localhost:8087***
-4. Import the ***hillingdonchippie.sql*** file into a database hosting software (such as HeidiSql), and make sure to host the database aswell.
+2. Import the ***hillingdonchippie.sql*** file found in the root of this project.
+2. Open the PHP-backend folder in a terminal and run:
+-- ***php -S localhost:8087***
 5. You may now view this project in **localhost:8087**
 ##### Admin login details:
 - Email: **admin@admin.com**
 - Password: **admin**
 ---
 
-### 2. Instalation for the frontend/ user view (WBD5204)
-1. Follow all the steps for the **Backend and admin view instalation (WBD5100)** if they have not been performed yet.
-
+### 2. Setup for the frontend/ user view (WBD5204)
+1. Follow all the steps for the **Backend and admin view setup (WBD5100)** if they have not been performed yet.
 2. Add the chrome extension **Allow CORS: Access-Control-Allow-Origin**, which can be found here:
 - https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en#:~:text=Allow%20CORS%3A%20Access%2DControl%2DAllow%2DOrigin%20lets%20you,default%20(in%20JavaScript%20APIs).
 3. Make sure that the previously installed extension is **switched on.**
@@ -34,8 +33,21 @@ This project is a combination of coursework performed in both the WBD5100 and th
 5. You may now view this project in your localhost url - provided by your terminal. 
 ---
 # API structure
-- **localhost:8087/api/items** - a get request will show us all the items we have in our database table. A post request to this url will submit a new order from the frontend side and display the order on the "orders" page of the admin section.
-- **localhost:8087/api/faq** - A get request will display all of the FAQ from our database table.
+- **localhost:8087/api/items** 
+-- a **get** request to this url will return all the items we have in our database table "items"
+- **localhost:8087/api/orders** 
+-- A **post** request to this url will submit data to the database tables "orders" and "item_order".
+- **localhost:8087/api/faq** 
+-- A **get** request to this url returns all the FAQ from our database table "faq".
+---
+# Extra notes
+## 1. Frontend project
+- reads for a cookie every time a view is loaded, and creates a cookie when the "accept cookies" prompt is confirmed - stopping the prompt from appearing when loading a new view.
+- has a custom 404 page
+## 2. Backend project
+- has mandatory image uploads when creating a new item. However, it has optional image changing when editing an item. Uploading a new item image will delete the old item's image.
+- has a custom 404 page
+
 
 
 

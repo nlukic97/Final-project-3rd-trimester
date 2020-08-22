@@ -49,7 +49,7 @@ export default {
   ,
   beforeMount(){
     for(var i = 0; i < this.icons.length; i++){
-      this.urls[i] = 'https://www.'+this.icons[i]+'.com/' + this.username; //proveri za ovo
+      this.urls[i] = 'https://www.'+this.icons[i]+'.com/' + this.username;
     }
   }
 }

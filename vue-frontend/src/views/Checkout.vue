@@ -144,14 +144,12 @@ export default {
       this.$router.push('/order')
     },
 
-    validation(){ //but try to implement vuetify validation in here. You have three different forms, that is one issue.s
+    validation(){
       var a = this.$refs.form1.validate()
       var b = this.$refs.form2.validate()
 
       if(a == true && b == true){
-        //ovde ide axios poziv. Ako je uspesan, onda ide router push. Ako ne, onda baca na error stranicu.
         this.submit()
-        //axios zahtev ka api/items post metodi
         this.$router.push('../confirm')
       }
     },

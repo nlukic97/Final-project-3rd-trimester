@@ -27,7 +27,6 @@ export default {
   beforeMount(){
     Axios.get('http://localhost:8087/api/faq')
     .then(response=>{
-      // console.log(response.data)
       this.faqs = response.data
     })
   }
