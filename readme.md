@@ -24,13 +24,10 @@ This project is a combination of coursework performed in both the WBD5100 and th
 
 ### 2. Setup for the frontend/ user view (WBD5204)
 1. Follow all the steps for the **Backend and admin view setup (WBD5100)** if they have not been performed yet.
-2. Add the chrome extension **Allow CORS: Access-Control-Allow-Origin**, which can be found here:
-- https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en#:~:text=Allow%20CORS%3A%20Access%2DControl%2DAllow%2DOrigin%20lets%20you,default%20(in%20JavaScript%20APIs).
-3. Make sure that the previously installed extension is **switched on.**
-4. Open the **vue-frontend** folder in another terminal window and run:
+3. Open the **vue-frontend** folder in another terminal window and run:
 - ***npm install***
 - ***npm run serve***
-5. You may now view this project in your localhost url - provided by your terminal. 
+4. You may now view this project in your localhost url - provided by your terminal. 
 ---
 # API structure
 - **localhost:8087/api/items** 
@@ -47,6 +44,11 @@ This project is a combination of coursework performed in both the WBD5100 and th
 ## 2. Backend project
 - has mandatory image uploads when creating a new item. However, it has optional image changing when editing an item. Uploading a new item image will delete the old item's image.
 - has a custom 404 page
+
+---
+
+## 2022 UPDATE:
+Added access control headers to allow * routes to be executed so that the user would not have to install the extension "allow cors" as was previously required. 
 
 
 
