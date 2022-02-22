@@ -1,7 +1,7 @@
 <template>
   <div v-if="CookiePromptDisplay">
     <v-card id="cookieBanner" class="pt-0 pr-0 pb-0 pl-0"> 
-      <div class="d-flex justify-center  align-center red pt-5 pb-5">
+      <div class="d-flex justify-center align-center red pt-5 pb-5">
         <span class="ml-5 mr-10 white--text">Our site uses cookies. By browsing this site, you consent to the use of these cookies.</span>
         <v-btn
         class="white red--text mr-5"
@@ -51,7 +51,8 @@ export default {
     margin:0;
     padding:0 ;
     position:fixed;
-    top:86vh;
+    // top:86vh; // I used this 2 years ago, not sure why I did. Bottom:0 is better.
+    bottom: 0;
     left:0;
     width:100%;
     z-index: 1000;
